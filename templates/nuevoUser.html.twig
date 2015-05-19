@@ -1,0 +1,60 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Login
+{% endblock %}
+
+{% block contenido %}
+<div class="col-md-10 col-md-offset-1">
+    <h1>Crear nuevo usuario</h1>
+</div>
+<div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+    <form class="form-signin" action="/registro" method="post" id="formNuevoUsuario">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="input-group">
+                <label for="username">Usuario</label>
+                <input id="user" type="text" name="user" class="form-control"  required autofocus>
+
+                <br/><br/><br/>	<br/>
+                <label for="pass1">Contraseña</label>
+                <input id="pass1" type="password" name="pass1" class="form-control"  required>
+
+                <br/><br/><br/>	<br/>
+                <label for="pass2">Repita contraseña</label>
+                <input id='pass2' type="password" name="pass2" class="form-control"  required>
+
+                <br/><br/><br/><br/>
+                <label for="email">E-Mail</label>
+                <input id='email' type="email" name="email" class="form-control"  required>
+
+                <br/><br/><br/><br/>
+                <label for="steam">Steam</label>
+                <input id='steam' type="text" name="steam" class="form-control"  required>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+            <div class="input-group">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" name="nombre" class="form-control"  required>
+
+                <br/><br/><br/>	<br/>
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" name="apellidos" class="form-control">
+
+                <br/><br/><br/><br/>
+                <label for="edad">Edad</label>
+                <input id='edad' type="text" name="edad" class="form-control"  required>
+
+                <br/><br/><br/><br/>
+                <label for="imagen">Imagen</label>
+                <input id='imagen' type="file" name="imagen" class="form-control">
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-4 col-md-offset-4" style="text-align:center;margin-top:2%">
+        <button type="button" name="registro" onClick="envio('formNuevoUsuario')" class="btn btn-primary">Crear</button>
+        <a href="/"><button class="btn btn-default">Atrás</button></a>
+    </div>
+{% endblock %}

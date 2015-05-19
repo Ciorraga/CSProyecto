@@ -1,0 +1,133 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %} {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/miJs.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <script src="js/modernizr.custom.js"></script>
+
+
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12" id="banner" style="text-align:right;color:white">
+        <div id="inicioAcciones" >
+            {% if not usuarioLogin %}
+            <a href="" style="color:white" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in" style="font-size:1.5em;">Entrar</i></a>
+            {% else %}
+            <a href="/cerrarSesion" style="color:white"><i class="fa fa-sign-in" style="font-size:1.5em;">Salir</i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse" style="border-radius: 0px;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/" id="mainTitle">CSGOPlay</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9" >
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href='/'>Noticias</span></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Campeonato <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href='nuevaNotificacion.php'>Nuevo campeonato</a></li> <!-- Solo se mostrara si es admin o capitan del equipo -->
+                        <li><a href="listaNotificacion.php">Lista campeonatos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href='#'>Equipos</span></a>
+                </li>
+                <li class='dropdown'>
+                    <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>Retos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block contenido %}
+{% endblock %}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Recordar contraseña</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="account-wall">
+                            <form class="form-signin" action="/login" method="post" id="formLogin">
+                                <div class="input-group">
+								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
+								  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								  		</span>
+                                    <input type="text" name="username" class="form-control" placeholder="Usuario" required autofocus>
+                                </div>
+                                <br/>
+                                <div class="input-group">
+								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
+								  			<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+									  	</span>
+                                    <input type="password" name="password" class="form-control" placeholder="Contraseña" >
+                                </div>
+                                <label class="checkbox pull-left">
+                                    <input type="checkbox" name="checkCookie" value="remember-me">
+                                    Recordar
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer" style="text-align:right">
+                <button type="button" name="login" onclick="envio('formLogin')" class="btn btn-primary">Entrar</button>
+
+                <a href="/registro" name="recordar" class="btn btn-success" >Registrar<a>
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if alta=='ok' %}
+    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-dialog-ok.css" />
+    <script src="js/classie.js"></script>
+    <script src="js/notificationFx.js"></script>
+    <script src="js/dialogOk.js"></script>
+{% endif %}
+{% if alta=='pass' %}
+    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-dialog-warn.css" />
+    <script src="js/classie.js"></script>
+    <script src="js/notificationFx.js"></script>
+    <script src="js/dialogPass.js"></script>
+{% endif %}
+{% if alta=='campos' %}
+    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-dialog-warn.css" />
+    <script src="js/classie.js"></script>
+    <script src="js/notificationFx.js"></script>
+    <script src="js/dialogCampos.js"></script>
+{% endif %}
+
+</body>
+</html>
