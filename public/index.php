@@ -63,7 +63,7 @@ $app->post('/login', function() use ($app) {
         die();
     }
     else{
-        $app->render('inicio.html.twig');
+        $app->render('inicio.html.twig', array('usuarioLoginError' => '1'));
         die();
     }
 });

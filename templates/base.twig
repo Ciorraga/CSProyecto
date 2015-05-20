@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block titulo %} {% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -16,14 +17,24 @@
 
 
 </head>
-<body>
+<body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
 <div class="row">
     <div class="col-md-12" id="banner" style="text-align:right;color:white">
         <div id="inicioAcciones" >
             {% if not usuarioLogin %}
-            <a href="" style="color:white" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in" style="font-size:1.5em;">Entrar</i></a>
+                <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
             {% else %}
-            <a href="/cerrarSesion" style="color:white"><i class="fa fa-sign-in" style="font-size:1.5em;">Salir</i></a>
+            <div class="dropdown">
+                <img src="imagenes/interrogacion.jpg" style="width:50px;height:50px;border:1px solid white;padding:5px" alt="" data-toggle="dropdown" aria-expanded="true"/>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
+                    <li role="presentation" class="dropdown-header">{{ usuarioLogin['user'] }}</li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user"> Mi cuenta</i></a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-envelope"> Mensajes</i></a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><a href="/cerrarSesion"><i class="fa fa-sign-out">Salir</i></a></a></li>
+                </ul>
+            </div>
+
             {% endif %}
         </div>
     </div>
@@ -38,7 +49,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9" >
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href='/'>Noticias</span></a>
+                    <a href='/'>Noticias</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Campeonato <span class="caret"></span></a>
@@ -48,7 +59,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Equipos</span></a>
+                    <a href='#'>Equipos</a>
                 </li>
                 <li class='dropdown'>
                     <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>Retos</a>
@@ -66,9 +77,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Recordar contraseña</h4>
+                <h4 class="modal-title" id="myModalLabel">Acceso</h4>
             </div>
             <div class="modal-body">
+                {% if usuarioLoginError %}
+                    <div class="alert alert-danger" role="alert" style="text-align:center;">El usuario o la contraseña no son válidos</div>
+                {% endif %}
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="account-wall">
