@@ -37,7 +37,7 @@ CREATE  TABLE IF NOT EXISTS `csgoPlay`.`usuario` (
   `edad` INT NOT NULL ,
   `es_admin` TINYINT(1) NOT NULL DEFAULT 0 ,
   `es_moderador` TINYINT(1) NOT NULL DEFAULT 0 ,
-  `imagen` VARCHAR(200) NULL DEFAULT `imagenes/interrogacion.jpg` ,
+  `imagen` VARCHAR(200) NULL DEFAULT 'imagenes/interrogacion.jpg' ,
   `steam` VARCHAR(200) NOT NULL ,
   `email` VARCHAR(25) NOT NULL ,
   `password` VARCHAR(50) NOT NULL ,
