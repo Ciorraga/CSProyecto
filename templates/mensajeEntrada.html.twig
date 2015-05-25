@@ -1,0 +1,35 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Mensajes
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+        <h2 style="text-align:center">Mensaje de {{ mensaje.user }}</h2>
+        <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:#d8d8d8;padding:1.5%">
+            <div class="panel panel-default">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="text-align:center;">
+                        <h4>{{ mensaje.asunto }}</h4>
+                    </div>
+                    <div class="panel-body">
+                        {{ mensaje.mensaje }}
+                    </div>
+                    <div class="panel-footer" style="text-align:right;">
+                        <span>Fecha: {{ mensaje.fecha }}</span>
+                    </div>
+                </div>
+            </div>
+            <form class="ui reply form" action="/" method="POST">
+                <div class="field">
+                    <textarea name="titulo"  style="display:none">{{ mensaje.asunto }}</textarea>
+                    <textarea name="textoMensaje"></textarea>
+                </div>
+                <button class="ui blue submit icon button" type="submit" value="{{ mensaje.usuario_id }}" name="botonRespondeMensaje">
+                    <i class="fa fa-paper-plane"></i> Responder
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

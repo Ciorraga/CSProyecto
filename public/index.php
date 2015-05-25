@@ -67,7 +67,8 @@ $app->get('/miCuenta', function() use ($app) {
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/entrada', function() use ($app) {
     $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
-    $app->render('mensajesUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
+    //var_dump($mensajes);die();
+    $app->render('mensajesEntradaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
 })->name('entrada');
 
@@ -96,6 +97,27 @@ $app->post('/login', function() use ($app) {
 });
 
 //Cuando pulsamos en el boton de CREAR en el registro de usuario
+$app->post('/', function() use ($app) {
+   if(isset($_POST['botonRespondeMensaje'])){
+       $fecha_actual=date("Y/m/d");
+       $titulo = "Re:".$_POST['titulo'];
+       $texto = htmlentities($_POST['textoMensaje']);
+       $destinatario = htmlentities($_POST['botonRespondeMensaje']);
+       $remitente = $_SESSION['usuarioLogin']['id'];
+
+       $nuevoMensaje = ORM::for_table('mensaje')->create();
+       $nuevoMensaje->usuario_id = $destinatario;
+       $nuevoMensaje->remitente_id = $remitente;
+       $nuevoMensaje->asunto = $titulo;
+       $nuevoMensaje->mensaje = $texto;
+       $nuevoMensaje->fecha = $fecha_actual;
+       $nuevoMensaje->save();
+       $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
+       $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
+       die();
+   }
+});
+
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
         $app->render('nuevoUser.html.twig', array('alta' => "campos"));
@@ -160,8 +182,24 @@ $app->post('/actualizaUsuario', function() use ($app) {
             die();
         }
     }
+});
 
+$app->post('/muestraMensaje', function() use ($app) {
+    
+    $mensaje = ORM::for_table('mensaje')
+        ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
+        ->where('mensaje.id', $_POST['botonMostrar'])
+        ->find_one();
+    //$mensaje = ORM::for_table('mensaje')->where('id', $_POST['botonMostrar']) ->find_one();
 
+    //$mensajeLeido = ORM::for_table('mensaje')->find_one($_POST['botonMostrar']);
+    //$mensajeLeido -> leido = 1;
+    //$mensajeLeido->save();
+
+    //$_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count(); ,'numMensajes' => $_SESSION['numMensajes']
+
+    $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje,'usuarioLogin'=>$_SESSION['usuarioLogin']));
+    die();
 });
 
 

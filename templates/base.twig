@@ -13,6 +13,10 @@
     <script src="js/miJs.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="js/modernizr.custom.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="sourceSem/semantic.min.css">
+
+
 </head>
 <body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
 <div class="row">
@@ -138,6 +142,13 @@
     <script src="js/classie.js"></script>
     <script src="js/notificationFx.js"></script>
     <script src="js/dialogCampos.js"></script>
+{% endif %}
+{% if mensajeRespEnviado=='ok' %}
+    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-dialog-ok.css" />
+    <script src="js/classie.js"></script>
+    <script src="js/notificationFx.js"></script>
+    <script src="js/dialogMensajeRespOk.js"></script>
 {% endif %}
 
 </body>
