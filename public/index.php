@@ -64,12 +64,19 @@ $app->get('/miCuenta', function() use ($app) {
     }
 })->name('miCuenta');
 
-//Sección mensajes de cada usuario
-$app->get('/mensajes', function() use ($app) {
+//Sección bandeja de entrada de MENSAJES de cada usuario
+$app->get('/entrada', function() use ($app) {
     $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
     $app->render('mensajesUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
-})->name('mensajes');
+})->name('entrada');
+
+//Sección bandeja de entrada de MENSAJES de cada usuario
+$app->get('/salida', function() use ($app) {
+    $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))->where('remitente_id',$_SESSION['usuarioLogin']['id'])->find_many();
+    $app->render('mensajesSalidaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
+    die();
+})->name('salida');
 
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login

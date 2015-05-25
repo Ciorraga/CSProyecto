@@ -28,8 +28,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.769231" vertical-offset="867" max-vertical-offset="2856">
-              <caret line="69" column="158" selection-start-line="69" selection-start-column="158" selection-end-line="69" selection-end-column="158" />
+            <state vertical-scroll-proportion="-15.692307" vertical-offset="867" max-vertical-offset="2975">
+              <caret line="75" column="87" selection-start-line="75" selection-start-column="87" selection-end-line="75" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -40,16 +40,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="1649">
               <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dialogOk.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/dialogOk.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="391">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -68,24 +58,36 @@
       <file leaf-file-name="base.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="2533">
-              <caret line="27" column="140" selection-start-line="27" selection-start-column="140" selection-end-line="27" selection-end-column="140" />
+            <state vertical-scroll-proportion="-3.509091" vertical-offset="283" max-vertical-offset="2533">
+              <caret line="28" column="91" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mensajesUsuario.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/mensajesUsuario.html.twig">
+      <file leaf-file-name="mensajesSalidaUsuario.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/mensajesSalidaUsuario.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64203614" vertical-offset="102" max-vertical-offset="748">
-              <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.33004925" vertical-offset="37" max-vertical-offset="748">
+              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
               <folding>
                 <element signature="e#149#206#0#HTML" expanded="true" />
-                <element signature="e#519#544#0#HTML" expanded="true" />
+                <element signature="e#532#557#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mensajesUsuario.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/mensajesUsuario.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="748">
+              <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+              <folding>
+                <element signature="e#149#206#0#HTML" expanded="true" />
+                <element signature="e#532#557#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,8 +161,9 @@
         <option value="$PROJECT_DIR$/templates/miCuenta.html.twig" />
         <option value="$PROJECT_DIR$/templates/inicio.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.twig" />
-        <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/templates/mensajesUsuario.html.twig" />
+        <option value="$PROJECT_DIR$/public/index.php" />
+        <option value="$PROJECT_DIR$/templates/mensajesSalidaUsuario.html.twig" />
       </list>
     </option>
   </component>
@@ -400,14 +403,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1701" max-vertical-offset="2703">
-          <caret line="142" column="114" selection-start-line="142" selection-start-column="114" selection-end-line="142" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/inicio.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="1649">
@@ -438,7 +433,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
           </folding>
         </state>
       </provider>
@@ -520,7 +514,6 @@
           <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
           </folding>
         </state>
       </provider>
@@ -602,7 +595,6 @@
           <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
           <folding>
             <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
           </folding>
         </state>
       </provider>
@@ -661,7 +653,6 @@
           <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding>
             <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
           </folding>
         </state>
       </provider>
@@ -794,30 +785,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="2533">
-          <caret line="27" column="140" selection-start-line="27" selection-start-column="140" selection-end-line="27" selection-end-column="140" />
+        <state vertical-scroll-proportion="-3.509091" vertical-offset="283" max-vertical-offset="2533">
+          <caret line="28" column="91" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#span#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1432549176964" expanded="true" signature="1272:2588" placeholder="{% if not usuarioLogin ...%}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/mensajesUsuario.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="748">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+          <folding>
+            <element signature="e#149#206#0#HTML" expanded="true" />
+            <element signature="e#532#557#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231" vertical-offset="867" max-vertical-offset="2856">
-          <caret line="69" column="158" selection-start-line="69" selection-start-column="158" selection-end-line="69" selection-end-column="158" />
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="867" max-vertical-offset="2975">
+          <caret line="75" column="87" selection-start-line="75" selection-start-column="87" selection-end-line="75" selection-end-column="87" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/mensajesUsuario.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/mensajesSalidaUsuario.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64203614" vertical-offset="102" max-vertical-offset="748">
-          <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.33004925" vertical-offset="37" max-vertical-offset="748">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding>
             <element signature="e#149#206#0#HTML" expanded="true" />
-            <element signature="e#519#544#0#HTML" expanded="true" />
+            <element signature="e#532#557#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
