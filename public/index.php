@@ -37,7 +37,7 @@ $app->get('/', function() use ($app) {
         session_destroy();
         $app->render('inicio.html.twig');
     } else {
-        $app->render('inicio.html.twig', array('usuarioLogin' => $_SESSION['usuarioLogin']));
+        $app->render('inicio.html.twig', array('numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
         die();
     }
 })->name('inicio');
@@ -57,13 +57,19 @@ $app->get('/registro', function() use ($app) {
 //Sección mi cuenta. Sólo puede acceder a ella un usuario previamente logueado
 $app->get('/miCuenta', function() use ($app) {
     if(isset($_SESSION['usuarioLogin'])){
-        $app->render('miCuenta.html.twig',array("usuarioLogin" => $_SESSION['usuarioLogin']));
+        $app->render('miCuenta.html.twig',array('numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
     }else{
         $app->redirect($app->router()->urlFor('inicio'));
         die();
     }
-
 })->name('miCuenta');
+
+//Sección mensajes de cada usuario
+$app->get('/mensajes', function() use ($app) {
+    $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
+    $app->render('mensajesUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
+    die();
+})->name('mensajes');
 
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login
@@ -71,7 +77,9 @@ $app->post('/login', function() use ($app) {
     $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
     if($usuario){
         $_SESSION['usuarioLogin'] = $usuario;
-        $app->render('inicio.html.twig', array('usuarioLogin' => $usuario));
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
+
+        $app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
         die();
     }
     else{
@@ -118,7 +126,7 @@ $app->post('/registro', function() use ($app) {
 //Cuando pulsamos el botón actualizar en la sección "Mi cuenta"
 $app->post('/actualizaUsuario', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
-        $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios")));
+        $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
         die();
     }else{
         if ($_POST['pass1'] == $_POST['pass2']) {
@@ -134,13 +142,14 @@ $app->post('/actualizaUsuario', function() use ($app) {
 
             $usuario = ORM::for_table('usuario')->where('id', $_SESSION['usuarioLogin']['id'])->find_one();
             if($usuario){
+                $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
                 $_SESSION['usuarioLogin'] = $usuario;
             }
 
-            $app->render('miCuenta.html.twig', array('msgCuenta' => array("success","Cambios realizados con éxito")));
+            $app->render('miCuenta.html.twig', array('msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
             die();
         }else{
-            $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Las contraseñas no son iguales")));
+            $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Las contraseñas no son iguales"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
             die();
         }
     }
