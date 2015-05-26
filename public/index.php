@@ -43,6 +43,8 @@ $app->get('/', function() use ($app) {
             ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
             ->order_by_desc('noticia.fecha')
             ->find_array();
+        session_start();
+        $_SESSION['not']=$noticias;
         $app->render('inicio.html.twig',array('noticias' => $noticias));
     } else {
         $noticias = ORM::for_table('noticia')
@@ -53,6 +55,7 @@ $app->get('/', function() use ($app) {
             ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
             ->order_by_desc('noticia.fecha')
             ->find_array();
+        $_SESSION['not']=$noticias;
         $app->render('inicio.html.twig', array('noticias' => $noticias,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
     }
 })->name('inicio');
@@ -81,7 +84,19 @@ $app->get('/miCuenta', function() use ($app) {
 
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/entrada', function() use ($app) {
-    $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
+    $noticias = ORM::for_table('noticia')
+        ->select('noticia.titulo')
+        ->select('noticia.texto')
+        ->select('noticia.fecha')
+        ->select('usuario.user')
+        ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+        ->order_by_desc('noticia.fecha')
+        ->find_array();
+    $mensajes = ORM::for_table('mensaje')
+        ->select('','')
+        ->join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
+        ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
+        ->find_array();
     //var_dump($mensajes);die();
     $app->render('mensajesEntradaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
@@ -96,20 +111,7 @@ $app->get('/salida', function() use ($app) {
 
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login
-$app->post('/login', function() use ($app) {
-    $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
-    if($usuario){
-        $_SESSION['usuarioLogin'] = $usuario;
-        $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
 
-        $app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
-        die();
-    }
-    else{
-        $app->render('inicio.html.twig', array('usuarioLoginError' => '1'));
-        die();
-    }
-});
 
 //Cuando pulsamos en el boton de CREAR en el registro de usuario
 $app->post('/', function() use ($app) {
@@ -131,6 +133,24 @@ $app->post('/', function() use ($app) {
        $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
        die();
    }
+
+    if(isset($_POST['loginUsuario'])){
+        $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
+        if($usuario){
+            $_SESSION['usuarioLogin'] = $usuario;
+            $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
+
+            $app->redirect($app->router()->urlFor('inicio'));
+            //$app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
+            die();
+        }
+        else{
+            //$app->redirect($app->router()->urlFor('inicio',array('usuarioLoginError' => '1')));
+            //Necesito saber como pasar parámetros en urlFor
+            $app->render('inicio.html.twig',array('noticias' => $_SESSION['not'] ,'usuarioLoginError' => '1'));
+            die();
+        }
+    }
 });
 
 $app->post('/registro', function() use ($app) {

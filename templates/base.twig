@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="account-wall">
-                            <form class="form-signin" action="/login" method="post" id="formLogin">
+                            <form class="form-signin" action="/" method="post" id="formLogin">
                                 <div class="input-group">
 								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
 								  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -106,7 +106,7 @@
                                     <input type="checkbox" name="checkCookie" value="remember-me">
                                     Recordar
                                 </label>
-                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
 
             </div>
             <div class="panel-footer" style="text-align:right">
-                <button type="button" name="login" onclick="envio('formLogin')" class="btn btn-primary">Entrar</button>
+                <button type="submit" name="loginUsuario"  class="btn btn-primary">Entrar</button>
 
                 <a href="/registro" name="recordar" class="btn btn-success" >Registrar<a>
-
+                        </form>
             </div>
             </form>
         </div>
