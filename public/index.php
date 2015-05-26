@@ -84,18 +84,14 @@ $app->get('/miCuenta', function() use ($app) {
 
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/entrada', function() use ($app) {
-    $noticias = ORM::for_table('noticia')
-        ->select('noticia.titulo')
-        ->select('noticia.texto')
-        ->select('noticia.fecha')
-        ->select('usuario.user')
-        ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-        ->order_by_desc('noticia.fecha')
-        ->find_array();
     $mensajes = ORM::for_table('mensaje')
-        ->select('','')
+        ->select('mensaje.id')
+        ->select('mensaje.asunto')
+        ->select('mensaje.mensaje')
+        ->select('mensaje.fecha')
+        ->select('usuario.user')
         ->join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
-        ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
+        ->where('mensaje.usuario_id',$_SESSION['usuarioLogin']['id'])
         ->find_array();
     //var_dump($mensajes);die();
     $app->render('mensajesEntradaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
