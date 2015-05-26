@@ -35,10 +35,25 @@ $app->get('/', function() use ($app) {
     if (!isset($_SESSION['usuarioLogin'])) {
         unset($_SESSION);
         session_destroy();
-        $app->render('inicio.html.twig');
+        $noticias = ORM::for_table('noticia')
+            ->select('noticia.titulo')
+            ->select('noticia.texto')
+            ->select('noticia.fecha')
+            ->select('usuario.user')
+            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+            ->order_by_desc('noticia.fecha')
+            ->find_array();
+        $app->render('inicio.html.twig',array('noticias' => $noticias));
     } else {
-        $app->render('inicio.html.twig', array('numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
-        die();
+        $noticias = ORM::for_table('noticia')
+            ->select('noticia.titulo')
+            ->select('noticia.texto')
+            ->select('noticia.fecha')
+            ->select('usuario.user')
+            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+            ->order_by_desc('noticia.fecha')
+            ->find_array();
+        $app->render('inicio.html.twig', array('noticias' => $noticias,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
     }
 })->name('inicio');
 
@@ -185,7 +200,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
 });
 
 $app->post('/muestraMensaje', function() use ($app) {
-    
+
     $mensaje = ORM::for_table('mensaje')
         ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
         ->where('mensaje.id', $_POST['botonMostrar'])

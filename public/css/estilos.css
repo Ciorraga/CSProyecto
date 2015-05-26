@@ -32,8 +32,8 @@ nav{
 }
 
 #noticias {
-    font-family: baseFont;
-    font-size: 1.2em;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 1em;
 }
 
 a{
@@ -56,8 +56,8 @@ a:hover{
 }
 
 form{
-    font-family: baseFont !important;
-    font-size: 1.3em;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 1em;
 }
 
 h1{

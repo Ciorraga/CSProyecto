@@ -7,60 +7,54 @@
 {%block contenido %}
 <div id="noticias">
     <div class="col-md-8">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="page-header" style="text-align:center">
-                        <h2>Example page header</h2>
+        {% for noticia in noticias %}
+            <div class="col-md-12" style="margin-bottom:20px">
+                <div class="panel panel-default" style="border-bottom:2px solid darkblue !important;">
+                    <div class="panel-body">
+                        <div class="page-header" style="text-align:center">
+                            <h2>{{ noticia.titulo }}</h2>
+                        </div>
+                        <div class="panel-footer" style="text-align:right;margin-bottom:10px;">
+                            <span>Noticia creada por: {{ noticia.user }} el {{ noticia.fecha }}</span>
+                        </div>
+                        {{ noticia.texto }}
                     </div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde blanditiis ipsam at dolores pariatur repudiandae atque excepturi sit reprehenderit, reiciendis officiis, necessitatibus amet eligendi deleniti rerum a? Porro, commodi, architecto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil praesentium natus hic recusandae? Aliquid modi non cumque hic in sed, laudantium, similique laborum, ipsam voluptatum dolor assumenda iste ex tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id distinctio voluptas, mollitia corporis dolor impedit quasi, architecto nihil nam eveniet officia, sunt dicta vitae? Vero mollitia autem, recusandae quaerat ad.
-                </div>
-                <div class="panel-footer" style="text-align:right">
-                    <span>Noticia creada por: Usuario el 15/04/2015</span>
+
+                    <div class="col-md-12" style="background-color:#c0c0c0;padding:15px;border-top:2px solid darkblue !important;">
+                        <div>
+                            <h3>Comentarios</h3>
+                            <hr/>
+                            <div class="comment">
+                                <a style="float:left;">
+                                    <img style="padding-right:7px;width:50px;height:50px;" src="imagenes/interrogacion.jpg">
+                                </a>
+                                <div class="content">
+                                    <a class="author">Mathy</a>
+                                    <div class="metadata">
+                                        <span class="date">Today at 5:42PM</span>
+                                    </div>
+                                    <div class="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form class="ui reply form">
+                                <div class="field" >
+                                    <textarea style="height:10%"></textarea>
+                                </div>
+                                <div class="ui blue labeled submit icon button">
+                                    <i class="icon edit"></i> Enviar
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="page-header" style="text-align:center">
-                        <h2>Example page header</h2>
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde blanditiis ipsam at dolores pariatur repudiandae atque excepturi sit reprehenderit, reiciendis officiis, necessitatibus amet eligendi deleniti rerum a? Porro, commodi, architecto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil praesentium natus hic recusandae? Aliquid modi non cumque hic in sed, laudantium, similique laborum, ipsam voluptatum dolor assumenda iste ex tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id distinctio voluptas, mollitia corporis dolor impedit quasi, architecto nihil nam eveniet officia, sunt dicta vitae? Vero mollitia autem, recusandae quaerat ad.
-                </div>
-                <div class="panel-footer" style="text-align:right">
-                    <span>Noticia creada por: Usuario el 15/04/2015</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="page-header" style="text-align:center">
-                        <h2>Example page header</h2>
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde blanditiis ipsam at dolores pariatur repudiandae atque excepturi sit reprehenderit, reiciendis officiis, necessitatibus amet eligendi deleniti rerum a? Porro, commodi, architecto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil praesentium natus hic recusandae? Aliquid modi non cumque hic in sed, laudantium, similique laborum, ipsam voluptatum dolor assumenda iste ex tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id distinctio voluptas, mollitia corporis dolor impedit quasi, architecto nihil nam eveniet officia, sunt dicta vitae? Vero mollitia autem, recusandae quaerat ad.
-                </div>
-                <div class="panel-footer" style="text-align:right">
-                    <span>Noticia creada por: Usuario el 15/04/2015</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="page-header" style="text-align:center">
-                        <h2>Example page header</h2>
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde blanditiis ipsam at dolores pariatur repudiandae atque excepturi sit reprehenderit, reiciendis officiis, necessitatibus amet eligendi deleniti rerum a? Porro, commodi, architecto. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil praesentium natus hic recusandae? Aliquid modi non cumque hic in sed, laudantium, similique laborum, ipsam voluptatum dolor assumenda iste ex tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id distinctio voluptas, mollitia corporis dolor impedit quasi, architecto nihil nam eveniet officia, sunt dicta vitae? Vero mollitia autem, recusandae quaerat ad.
-                </div>
-                <div class="panel-footer" style="text-align:right">
-                    <span>Noticia creada por: Usuario el 15/04/2015</span>
-                </div>
-            </div>
-        </div>
+
+
+        {% endfor %}
     </div>
-</div>
 <div id="lat">
     <div class="col-md-4">
         <div class="col-md-12">
