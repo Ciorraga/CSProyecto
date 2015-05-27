@@ -56,6 +56,9 @@ $app->get('/', function() use ($app) {
             ->order_by_desc('noticia.fecha')
             ->find_array();
         $_SESSION['not']=$noticias;
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
         $app->render('inicio.html.twig', array('noticias' => $noticias,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
     }
 })->name('inicio');
@@ -75,6 +78,9 @@ $app->get('/registro', function() use ($app) {
 //Sección mi cuenta. Sólo puede acceder a ella un usuario previamente logueado
 $app->get('/miCuenta', function() use ($app) {
     if(isset($_SESSION['usuarioLogin'])){
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
         $app->render('miCuenta.html.twig',array('numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
     }else{
         $app->redirect($app->router()->urlFor('inicio'));
@@ -86,13 +92,18 @@ $app->get('/miCuenta', function() use ($app) {
 $app->get('/entrada', function() use ($app) {
     $mensajes = ORM::for_table('mensaje')
         ->select('mensaje.id')
+        ->select('mensaje.leido')
         ->select('mensaje.asunto')
         ->select('mensaje.mensaje')
         ->select('mensaje.fecha')
         ->select('usuario.user')
         ->join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
         ->where('mensaje.usuario_id',$_SESSION['usuarioLogin']['id'])
+        ->order_by_desc('mensaje.fecha')
         ->find_array();
+    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+        ->where('leido',0)->count();
     //var_dump($mensajes);die();
     $app->render('mensajesEntradaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
@@ -100,7 +111,9 @@ $app->get('/entrada', function() use ($app) {
 
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/salida', function() use ($app) {
-    $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))->where('remitente_id',$_SESSION['usuarioLogin']['id'])->find_many();
+    $mensajes = ORM::for_table('mensaje')
+        ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
+        ->where('remitente_id',$_SESSION['usuarioLogin']['id'])->find_many();
     $app->render('mensajesSalidaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
 })->name('salida');
@@ -125,8 +138,13 @@ $app->post('/', function() use ($app) {
        $nuevoMensaje->mensaje = $texto;
        $nuevoMensaje->fecha = $fecha_actual;
        $nuevoMensaje->save();
-       $mensajes = ORM::for_table('mensaje')->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))->where('usuario_id',$_SESSION['usuarioLogin']['id'])->find_many();
-       $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
+
+       $mensajes = ORM::for_table('mensaje')
+           ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
+           ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
+           ->find_many();
+
+       $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
        die();
    }
 
@@ -134,7 +152,9 @@ $app->post('/', function() use ($app) {
         $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
         if($usuario){
             $_SESSION['usuarioLogin'] = $usuario;
-            $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
+            $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+                ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+                ->where('leido',0)->count();
 
             $app->redirect($app->router()->urlFor('inicio'));
             //$app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
@@ -186,6 +206,9 @@ $app->post('/registro', function() use ($app) {
 //Cuando pulsamos el botón actualizar en la sección "Mi cuenta"
 $app->post('/actualizaUsuario', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
         $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
         die();
     }else{
@@ -200,15 +223,23 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $userAModificar->edad = $_POST['edad'];
             $userAModificar->save();
 
-            $usuario = ORM::for_table('usuario')->where('id', $_SESSION['usuarioLogin']['id'])->find_one();
+            $usuario = ORM::for_table('usuario')
+                ->where('id', $_SESSION['usuarioLogin']['id'])
+                ->find_one();
+
             if($usuario){
-                $_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count();
+                $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+                    ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+                    ->where('leido',0)->count();
                 $_SESSION['usuarioLogin'] = $usuario;
             }
 
             $app->render('miCuenta.html.twig', array('msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
             die();
         }else{
+            $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+                ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+                ->where('leido',0)->count();
             $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Las contraseñas no son iguales"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin']));
             die();
         }
@@ -216,20 +247,24 @@ $app->post('/actualizaUsuario', function() use ($app) {
 });
 
 $app->post('/muestraMensaje', function() use ($app) {
+    $mensajeLeido = ORM::for_table('mensaje')->find_one($_POST['botonMostrar']);
+    $mensajeLeido -> leido = 1;
+    $mensajeLeido->save();
 
     $mensaje = ORM::for_table('mensaje')
-        ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
+        ->select('mensaje.id')
+        ->select('mensaje.asunto')
+        ->select('mensaje.mensaje')
+        ->select('mensaje.fecha')
+        ->select('usuario.user')
+        ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
         ->where('mensaje.id', $_POST['botonMostrar'])
-        ->find_one();
-    //$mensaje = ORM::for_table('mensaje')->where('id', $_POST['botonMostrar']) ->find_one();
+        ->find_array();
 
-    //$mensajeLeido = ORM::for_table('mensaje')->find_one($_POST['botonMostrar']);
-    //$mensajeLeido -> leido = 1;
-    //$mensajeLeido->save();
-
-    //$_SESSION['numMensajes'] = ORM::for_table('mensaje')->where('usuario_id', $_SESSION['usuarioLogin']['id'])->where('leido',0)->count(); ,'numMensajes' => $_SESSION['numMensajes']
-
-    $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje,'usuarioLogin'=>$_SESSION['usuarioLogin']));
+    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+        ->where('leido',0)->count();
+    $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin']));
     die();
 });
 

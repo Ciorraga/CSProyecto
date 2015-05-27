@@ -28,7 +28,7 @@
                     <tbody>
                     {% for mensaje in mensajes %}
                         <tr>
-                            <th scope="row">{% if mensaje.leido==0 %}<i class="fa fa-envelope"></i>{% else %}<i class="fa fa-envelope-o"></i>{% endif %}</th>
+                            <th scope="row">{% if mensaje.leido==0 %}<i class="fa fa-envelope-o"></i>{% else %}<i class="fa fa-envelope"></i>{% endif %}</th>
                             <td>{{ mensaje.asunto }}</td>
                             <td>{{ mensaje.user }}</td>
                             <td>{{ mensaje.fecha }}</td>
