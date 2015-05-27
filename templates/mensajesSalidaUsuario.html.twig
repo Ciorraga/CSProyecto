@@ -16,7 +16,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Asunto</th>
                     <th>A</th>
                     <th>Fecha</th>
@@ -25,7 +24,6 @@
                 <tbody>
                 {% for mensaje in mensajes %}
                     <tr>
-                        <th scope="row">{% if mensaje.leido==0 %}<i class="fa fa-envelope"></i>{% else %}<i class="fa fa-envelope-o"></i>{% endif %}</th>
                         <td>{{ mensaje.asunto }}</td>
                         <td>{{ mensaje.user }}</td>
                         <td>{{ mensaje.fecha }}</td>

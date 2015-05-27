@@ -122,52 +122,7 @@ $app->get('/salida', function() use ($app) {
 //Cuando pulsamos en el boton de ACEPTAR en el login
 
 
-//Cuando pulsamos en el boton de CREAR en el registro de usuario
-$app->post('/', function() use ($app) {
-   if(isset($_POST['botonRespondeMensaje'])){
-       $fecha_actual=date("Y/m/d");
-       $titulo = "Re:".$_POST['titulo'];
-       $texto = htmlentities($_POST['textoMensaje']);
-       $destinatario = htmlentities($_POST['botonRespondeMensaje']);
-       $remitente = $_SESSION['usuarioLogin']['id'];
 
-       $nuevoMensaje = ORM::for_table('mensaje')->create();
-       $nuevoMensaje->usuario_id = $destinatario;
-       $nuevoMensaje->remitente_id = $remitente;
-       $nuevoMensaje->asunto = $titulo;
-       $nuevoMensaje->mensaje = $texto;
-       $nuevoMensaje->fecha = $fecha_actual;
-       $nuevoMensaje->save();
-
-       $mensajes = ORM::for_table('mensaje')
-           ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
-           ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
-           ->find_many();
-
-       $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
-       die();
-   }
-
-    if(isset($_POST['loginUsuario'])){
-        $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
-        if($usuario){
-            $_SESSION['usuarioLogin'] = $usuario;
-            $_SESSION['numMensajes'] = ORM::for_table('mensaje')
-                ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
-                ->where('leido',0)->count();
-
-            $app->redirect($app->router()->urlFor('inicio'));
-            //$app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
-            die();
-        }
-        else{
-            //$app->redirect($app->router()->urlFor('inicio',array('usuarioLoginError' => '1')));
-            //Necesito saber como pasar parámetros en urlFor
-            $app->render('inicio.html.twig',array('noticias' => $_SESSION['not'] ,'usuarioLoginError' => '1'));
-            die();
-        }
-    }
-});
 
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
@@ -246,28 +201,82 @@ $app->post('/actualizaUsuario', function() use ($app) {
     }
 });
 
-$app->post('/muestraMensaje', function() use ($app) {
-    $mensajeLeido = ORM::for_table('mensaje')->find_one($_POST['botonMostrar']);
-    $mensajeLeido -> leido = 1;
-    $mensajeLeido->save();
+//Cuando pulsamos en el boton de CREAR en el registro de usuario
+$app->post('/', function() use ($app) {
+    if(isset($_POST['botonRespondeMensaje'])){
+        $fecha_actual=date("Y/m/d");
+        $titulo = "Re:".$_POST['titulo'];
+        $texto = htmlentities($_POST['textoMensaje']);
+        $destinatario = htmlentities($_POST['botonRespondeMensaje']);
+        $remitente = $_SESSION['usuarioLogin']['id'];
 
-    $mensaje = ORM::for_table('mensaje')
-        ->select('mensaje.id')
-        ->select('mensaje.asunto')
-        ->select('mensaje.mensaje')
-        ->select('mensaje.fecha')
-        ->select('usuario.user')
-        ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
-        ->where('mensaje.id', $_POST['botonMostrar'])
-        ->find_array();
+        $nuevoMensaje = ORM::for_table('mensaje')->create();
+        $nuevoMensaje->usuario_id = $destinatario;
+        $nuevoMensaje->remitente_id = $remitente;
+        $nuevoMensaje->asunto = $titulo;
+        $nuevoMensaje->mensaje = $texto;
+        $nuevoMensaje->fecha = $fecha_actual;
+        $nuevoMensaje->save();
 
-    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
-        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
-        ->where('leido',0)->count();
-    $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin']));
-    die();
+        $mensajes = ORM::for_table('mensaje')
+            ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
+            ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
+            ->find_many();
+
+        $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
+        die();
+    }
+
+    if(isset($_POST['loginUsuario'])){
+        $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
+        if($usuario){
+            $_SESSION['usuarioLogin'] = $usuario;
+            $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+                ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+                ->where('leido',0)->count();
+
+            $app->redirect($app->router()->urlFor('inicio'));
+            //$app->render('inicio.html.twig',array('numMensajes' => $_SESSION['numMensajes'] , 'usuarioLogin' => $usuario));
+            die();
+        }
+        else{
+            //$app->redirect($app->router()->urlFor('inicio',array('usuarioLoginError' => '1')));
+            //Necesito saber como pasar parámetros en urlFor
+            $app->render('inicio.html.twig',array('noticias' => $_SESSION['not'] ,'usuarioLoginError' => '1'));
+            die();
+        }
+    }
+
+    if(isset($_POST['botonMostrar'])){
+        $mensajeLeido = ORM::for_table('mensaje')->find_one($_POST['botonMostrar']);
+        $mensajeLeido -> leido = 1;
+        $mensajeLeido->save();
+
+        $mensaje = ORM::for_table('mensaje')
+            ->select('mensaje.id')
+            ->select('mensaje.asunto')
+            ->select('mensaje.mensaje')
+            ->select('mensaje.fecha')
+            ->select('usuario.user')
+            ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
+            ->where('mensaje.id', $_POST['botonMostrar'])
+            ->find_array();
+
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
+        $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin']));
+        die();
+    }
+
+    if(isset($_POST['botonBorrar'])){
+        ORM::for_table('mensaje')
+            ->find_one($_POST['botonBorrar'])->delete();
+
+        $app->redirect($app->router()->urlFor('entrada'));
+        die();
+    }
 });
-
 
 $app->run();
 
