@@ -123,6 +123,13 @@ $app->get('/salida', function() use ($app) {
     die();
 })->name('salida');
 
+$app->get('/nuevoMensaje', function() use ($app) {
+    $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
+})->name('nuevoMensaje');
+
+
+
+
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login
 
@@ -205,6 +212,18 @@ $app->post('/actualizaUsuario', function() use ($app) {
         }
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Cuando pulsamos en el boton de CREAR en el registro de usuario
 $app->post('/', function() use ($app) {

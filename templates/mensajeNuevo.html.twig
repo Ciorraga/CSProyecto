@@ -1,0 +1,29 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Mensajes
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+        <ul class="nav nav-tabs nav-justified">
+            <li role="presentation"><a href="/entrada">Bandeja de entrada</a></li>
+            <li role="presentation"><a href="/salida">Bandeja de salida</a></li>
+            <li role="presentation" class="active"><a href="/nuevoMensaje">Nuevo</a></li>
+        </ul>
+        <form action="/" method="POST" class="col-md-8 col-md-offset-2">
+            <div id="mensajeUsuario" style="text-align:center">
+                <h2>Nuevo Mensaje</h2>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+
+                <button class="ui blue submit icon button" style="margin-top:15px;" type="submit" name="enviarNuevoMensaje">
+                    <i class="fa fa-paper-plane"></i> Enviar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+    </script>
+{% endblock %}
