@@ -26,10 +26,12 @@
                     <textarea name="titulo"  style="display:none">{{ mensaje.asunto }}</textarea>
                     <textarea name="textoMensaje"></textarea>
                 </div>
-                <button class="ui blue submit icon button" type="submit" value="{{ mensaje.usuario_id }}" name="botonRespondeMensaje">
+                <button class="ui blue submit icon button" type="submit" value="{{ mensaje.remitente_id }}" name="botonRespondeMensaje">
                     <i class="fa fa-paper-plane"></i> Responder
                 </button>
             </form>
         </div>
     </div>
+
+
 {% endblock %}

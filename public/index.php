@@ -210,6 +210,8 @@ $app->post('/', function() use ($app) {
         $destinatario = htmlentities($_POST['botonRespondeMensaje']);
         $remitente = $_SESSION['usuarioLogin']['id'];
 
+        //var_dump($destinatario);die();
+
         $nuevoMensaje = ORM::for_table('mensaje')->create();
         $nuevoMensaje->usuario_id = $destinatario;
         $nuevoMensaje->remitente_id = $remitente;
@@ -258,6 +260,7 @@ $app->post('/', function() use ($app) {
             ->select('mensaje.mensaje')
             ->select('mensaje.fecha')
             ->select('usuario.user')
+            ->select('mensaje.remitente_id')
             ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
             ->where('mensaje.id', $_POST['botonMostrar'])
             ->find_array();
