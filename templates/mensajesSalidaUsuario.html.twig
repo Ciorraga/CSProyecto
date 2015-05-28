@@ -11,6 +11,7 @@
             <li role="presentation" class="active"><a href="/salida">Bandeja de salida</a></li>
             <li role="presentation"><a href="#">Nuevo</a></li>
         </ul>
+        <form action="/" method="POST">
         <div id="a" style="text-align:center">
             <h2>Bandeja de salida</h2>
             <table class="table table-hover">
@@ -19,6 +20,7 @@
                     <th>Asunto</th>
                     <th>A</th>
                     <th>Fecha</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,11 +29,18 @@
                         <td>{{ mensaje.asunto }}</td>
                         <td>{{ mensaje.user }}</td>
                         <td>{{ mensaje.fecha }}</td>
+                        <td style="text-align:right">
+                            <div class="btn-group">
+                                <button type="submit" name="botonMostrar_Msg_Salida" class="btn btn-success" value="{{ mensaje.id }}">Ver</button>
+                                <button type="submit" name="botonBorrar_Msg_Salida" class="btn btn-danger" value="{{ mensaje.id }}">Borrar</button>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
+        </form>
 
     </div>
 {% endblock %}

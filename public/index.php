@@ -112,8 +112,13 @@ $app->get('/entrada', function() use ($app) {
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/salida', function() use ($app) {
     $mensajes = ORM::for_table('mensaje')
+        ->select('mensaje.asunto')
+        ->select('mensaje.fecha')
+        ->select('mensaje.id')
+        ->select('usuario.user')
         ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
-        ->where('remitente_id',$_SESSION['usuarioLogin']['id'])->find_many();
+        ->where('remitente_id',$_SESSION['usuarioLogin']['id'])
+        ->find_many();
     $app->render('mensajesSalidaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     die();
 })->name('salida');
@@ -277,6 +282,33 @@ $app->post('/', function() use ($app) {
             ->find_one($_POST['botonBorrar'])->delete();
 
         $app->redirect($app->router()->urlFor('entrada'));
+        die();
+    }
+
+    if(isset($_POST['botonMostrar_Msg_Salida'])){
+        $mensaje = ORM::for_table('mensaje')
+            ->select('mensaje.id')
+            ->select('mensaje.asunto')
+            ->select('mensaje.mensaje')
+            ->select('mensaje.fecha')
+            ->select('usuario.user')
+            ->select('mensaje.remitente_id')
+            ->inner_join('usuario', array('mensaje.usuario_id', '=', 'usuario.id'))
+            ->where('mensaje.id', $_POST['botonMostrar_Msg_Salida'])
+            ->find_array();
+
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
+        $app->render('mensajeSalida.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin']));
+        die();
+    }
+
+    if(isset($_POST['botonBorrar_Msg_Salida'])){
+        ORM::for_table('mensaje')
+            ->find_one($_POST['botonBorrar_Msg_Salida'])->delete();
+
+        $app->redirect($app->router()->urlFor('salida'));
         die();
     }
 });
