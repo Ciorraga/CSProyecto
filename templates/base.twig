@@ -12,36 +12,14 @@
     <link rel="stylesheet" href="css/estilos.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="js/miJs.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="js/modernizr.custom.js"></script>
-
     <link rel="stylesheet" type="text/css" href="sourceSem/semantic.min.css">
-
+    <link rel="stylesheet" type="text/css" href="css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="css/cs-skin-elastic.css" />
+    <link rel="stylesheet" type="text/css" href="css/cs-skin-slide.css" />
 
 </head>
 <body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
-<div class="row">
-    <div class="col-md-12" id="banner" style="text-align:right;color:white">
-        <div id="inicioAcciones" >
-            {% if not usuarioLogin %}
-                <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
-            {% else %}
-            <div class="dropdown">
-                <img src="imagenes/interrogacion.jpg" style="width:50px;height:50px;border:1px solid white;padding:5px" alt="" data-toggle="dropdown" aria-expanded="true"/>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
-                    <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/entrada"><i class="fa fa-envelope"> Mensajes <span style="margin-botom:0px" class="badge">{% if numMensajes != 0 %} {{ numMensajes }} {% endif %}</span></i></a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><a href="/cerrarSesion"><i class="fa fa-sign-out">Salir</i></a></a></li>
-                </ul>
-            </div>
-
-            {% endif %}
-        </div>
-    </div>
-</div>
-
 <nav class="navbar navbar-inverse" style="border-radius: 0px;">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -70,6 +48,30 @@
         </div>
     </div>
 </nav>
+
+<div class="row">
+    <div class="col-md-12" id="banner" style="text-align:right;color:white">
+        <div id="inicioAcciones" >
+            {% if not usuarioLogin %}
+                <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
+            {% else %}
+            <div class="dropdown">
+                <img src="imagenes/interrogacion.jpg" style="width:50px;height:50px;border:1px solid white;padding:5px" alt="" data-toggle="dropdown" aria-expanded="true"/>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
+                    <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/entrada"><i class="fa fa-envelope"> Mensajes <span style="margin-botom:0px" class="badge">{% if numMensajes != 0 %} {{ numMensajes }} {% endif %}</span></i></a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><a href="/cerrarSesion"><i class="fa fa-sign-out">Salir</i></a></a></li>
+                </ul>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 {% block contenido %}
 {% endblock %}
 

@@ -124,7 +124,12 @@ $app->get('/salida', function() use ($app) {
 })->name('salida');
 
 $app->get('/nuevoMensaje', function() use ($app) {
-    $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
+    $usuarios = ORM::for_table('usuario')
+        ->select('user')
+        ->select('id')
+        ->find_many();
+
+    $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios));
 })->name('nuevoMensaje');
 
 
@@ -329,6 +334,32 @@ $app->post('/', function() use ($app) {
 
         $app->redirect($app->router()->urlFor('salida'));
         die();
+    }
+
+    if(isset($_POST['enviarNuevoMensaje'])){
+        $asunto = htmlentities($_POST['asunto']);
+        $mensaje = htmlentities($_POST['mensaje']);
+        $id_usuario= htmlentities($_POST['id_usuario']);
+        $id_remitente = $_SESSION['usuarioLogin']['id'];
+        $fecha_actual=date("Y/m/d");
+
+
+        $nuevoMensaje = ORM::for_table('mensaje')->create();
+        $nuevoMensaje->usuario_id = $id_usuario;
+        $nuevoMensaje->remitente_id = $id_remitente;
+        $nuevoMensaje->asunto = $asunto;
+        $nuevoMensaje->mensaje = $mensaje;
+        $nuevoMensaje->fecha = $fecha_actual;
+        $nuevoMensaje->save();
+
+        $mensajes = ORM::for_table('mensaje')
+            ->inner_join('usuario', array('mensaje.remitente_id', '=', 'usuario.id'))
+            ->where('usuario_id',$_SESSION['usuarioLogin']['id'])
+            ->find_many();
+
+        $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
+        die();
+
     }
 });
 

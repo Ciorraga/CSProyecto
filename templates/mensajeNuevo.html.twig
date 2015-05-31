@@ -11,11 +11,21 @@
             <li role="presentation"><a href="/salida">Bandeja de salida</a></li>
             <li role="presentation" class="active"><a href="/nuevoMensaje">Nuevo</a></li>
         </ul>
+        <p></p>
         <form action="/" method="POST" class="col-md-8 col-md-offset-2">
             <div id="mensajeUsuario" style="text-align:center">
                 <h2>Nuevo Mensaje</h2>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <select class="cs-select cs-skin-elastic" name="id_usuario">
+                    <option value="" disabled selected>Selecciona un usuario</option>
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}" data-class="flag-france">{{ usuario.user }}</option>
+                    {% endfor %}
+                </select>
 
+            </div>
+            <div style="margin-top:15px;">
+                <input type="text" class="form-control" name="asunto" placeholder="Escibe aquí el asunto de tu mensaje"><br/>
+                <textarea placeholder="Escribe aquí el contenido de tu mensaje" class="form-control" rows="5" id="comment" name="mensaje"></textarea>
                 <button class="ui blue submit icon button" style="margin-top:15px;" type="submit" name="enviarNuevoMensaje">
                     <i class="fa fa-paper-plane"></i> Enviar
                 </button>
@@ -23,7 +33,13 @@
         </form>
     </div>
 
+    <script src="js/classie.js"></script>
+    <script src="js/selectFx.js"></script>
     <script>
-
+        (function() {
+            [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
+                new SelectFx(el);
+            } );
+        })();
     </script>
 {% endblock %}
