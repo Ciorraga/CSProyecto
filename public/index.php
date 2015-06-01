@@ -170,8 +170,31 @@ $app->get('/equipos', function() use ($app) {
     $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
 })->name('equipos');
 
+$app->get('/buscarEquipo/:id', function ($id) {
+    $equipo = ORM::for_table('equipo')
+        ->where_like('nombre', '%'. $id .'%')
+        ->find_many();
 
+    foreach ($equipo as $valor){
+      echo "<a href='/equipos/".$valor['nombre']."'>". $valor['nombre'] ."</a><br/>" ;
+    };
+})->name('buscarEquipo');
 
+$app->get('/equipos/:equipo', function ($equipo) use ($app) {
+    $equipo = ORM::for_table('equipo')
+        ->where('nombre',$equipo)
+        ->find_many();
+    
+    $usuarios = ORM::for_table('usuario')
+        ->where('equipo_id',$equipo[0]['id'])
+        ->find_many();
+
+    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+        ->where('leido',0)->count();
+
+    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
+});
 
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login
