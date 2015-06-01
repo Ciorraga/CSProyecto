@@ -150,24 +150,30 @@ $app->get('/nuevoMensaje', function() use ($app) {
     $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios));
 })->name('nuevoMensaje');
 
+//Cuando el usuario pulsa en "Equipos"
 $app->get('/equipos', function() use ($app) {
+    //Si el usuario NO tiene equipo
     if($_SESSION['usuarioLogin']['equipo_id']==null){
-        echo "ENTRA";die();
         $equipo = null;
+        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes']));
     }else{
+        //Consulta para extraer los datos del equipo
         $equipo = ORM::for_table('equipo')
             ->where('id',$_SESSION['usuarioLogin']['equipo_id'])
             ->find_many();
+        //Consulta para extraer los datos de los miembros del equipo
         $usuarios = ORM::for_table('usuario')
             ->where('equipo_id',$equipo[0]['id'])
             ->find_many();
+
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
+
+        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
     }
 
-    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
-        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
-        ->where('leido',0)->count();
 
-    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
 })->name('equipos');
 
 $app->get('/buscarEquipo/:id', function ($id) {
@@ -184,7 +190,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $equipo = ORM::for_table('equipo')
         ->where('nombre',$equipo)
         ->find_many();
-    
+
     $usuarios = ORM::for_table('usuario')
         ->where('equipo_id',$equipo[0]['id'])
         ->find_many();
@@ -417,7 +423,16 @@ $app->post('/', function() use ($app) {
         $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
         die();
     }
+
+    if(isset($_POST['botonCreaEquipo'])){
+        echo "CREAR EQUIPO";
+        die();
+    }
+
 });
+
+
+
 
 $app->run();
 

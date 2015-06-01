@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/estilos.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="js/miJs.js"></script>
-    <script src="js/modernizr.custom.js"></script>
+    <script src="/js/miJs.js"></script>
+    <script src="/js/modernizr.custom.js"></script>
     <link rel="stylesheet" type="text/css" href="/sourceSem/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/cs-select.css" />
     <link rel="stylesheet" type="text/css" href="/css/cs-skin-elastic.css" />
@@ -56,7 +56,7 @@
                 <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
             {% else %}
             <div class="dropdown">
-                <img src="imagenes/interrogacion.jpg" style="width:50px;height:50px;border:1px solid white;padding:5px" alt="" data-toggle="dropdown" aria-expanded="true"/>
+                <img src="imagenes/interrogacion.jpg" class="img-thumbnail" style="width:60px;height:60px;border:1px solid white;" alt="" data-toggle="dropdown" aria-expanded="true"/>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
                     <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>

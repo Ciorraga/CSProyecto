@@ -1,7 +1,7 @@
 {%extends "base.twig" %}
 
 {% block titulo %}
-    CSGOPlay | Mensajes
+    CSGOPlay | Equipos
 {% endblock %}
 
 {% block contenido %}
@@ -10,8 +10,14 @@
         <div class="col-md-8 col-md-offset-1" id="equiposSeccion">
             <h2>Mi equipo</h2>
             {% if equipo==null %}
-                Aún no tienes equipo!<br/>
-                Busca un equipo y manda una petición de entrada si quieres competir en CSGOPlay
+            <form action="/" method="POST">
+                <div class="jumbotron" style="padding:3%;">
+                    <h1>¿Aún no tienes equipo?</h1>
+                    <p>Crea un equipo y juega con tus amigos, o, utiliza el buscador ubicado en la derecha para encontrar un equipo y solicitar tu admisión a él</p>
+                    <p><button class="btn btn-primary btn-lg" type="submit" name="botonCreaEquipo">Crear equipo</button></p>
+
+                </div>
+            </form>
             {% else %}
                 {% for eq in equipo %}
                 <div class="row">
