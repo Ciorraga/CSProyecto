@@ -203,7 +203,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
 });
 
 //------------------------------------------------------------------------POSTS--------
-//Cuando pulsamos en el boton de ACEPTAR en el login
+
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
         $app->render('nuevoUser.html.twig', array('alta' => "campos"));
@@ -281,19 +281,6 @@ $app->post('/actualizaUsuario', function() use ($app) {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-//Cuando pulsamos en el boton de CREAR en el registro de usuario
 $app->post('/', function() use ($app) {
     if(isset($_POST['botonRespondeMensaje'])){
         $fecha_actual=date("Y/m/d");
@@ -425,7 +412,58 @@ $app->post('/', function() use ($app) {
     }
 
     if(isset($_POST['botonCreaEquipo'])){
-        echo "CREAR EQUIPO";
+        $app->render('nuevoEquipo.html.twig', array('numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
+        die();
+    }
+
+    if(isset($_POST['botonFormNuevoEquipo'])){
+        $nombre = htmlentities($_POST['nombreEquipo']);
+        $urlSteam = htmlentities($_POST['urlSteam']);
+        $fecha_actual=date("Y/m/d");
+
+        //Guardamos el equipo en la BBDD
+        $nuevoEquipo = ORM::for_table('equipo')->create();
+        $nuevoEquipo->nombre = $nombre;
+        $nuevoEquipo->grupo_steam = $urlSteam;
+        $nuevoEquipo->capitan_id = $_SESSION['usuarioLogin']['id'];
+        $nuevoEquipo->fecha_creacion = $fecha_actual;
+        if(isset($_POST['webEquipo'])){
+            $nuevoEquipo->web = htmlentities($_POST['webEquipo']);
+        }
+        if(isset($_POST['logoEquipo'])){
+            $nuevoEquipo->logo = $_POST['logoEquipo'];
+        }
+        $nuevoEquipo->save();
+
+        //Extraemos el id del equipo que se acaba de crear
+        $equipoId = ORM::for_table('equipo')
+            ->select('id')
+            ->where('nombre',$nombre)
+            ->find_one();
+
+        //Agregamos el campo "equipo_id"con el equipo que esté usuario creó anteriormente
+        $userAModificar = ORM::for_table('usuario')->find_one($_SESSION['usuarioLogin']['id']);
+        $userAModificar->equipo_id = $equipoId['id'];
+        $userAModificar->save();
+
+        //Volvemos a grabar la sesion con los nuevos datos
+        $_SESSION['usuarioLogin'] = ORM::for_table('usuario')
+            ->where('id', $_SESSION['usuarioLogin']['id'])
+            ->find_one();
+        //Consulta para extraer los datos del equipo
+        $equipo = ORM::for_table('equipo')
+            ->where('id',$_SESSION['usuarioLogin']['equipo_id'])
+            ->find_many();
+        //Consulta para extraer los datos de los miembros del equipo
+        $usuarios = ORM::for_table('usuario')
+            ->where('equipo_id',$equipo[0]['id'])
+            ->find_many();
+
+        $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+            ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+            ->where('leido',0)->count();
+
+        $app->render('equipos.html.twig',array('mensajeNuevoEquipo' => 'ok','usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
         die();
     }
 

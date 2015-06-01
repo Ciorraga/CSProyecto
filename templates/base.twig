@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/cs-select.css" />
     <link rel="stylesheet" type="text/css" href="/css/cs-skin-elastic.css" />
     <link rel="stylesheet" type="text/css" href="/css/cs-skin-slide.css" />
-
+    <link rel="stylesheet" type="text/css" href="/css/set2.css" />
 </head>
 <body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
 <nav class="navbar navbar-inverse" style="border-radius: 0px;">
@@ -126,32 +126,39 @@
     </div>
 </div>
 {% if alta=='ok' %}
-    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="css/ns-dialog-ok.css" />
-    <script src="js/classie.js"></script>
-    <script src="js/notificationFx.js"></script>
-    <script src="js/dialogOk.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogOk.js"></script>
 {% endif %}
 {% if alta=='pass' %}
-    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="css/ns-dialog-warn.css" />
-    <script src="js/classie.js"></script>
-    <script src="js/notificationFx.js"></script>
-    <script src="js/dialogPass.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-warn.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogPass.js"></script>
 {% endif %}
 {% if alta=='campos' %}
-    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="css/ns-dialog-warn.css" />
-    <script src="js/classie.js"></script>
-    <script src="js/notificationFx.js"></script>
-    <script src="js/dialogCampos.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-warn.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogCampos.js"></script>
 {% endif %}
 {% if mensajeRespEnviado=='ok' %}
-    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="css/ns-dialog-ok.css" />
-    <script src="js/classie.js"></script>
-    <script src="js/notificationFx.js"></script>
-    <script src="js/dialogMensajeRespOk.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogMensajeRespOk.js"></script>
+{% endif %}
+{% if mensajeNuevoEquipo=='ok' %}
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogNuevoEquipo.js"></script>
 {% endif %}
 
 </body>

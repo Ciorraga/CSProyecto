@@ -6,80 +6,92 @@
 
 {% block contenido %}
     <div class="col-md-4 col-md-offset-4" style="text-align:center">
-        <h1>Mi cuenta</h1>
+        <h1>Nuevo equipo</h1>
     </div>
     <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
     {% if msgCuenta %}
         <div class='alert alert-{{ msgCuenta['0'] }}' role='alert' style='text-align:center;'>{{ msgCuenta['1'] }}</div>
     {% endif %}
-    <form class="form-horizontal" action="/actualizaUsuario" method="post" id="formActualizaUsuario">
+    <form class="form-horizontal" action="/" method="POST">
         <div class="row" style="text-align:center">
             <p style="padding:50px;">
-                En ésta sección podrás hacer cambios en los datos de tu propia cuenta.
+                Aquí podrás crear tu nuevo equipo.
             </p>
         </div>
-        <div class="row">
-            <div class="form-group">
-                <div class="form-group">
-                    <label for="user" class="col-sm-2 control-label">Usuario *</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="user" id="user" value="{{ usuarioLogin['user'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="pass1" class="col-sm-2 control-label">Contraseña *</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="pass1" id="pass1" placeholder="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="pass2" class="col-sm-2 control-label">Repita Contraseña *</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="pass2" id="pass2" placeholder="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="nombre" class="col-sm-2 control-label">Nombre *</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="{{ usuarioLogin['nombre'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="{{ usuarioLogin['apellidos'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="steam" class="col-sm-2 control-label">URL Steam *</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="steam" id="steam" placeholder="{{ usuarioLogin['steam'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">E-mail *</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="email" id="email" placeholder="{{ usuarioLogin['email'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edad" class="col-sm-2 control-label">Edad *</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="edad" id="edad" placeholder="{{ usuarioLogin['edad'] }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edad" class="col-sm-2 control-label">Imagen</label>
-                    <div class="col-sm-9">
-                        <input type="file" class="form-control" name="imagen" id="imagen" placeholder="">
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-8 col-md-offset-2">
+            <span class="input input--manami">
+    		    <input class="input__field input__field--manami" type="text" id="input-32" name="nombreEquipo" required/>
+                <label class="input__label input__label--manami" for="input-32">
+                    <span class="input__label-content input__label-content--manami">*Nombre del equipo</span>
+                </label>
+		    </span>
         </div>
-    </form>
+        <div class="col-md-8 col-md-offset-2">
+            <span class="input input--manami">
+    		    <input class="input__field input__field--manami" type="text" id="input-100" name="urlSteam" required/>
+                <label class="input__label input__label--manami" for="input-100">
+                    <span class="input__label-content input__label-content--manami">*URL de grupo STEAM</span>
+                </label>
+		    </span>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <span class="input input--manami">
+    		    <input class="input__field input__field--manami" type="text" id="input-32" name="webEquipo" />
+                <label class="input__label input__label--manami" for="input-32">
+                    <span class="input__label-content input__label-content--manami">Web</span>
+                </label>
+		    </span>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <span class="input input--manami">
+    		    <input class="input__field input__field--manami" type="file" id="input-32" name="logoEquipo"/>
+                <label class="input__label input__label--manami" for="input-32">
+                    <span class="input__label-content input__label-content--manami">Logo de equipo</span>
+                </label>
+		    </span>
+        </div>
+
 
     <div class="col-md-4 col-md-offset-4" style="text-align:center;margin-top:2%">
-        <button type="button" name="actualizar" onClick="envio('formActualizaUsuario')" class="btn btn-primary">Actualizar</button>
-        <a href="/"><button class="btn btn-default">Atrás</button></a>
+        <button type="submit"  class="btn btn-primary" name="botonFormNuevoEquipo">Crear</button>
+        <a href="/equipos"><button class="btn btn-default">Atrás</button></a>
     </div>
+    </form>
+
+    <script src="js/classie.js"></script>
+    <script>
+        (function() {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
+        })();
+    </script>
 {% endblock %}
