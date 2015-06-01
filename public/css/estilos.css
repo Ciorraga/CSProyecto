@@ -1,5 +1,5 @@
 body{
-    background-color:#294452 !important;
+    background-color:#8E9191 !important;
 }
 
 @font-face {
@@ -63,5 +63,25 @@ form{
 h1{
     color:white;
 }
+
+#integrantesEquipo{
+    margin-top:15px;
+}
+
+#equiposSeccion{
+    border:1px solid black;
+    padding:15px;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+#integrantesLabel{
+    padding-left:15px
+}
+
+#imagenUsuario{
+    width:40px;
+    height:40px;
+}
+
 
 

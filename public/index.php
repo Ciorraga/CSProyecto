@@ -30,6 +30,23 @@ $view->parserExtensions = array(
 session_cache_limiter(false);
 session_start();
 
+/*function comentarios($id_noticia){
+    $noticias = ORM::for_table('comentario')
+        ->select('comentario.id','idComentario')
+        ->select('comentario.texto')
+        ->select('comentario.fecha')
+        ->select('usuario.user')
+        ->select('usuario.id','idUsuario')
+        ->select('usuario.imagen')
+        ->join('noticia', array('noticia.id', '=', 'comentario.noticia_id'))
+        ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+        ->where('comentario.noticia_id',$id_noticia)
+        ->order_by_desc('noticia.fecha')
+        ->find_array();
+    var_dump($noticias);die();
+    return $noticias;
+}*/
+
 //Página de inicio de la aplicación
 $app->get('/', function() use ($app) {
     if (!isset($_SESSION['usuarioLogin'])) {
@@ -59,6 +76,7 @@ $app->get('/', function() use ($app) {
         $_SESSION['numMensajes'] = ORM::for_table('mensaje')
             ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
             ->where('leido',0)->count();
+
         $app->render('inicio.html.twig', array('noticias' => $noticias,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
     }
 })->name('inicio');
@@ -132,15 +150,31 @@ $app->get('/nuevoMensaje', function() use ($app) {
     $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios));
 })->name('nuevoMensaje');
 
+$app->get('/equipos', function() use ($app) {
+    if($_SESSION['usuarioLogin']['equipo_id']==null){
+        echo "ENTRA";die();
+        $equipo = null;
+    }else{
+        $equipo = ORM::for_table('equipo')
+            ->where('id',$_SESSION['usuarioLogin']['equipo_id'])
+            ->find_many();
+        $usuarios = ORM::for_table('usuario')
+            ->where('equipo_id',$equipo[0]['id'])
+            ->find_many();
+    }
+
+    $_SESSION['numMensajes'] = ORM::for_table('mensaje')
+        ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
+        ->where('leido',0)->count();
+
+    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
+})->name('equipos');
+
 
 
 
 //------------------------------------------------------------------------POSTS--------
 //Cuando pulsamos en el boton de ACEPTAR en el login
-
-
-
-
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
         $app->render('nuevoUser.html.twig', array('alta' => "campos"));
@@ -359,7 +393,6 @@ $app->post('/', function() use ($app) {
 
         $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes));
         die();
-
     }
 });
 

@@ -1,0 +1,62 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Mensajes
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-10 col-md-offset-1" style="margin-top:2%;background-color:white;padding:1.5%">
+
+        <div class="col-md-8 col-md-offset-1" id="equiposSeccion">
+            <h2>Mi equipo</h2>
+            {% if equipo==null %}
+                Aún no tienes equipo!<br/>
+                Busca un equipo y manda una petición de entrada si quieres competir en CSGOPlay
+            {% else %}
+                <div class="row">
+                    <div class="col-md-4">
+                        {% for eq in equipo %}
+                            <div  id="imagenEquipo">
+                                <img src="{{ eq.logo }}"/>
+                            </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1 ">
+                            <div class="datosEquipo">
+                                <label class="labelEquipo">Nombre del equipo: </label>{{ eq.nombre }} <br/>
+                                <label class="labelEquipo">Creado: </label>{{ eq.fecha_creacion }} <br/>
+                                <label class="labelEquipo">Web: </label>{{ eq.web }} <br/>
+                                <label class="labelEquipo">Grupo Steam: </label>{{ eq.grupo_steam }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="row" id="integrantesEquipo">
+                    <h2 id="integrantesLabel">Integrantes</h2>
+                    <div class="col-md-8" id="datosUsuariosEquipo">
+                        <table class="table table-striped">
+                            {% for usuario in usuarios %}
+                                <tr>
+                                    <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
+                                    <td>{{ usuario.user }}</td>
+                                    <td>{{ usuario.nombre }}</td>
+                                    <td>{{ usuario.edad }}</td>
+                                    <td>{{ usuario.email }}</td>
+                                    <td>{{ usuario.steam }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
