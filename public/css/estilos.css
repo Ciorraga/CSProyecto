@@ -101,5 +101,14 @@ h1{
     margin-left:100px !important;
 }
 
+#textoSearch{
+    margin-left:50px;
+}
+
+#livesearch{
+    padding:10%;
+    font-family: baseFont;
+    font-size:1.4em;
+}
 
 

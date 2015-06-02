@@ -5,10 +5,15 @@
 {% endblock %}
 
 {% block contenido %}
+    <div class="col-md-4 col-md-offset-4" style="text-align:center">
+        <h1>Equipos</h1>
+    </div>
     <div class="col-md-10 col-md-offset-1" id="divPrincipalEquipos">
 
         <div class="col-md-8 col-md-offset-1" id="equiposSeccion">
-            <h2>Mi equipo</h2>
+            {% if miEquipo == true %}
+                <h2>Mi equipo</h2>
+            {%  endif %}
             {% if equipo==null %}
             <form action="/" method="POST">
                 <div class="jumbotron" style="padding:3%;">
@@ -23,7 +28,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div  id="imagenEquipo">
-                        <img src="/{{ eq.logo }}"/>
+                        <img src="{{ eq.logo }}"/>
                         </div>
                     </div>
                     <div class="col-md-7 col-md-offset-1" id="datosEquipo">
@@ -37,11 +42,19 @@
 
                 <div class="row" id="integrantesEquipo">
                     <h2 id="integrantesLabel">Integrantes</h2>
-                    <div class="col-md-8" id="datosUsuariosEquipo">
+                    <div class="col-md-11" id="datosUsuariosEquipo">
                         <table class="table table-striped">
+                            <tr>
+                                <th></th>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>E-mail</th>
+                                <th>Url Steam</th>
+                            </tr>
                             {% for usuario in usuarios %}
                                 <tr>
-                                    <td><img id="imagenUsuario" src="/{{ usuario.imagen }}" alt=""/></td>
+                                    <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
                                     <td>{{ usuario.user }}</td>
                                     <td>{{ usuario.nombre }}</td>
                                     <td>{{ usuario.edad }}</td>
@@ -56,19 +69,56 @@
 
             {% endif %}
         </div>
-        <div class="col-md-3">
-            <div class="input-group">
-                <input type="text" class="form-control" onkeyup="showResult(this.value)" placeholder="Buscar equipo...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i id="lupaEquipos" class="fa fa-search" ></i></button>
-                  </span>
-
+        <div class="col-md-3" style="margin-top:5%;">
+            <div class="row">
+                <span class="input input--makiko">
+                    <input class="input__field input__field--makiko" type="text" id="input-32" onkeyup="showResult(this.value)"/>
+                    <label class="input__label input__label--makiko" for="input-16">
+                        <span class="input__label-content input__label-content--makiko"><span id="textoSearch">Escribe para buscar equipo</span></span>
+                    </label>
+                </span>
             </div>
             <div id="livesearch"></div>
         </div>
-
-
     </div>
+
+    <script src="js/classie.js"></script>
+    <script>
+        (function() {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
+        })();
+    </script>
+
     <script>
         function showResult(str) {
             if (str.length==0) {

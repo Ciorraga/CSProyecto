@@ -170,7 +170,13 @@ $app->get('/equipos', function() use ($app) {
             ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
             ->where('leido',0)->count();
 
-        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
+        if($_SESSION['usuarioLogin']['id']==$equipo[0]['id']){
+            $miEquipo = false;
+        }else{
+            $miEquipo = true;
+        }
+
+        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'miEquipo' => $miEquipo));
     }
 
 
@@ -198,6 +204,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $_SESSION['numMensajes'] = ORM::for_table('mensaje')
         ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
         ->where('leido',0)->count();
+
 
     $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
 });
