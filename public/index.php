@@ -30,23 +30,6 @@ $view->parserExtensions = array(
 session_cache_limiter(false);
 session_start();
 
-/*function comentarios($id_noticia){
-    $noticias = ORM::for_table('comentario')
-        ->select('comentario.id','idComentario')
-        ->select('comentario.texto')
-        ->select('comentario.fecha')
-        ->select('usuario.user')
-        ->select('usuario.id','idUsuario')
-        ->select('usuario.imagen')
-        ->join('noticia', array('noticia.id', '=', 'comentario.noticia_id'))
-        ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-        ->where('comentario.noticia_id',$id_noticia)
-        ->order_by_desc('noticia.fecha')
-        ->find_array();
-    var_dump($noticias);die();
-    return $noticias;
-}*/
-
 //Página de inicio de la aplicación
 $app->get('/', function() use ($app) {
     if (!isset($_SESSION['usuarioLogin'])) {
@@ -205,8 +188,14 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
         ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
         ->where('leido',0)->count();
 
+    if(!$_SESSION['usuarioLogin']['equipo_id']){
+        $botonSolicitud = [true,$equipo[0]['id']];
+    }else{
+        $botonSolicitud = false;
+    }
 
-    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
+
+    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud));
 });
 
 //------------------------------------------------------------------------POSTS--------
@@ -472,6 +461,24 @@ $app->post('/', function() use ($app) {
 
         $app->render('equipos.html.twig',array('mensajeNuevoEquipo' => 'ok','usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios));
         die();
+    }
+
+    if(isset($_POST['botonSolicitud'])){
+        $nuevaSolicitud = ORM::for_table('equipo_usuario')->create();
+        $nuevaSolicitud->equipo_id = $_POST['botonSolicitud'];
+        $nuevaSolicitud->usuario_id = $_SESSION['usuarioLogin']['id'];
+        $nuevaSolicitud->save();
+
+        $noticias = ORM::for_table('noticia')
+            ->select('noticia.titulo')
+            ->select('noticia.texto')
+            ->select('noticia.fecha')
+            ->select('usuario.user')
+            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+            ->order_by_desc('noticia.fecha')
+            ->find_array();
+
+        $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok'));
     }
 
 });

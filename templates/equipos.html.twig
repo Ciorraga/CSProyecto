@@ -77,6 +77,11 @@
                         <span class="input__label-content input__label-content--makiko"><span id="textoSearch">Escribe para buscar equipo</span></span>
                     </label>
                 </span>
+                {% if botonSolicitud[0] == true %}
+                    <form action="/" method="POST">
+                        <button class="button button--moema button--text-thick button--text-upper button--size-s" name="botonSolicitud" value="{{ botonSolicitud[1] }}">Mandar solicitud de admisión</button>
+                    </form>
+                {% endif %}
             </div>
             <div id="livesearch"></div>
         </div>
