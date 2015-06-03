@@ -1,0 +1,37 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Solicitudes
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" style="text-align:center">
+        <h1>Solicitudes de admisión</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="divPrincipalEquipos">
+        <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table table-striped">
+                        <tr>
+                            <th></th>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Url Steam</th>
+                            <th></th>
+                        </tr>
+                        {% for solicitud in solicitudes %}
+                            <tr>
+                                <td><img id="imagenUsuario" src="{{ solicitud.imagen }}" alt=""/></td>
+                                <td>{{ solicitud.user }}</td>
+                                <td>{{ solicitud.nombre }}</td>
+                                <td>{{ solicitud.steam }}</td>
+                                <td><button type="submit" name="botonAceptar" class="btn btn-success" value="{{ solicitud.id }}">Aceptar</button>
+                                <button type="submit" name="botonDenegar" class="btn btn-danger" value="{{ solicitud.id }}">Denegar</button></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+         </div>
+    </div>
+{% endblock %}

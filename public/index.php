@@ -240,6 +240,23 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
 });
 
+$app->get('/solicitudes', function() use ($app) {
+    $solicitudes = ORM::for_table('equipo_usuario')
+        ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+        ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
+        ->find_many();
+
+    $es_capitan = ORM::for_table('equipo')->where('capitan_id', $_SESSION['usuarioLogin']['id'])->find_one();
+    if($es_capitan){
+        $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
+            ->where('equipo_id', $es_capitan['id'])
+            ->count();
+    }
+
+    $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
+
+})->name('buscarEquipo');
+
 //------------------------------------------------------------------------POSTS--------
 
 $app->post('/registro', function() use ($app) {
@@ -604,7 +621,7 @@ $app->post('/', function() use ($app) {
         $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok','nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
-    
+
 });
 
 
