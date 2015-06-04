@@ -9,7 +9,11 @@
         <h1>Solicitudes de admisión</h1>
     </div>
     <div class="col-md-10 col-md-offset-1" id="divPrincipalEquipos">
+        {% if tieneEquipo=='ok' %}
+            <div class="alert alert-danger" role="alert" style="text-align:center;">Este usuario ya ha sido admitido en otro equipo</div>
+        {% endif %}
         <div class="row">
+            <form action="/" method="POST">
                 <div class="col-md-10 col-md-offset-1">
                     <table class="table table-striped">
                         <tr>
@@ -25,13 +29,21 @@
                                 <td>{{ solicitud.user }}</td>
                                 <td>{{ solicitud.nombre }}</td>
                                 <td>{{ solicitud.steam }}</td>
-                                <td><button type="submit" name="botonAceptar" class="btn btn-success" value="{{ solicitud.id }}">Aceptar</button>
-                                <button type="submit" name="botonDenegar" class="btn btn-danger" value="{{ solicitud.id }}">Denegar</button></td>
+                                {% if solicitud.estado == 'pendiente' %}
+                                    <td><button type="submit" name="botonAceptarSol" class="btn btn-success" value="{{ solicitud.id }}">Aceptar</button>
+                                    <button type="submit" name="botonDenegarSol" class="btn btn-danger" value="{{ solicitud.id }}">Denegar</button></td>
+                                {% endif %}
+                                {% if solicitud.estado == 'aprobada' %}
+                                    <td><b>Solicitud aprobada</b></td>
+                                {% endif %}
+                                {% if solicitud.estado == 'denegada' %}
+                                    <td><b>Solicitud denegada</b></td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </table>
                 </div>
-            </div>
-         </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

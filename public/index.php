@@ -63,6 +63,7 @@ $app->get('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -92,6 +93,7 @@ $app->get('/miCuenta', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
         $app->render('miCuenta.html.twig',array('numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -107,6 +109,7 @@ $app->get('/entrada', function() use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
     $mensajes = ORM::for_table('mensaje')
@@ -134,6 +137,7 @@ $app->get('/salida', function() use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
     $mensajes = ORM::for_table('mensaje')
@@ -153,6 +157,7 @@ $app->get('/nuevoMensaje', function() use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
     $usuarios = ORM::for_table('usuario')
@@ -169,6 +174,7 @@ $app->get('/equipos', function() use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
     //Si el usuario NO tiene equipo
@@ -234,6 +240,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
 
@@ -250,14 +257,15 @@ $app->get('/solicitudes', function() use ($app) {
     if($es_capitan){
         $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
             ->where('equipo_id', $es_capitan['id'])
+            ->where('estado','pendiente')
             ->count();
     }
 
     $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
 
-})->name('buscarEquipo');
+})->name('solicitudes');
 
-//------------------------------------------------------------------------POSTS--------
+//------------------------------------------------------------------------POSTS-------------------------------------------------------------------------
 
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
@@ -303,6 +311,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
         $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -334,6 +343,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             if($es_capitan){
                 $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                     ->where('equipo_id', $es_capitan['id'])
+                    ->where('estado','pendiente')
                     ->count();
             }
 
@@ -348,6 +358,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             if($es_capitan){
                 $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                     ->where('equipo_id', $es_capitan['id'])
+                    ->where('estado','pendiente')
                     ->count();
             }
 
@@ -384,6 +395,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -404,6 +416,7 @@ $app->post('/', function() use ($app) {
             if($es_capitan){
                 $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                     ->where('equipo_id', $es_capitan['id'])
+                    ->where('estado','pendiente')
                     ->count();
             }
 
@@ -442,6 +455,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -456,6 +470,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
         $app->redirect($app->router()->urlFor('entrada'));
@@ -478,6 +493,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -496,6 +512,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -539,6 +556,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
         $app->render('nuevoEquipo.html.twig', array('numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -596,6 +614,7 @@ $app->post('/', function() use ($app) {
         if($es_capitan){
             $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
                 ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
                 ->count();
         }
 
@@ -621,6 +640,82 @@ $app->post('/', function() use ($app) {
         $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok','nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
+    if(isset($_POST['botonAceptarSol'])){
+        $usuario = ORM::for_table('usuario')
+            ->where('id',$_POST['botonAceptarSol'])
+            ->find_one();
+
+        if($usuario['equipo_id']==""){
+            /*$userAModificar = ORM::for_table('usuario')
+                ->where('id',$_POST['botonAceptarSol'])
+                ->find_one();
+            $userAModificar->equipo_id = $_SESSION['usuarioLogin']['equipo_id'];
+            $userAModificar->save();*/
+
+           /*$modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+                ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
+                ->where('usuario_id',$_POST['botonAceptarSol'])
+                ->find_one();
+            $modificaEstadoPeticion->estado = 'aprobada';
+            $modificaEstadoPeticion->save();*/
+
+            $solicitudes = ORM::for_table('equipo_usuario')
+                ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+                ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
+                ->where('equipo_usuario.estado','pendiente')
+                ->find_many();
+
+            $es_capitan = ORM::for_table('equipo')->where('capitan_id', $_SESSION['usuarioLogin']['id'])->find_one();
+            if($es_capitan){
+                $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
+                    ->where('estado', 'pendiente')
+                    ->where('equipo_id', $es_capitan['id'])
+                    ->count();
+            }
+
+            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok'));
+        }else{
+            $solicitudes = ORM::for_table('equipo_usuario')
+                ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+                ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
+                ->where('equipo_usuario.estado','pendiente')
+                ->find_many();
+
+            $es_capitan = ORM::for_table('equipo')->where('capitan_id', $_SESSION['usuarioLogin']['id'])->find_one();
+            if($es_capitan){
+                $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
+                    ->where('equipo_id', $es_capitan['id'])
+                    ->where('estado','pendiente')
+                    ->count();
+            }
+            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
+        }
+        die();
+        $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok','nuevaSolicitud' => $_SESSION['solicitudes']));
+    }
+
+    if(isset($_POST['botonDenegarSol'])){
+        $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+                ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
+                ->where('usuario_id',$_POST['botonDenegarSol'])
+                ->find_one();
+            $modificaEstadoPeticion->estado = 'denegada';
+            $modificaEstadoPeticion->save();
+
+        $solicitudes = ORM::for_table('equipo_usuario')
+            ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+            ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
+            ->where('equipo_usuario.estado','pendiente')
+            ->find_many();
+
+        $es_capitan = ORM::for_table('equipo')->where('capitan_id', $_SESSION['usuarioLogin']['id'])->find_one();
+        if($es_capitan){
+            $_SESSION['solicitudes'] = ORM::for_table('equipo_usuario')
+                ->where('equipo_id', $es_capitan['id'])
+                ->where('estado','pendiente')
+                ->count();
+        }
+    }
 
 });
 
