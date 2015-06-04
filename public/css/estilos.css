@@ -111,4 +111,11 @@ h1{
     font-size:1.4em;
 }
 
+#pepe{
+    font-size:0.7em !important;
+    color:gray !important;
+}
 
+.contentComment{
+    margin-bottom:2%;
+}

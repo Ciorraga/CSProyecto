@@ -36,6 +36,7 @@ $app->get('/', function() use ($app) {
         unset($_SESSION);
         session_destroy();
         $noticias = ORM::for_table('noticia')
+            ->select('noticia.id')
             ->select('noticia.titulo')
             ->select('noticia.texto')
             ->select('noticia.fecha')
@@ -43,9 +44,13 @@ $app->get('/', function() use ($app) {
             ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
             ->order_by_desc('noticia.fecha')
             ->find_array();
+        $comentarios = ORM::for_table('comentario')
+            ->order_by_desc('id')
+            ->find_array();
         session_start();
         $_SESSION['not']=$noticias;
-        $app->render('inicio.html.twig',array('noticias' => $noticias));
+        $_SESSION['coment']=$comentarios;
+        $app->render('inicio.html.twig',array('noticias' => $noticias,'comentarios' => $comentarios));
     } else {
         $noticias = ORM::for_table('noticia')
             ->select('noticia.titulo')
@@ -695,12 +700,12 @@ $app->post('/', function() use ($app) {
     }
 
     if(isset($_POST['botonDenegarSol'])){
-        $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+        /*$modificaEstadoPeticion = ORM::for_table('equipo_usuario')
                 ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
                 ->where('usuario_id',$_POST['botonDenegarSol'])
                 ->find_one();
             $modificaEstadoPeticion->estado = 'denegada';
-            $modificaEstadoPeticion->save();
+            $modificaEstadoPeticion->save();*/
 
         $solicitudes = ORM::for_table('equipo_usuario')
             ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
