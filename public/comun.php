@@ -12,6 +12,11 @@ class comun {
                 ->where('equipo_id', $es_capitan['id'])
                 ->where('estado','pendiente')
                 ->count();
+            if($_SESSION['solicitudes']==0){
+                $_SESSION['solicitudes'] = "vacio";
+            }
+        }else{
+
         }
     }
 

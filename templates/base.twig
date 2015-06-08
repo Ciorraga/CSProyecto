@@ -61,8 +61,8 @@
                     <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/entrada"><i class="fa fa-envelope"> Mensajes <span style="margin-botom:0px" class="badge">{% if numMensajes != 0 %} {{ numMensajes }} {% endif %}</span></i></a></li>
-                    {% if nuevaSolicitud!=0 %}
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/solicitudes"><i class="fa fa-child"> Solicitudes <span style="margin-botom:0px" class="badge">{{ nuevaSolicitud }}</span></i></a></li>
+                    {% if nuevaSolicitud!='noCapi' %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/solicitudes"><i class="fa fa-child"> Solicitudes {% if nuevaSolicitud>0 %} <span style="margin-botom:0px" class="badge">{{ nuevaSolicitud }}</span>{% endif %} </i></a></li>
                     {% endif %}
                     <li role="presentation" class="divider"></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><a href="/cerrarSesion"><i class="fa fa-sign-out">Salir</i></a></a></li>
@@ -169,6 +169,20 @@
     <script src="/js/classie.js"></script>
     <script src="/js/notificationFx.js"></script>
     <script src="/js/dialogNuevaSolicitud.js"></script>
+{% endif %}
+{% if aprobada=='ok' %}
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogSolicitudAprobada.js"></script>
+{% endif %}
+{% if aprobada=='notOk' %}
+    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
+    <script src="/js/classie.js"></script>
+    <script src="/js/notificationFx.js"></script>
+    <script src="/js/dialogSolicitudAprobadaNotOk.js"></script>
 {% endif %}
 
 </body>

@@ -34,10 +34,10 @@
                                     <button type="submit" name="botonDenegarSol" class="btn btn-danger" value="{{ solicitud.id }}">Denegar</button></td>
                                 {% endif %}
                                 {% if solicitud.estado == 'aprobada' %}
-                                    <td><b>Solicitud aprobada</b></td>
+                                    <td><span id="solicitudA"><b>Solicitud aprobada</b></span></td>
                                 {% endif %}
                                 {% if solicitud.estado == 'denegada' %}
-                                    <td><b>Solicitud denegada</b></td>
+                                    <td><span id="solicitudD"><b>Solicitud denegada</b></span></td>
                                 {% endif %}
                             </tr>
                         {% endfor %}

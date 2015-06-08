@@ -217,6 +217,12 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
 
 $app->get('/solicitudes', function() use ($app) {
     $solicitudes = ORM::for_table('equipo_usuario')
+        ->select('equipo_usuario.id')
+        ->select('usuario.user')
+        ->select('usuario.imagen')
+        ->select('usuario.nombre')
+        ->select('usuario.steam')
+        ->select('equipo_usuario.estado')
         ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
         ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
         ->find_many();
@@ -476,7 +482,9 @@ $app->post('/', function() use ($app) {
         if(isset($_POST['webEquipo'])){
             $nuevoEquipo->web = htmlentities($_POST['webEquipo']);
         }
-        if(isset($_POST['logoEquipo'])){
+        if($_POST['logoEquipo']==""){
+            $nuevoEquipo->logo = "/imagenes/interrogacion.jpg";
+        }else{
             $nuevoEquipo->logo = $_POST['logoEquipo'];
         }
         $nuevoEquipo->save();
@@ -538,21 +546,25 @@ $app->post('/', function() use ($app) {
     if(isset($_POST['botonAceptarSol'])){
         //var_dump($_POST['botonAceptarSol']);die();
         $usuario = ORM::for_table('usuario')
-            ->where('id',$_POST['botonAceptarSol'])
+            ->select('usuario.equipo_id')
+            ->join('equipo_usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+            ->where('equipo_usuario.id',$_POST['botonAceptarSol'])
             ->find_one();
 
         if($usuario['equipo_id']==""){
-            /*$userAModificar = ORM::for_table('usuario')
-                ->where('id',$_POST['botonAceptarSol'])
+            $us = ORM::for_table('equipo_usuario')
+            ->where('id',$_POST['botonAceptarSol'])
+            ->find_one();
+
+            $userAModificar = ORM::for_table('usuario')
+                ->where('id',$us['usuario_id'])
                 ->find_one();
             $userAModificar->equipo_id = $_SESSION['usuarioLogin']['equipo_id'];
-            $userAModificar->save();*/
+            $userAModificar->save();
 
            $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
-                ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
-                ->where('usuario_id',$_POST['botonAceptarSol'])
+                ->where('id',$_POST['botonAceptarSol'])
                 ->find_one();
-
             $modificaEstadoPeticion->estado = 'aprobada';
             $modificaEstadoPeticion->save();
 
@@ -567,12 +579,35 @@ $app->post('/', function() use ($app) {
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok'));
-        }else{
             $solicitudes = ORM::for_table('equipo_usuario')
+                ->select('equipo_usuario.id')
+                ->select('usuario.user')
+                ->select('usuario.imagen')
+                ->select('usuario.nombre')
+                ->select('usuario.steam')
+                ->select('equipo_usuario.estado')
                 ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
                 ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
-                ->where('equipo_usuario.estado','pendiente')
+                ->find_many();
+
+            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok'));
+        }else{
+
+            $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+                ->where('id',$_POST['botonAceptarSol'])
+                ->find_one();
+            $modificaEstadoPeticion->estado = 'denegada';
+            $modificaEstadoPeticion->save();
+
+            $solicitudes = ORM::for_table('equipo_usuario')
+                ->select('equipo_usuario.id')
+                ->select('usuario.user')
+                ->select('usuario.imagen')
+                ->select('usuario.nombre')
+                ->select('usuario.steam')
+                ->select('equipo_usuario.estado')
+                ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+                ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
                 ->find_many();
 
             $req = new comun();
@@ -580,27 +615,36 @@ $app->post('/', function() use ($app) {
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
             $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
         }
-        die();
-        $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok','nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
     if(isset($_POST['botonDenegarSol'])){
-        /*$modificaEstadoPeticion = ORM::for_table('equipo_usuario')
-                ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
-                ->where('usuario_id',$_POST['botonDenegarSol'])
-                ->find_one();
-            $modificaEstadoPeticion->estado = 'denegada';
-            $modificaEstadoPeticion->save();*/
+        $us = ORM::for_table('equipo_usuario')
+            ->where('id',$_POST['botonDenegarSol'])
+            ->find_one();
+
+        $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+            ->where('id',$_POST['botonDenegarSol'])
+            ->find_one();
+        $modificaEstadoPeticion->estado = 'denegada';
+        $modificaEstadoPeticion->save();
+
 
         $solicitudes = ORM::for_table('equipo_usuario')
+            ->select('equipo_usuario.id')
+            ->select('usuario.user')
+            ->select('usuario.imagen')
+            ->select('usuario.nombre')
+            ->select('usuario.steam')
+            ->select('equipo_usuario.estado')
             ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
             ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
-            ->where('equipo_usuario.estado','pendiente')
             ->find_many();
 
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+        $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'notOk'));
     }
 
 });

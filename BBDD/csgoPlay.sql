@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `equipo_fase` (
 --
 
 CREATE TABLE IF NOT EXISTS `equipo_usuario` (
+  `id` int(11) NOT NULL,
   `equipo_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `estado` enum('pendiente','aprobada','denegada','') NOT NULL DEFAULT 'pendiente'
@@ -125,10 +126,10 @@ CREATE TABLE IF NOT EXISTS `equipo_usuario` (
 -- Volcado de datos para la tabla `equipo_usuario`
 --
 
-INSERT INTO `equipo_usuario` (`equipo_id`, `usuario_id`, `estado`) VALUES
-(14, 1, 'pendiente'),
-(15, 18, 'pendiente'),
-(18, 48, 'pendiente');
+INSERT INTO `equipo_usuario` (`id`,`equipo_id`, `usuario_id`, `estado`) VALUES
+(1,14, 1, 'pendiente'),
+(2,15, 18, 'pendiente'),
+(3,18, 48, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -356,7 +357,7 @@ ALTER TABLE `equipo_fase`
 -- Indices de la tabla `equipo_usuario`
 --
 ALTER TABLE `equipo_usuario`
- ADD PRIMARY KEY (`equipo_id`,`usuario_id`), ADD KEY `fk_eu_usuario_id` (`usuario_id`), ADD KEY `fk_eu_equipo_id` (`equipo_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_eu_usuario_id` (`usuario_id`), ADD KEY `fk_eu_equipo_id` (`equipo_id`);
 
 --
 -- Indices de la tabla `fase`
@@ -403,6 +404,11 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `comentario`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `comentario`
+--
+ALTER TABLE `equipo_usuario`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
