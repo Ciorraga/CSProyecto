@@ -34,10 +34,13 @@ session_start();
 
 //Página de inicio de la aplicación
 $app->get('/', function() use ($app) {
+    //Si es un usaurio NO registrado
     if (!isset($_SESSION['usuarioLogin'])) {
         unset($_SESSION);
         session_destroy();
+
         $noticias = ORM::for_table('noticia')
+            ->select('noticia.id')
             ->select('noticia.titulo')
             ->select('noticia.texto')
             ->select('noticia.fecha')
@@ -45,15 +48,34 @@ $app->get('/', function() use ($app) {
             ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
             ->order_by_desc('noticia.fecha')
             ->find_array();
-        $comentarios = ORM::for_table('comentario')
-            ->order_by_desc('id')
-            ->find_array();
+
+        $miArray = [];
+        $i = 0;
+        foreach($noticias as $item){
+            $comentarios = ORM::for_table('comentario')
+                ->select('comentario.texto')
+                ->select('comentario.fecha')
+                ->select('usuario.imagen')
+                ->select('usuario.user')
+                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
+                ->where('noticia_id',$item['id'])
+                ->find_many();
+
+            $miArray[$i]['id'] = $item['id'];
+            $miArray[$i]['titulo'] = $item['titulo'];
+            $miArray[$i]['texto'] = $item['texto'];
+            $miArray[$i]['fecha'] = $item['fecha'];
+            $miArray[$i]['user'] = $item['user'];
+            $miArray[$i]['comentarios'] = $comentarios;
+            $i++;
+        }
+
         session_start();
         $_SESSION['not']=$noticias;
-        $_SESSION['coment']=$comentarios;
-        $app->render('inicio.html.twig',array('noticias' => $noticias,'comentarios' => $comentarios));
-    } else {
+        $app->render('inicio.html.twig',array('noticias' => $miArray));
+    } else { //Si es un usaurio registrado
         $noticias = ORM::for_table('noticia')
+            ->select('noticia.id')
             ->select('noticia.titulo')
             ->select('noticia.texto')
             ->select('noticia.fecha')
@@ -61,11 +83,33 @@ $app->get('/', function() use ($app) {
             ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
             ->order_by_desc('noticia.fecha')
             ->find_array();
+
+        $miArray = [];
+        $i = 0;
+        foreach($noticias as $item){
+            $comentarios = ORM::for_table('comentario')
+                ->select('comentario.texto')
+                ->select('comentario.fecha')
+                ->select('usuario.imagen')
+                ->select('usuario.user')
+                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
+                ->where('noticia_id',$item['id'])
+                ->find_many();
+
+            $miArray[$i]['id'] = $item['id'];
+            $miArray[$i]['titulo'] = $item['titulo'];
+            $miArray[$i]['texto'] = $item['texto'];
+            $miArray[$i]['fecha'] = $item['fecha'];
+            $miArray[$i]['user'] = $item['user'];
+            $miArray[$i]['comentarios'] = $comentarios;
+            $i++;
+        }
+
         $_SESSION['not']=$noticias;
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('inicio.html.twig', array('nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $noticias,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin']));
+        $app->render('inicio.html.twig', array('nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $miArray,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'registrado' => 'env'));
     }
 })->name('inicio');
 
