@@ -222,6 +222,16 @@ $app->get('/buscarEquipo/:id', function ($id) {
     };
 })->name('buscarEquipo');
 
+$app->get('/buscarUsuario/:id', function ($id) {
+    $usuario = ORM::for_table('usuario')
+        ->where_like('user', '%'. $id .'%')
+        ->find_many();
+
+    foreach ($usuario as $valor){
+        echo "<option>" . $valor['user'] . "</option>" ;
+    };
+})->name('buscarUsuario');
+
 $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $equipo = ORM::for_table('equipo')
         ->where('nombre',$equipo)
@@ -646,6 +656,7 @@ $app->post('/', function() use ($app) {
     }
 
     if(isset($_POST['botonAceptarSol'])){
+        //var_dump($_POST['botonAceptarSol']);die();
         $usuario = ORM::for_table('usuario')
             ->where('id',$_POST['botonAceptarSol'])
             ->find_one();
@@ -657,12 +668,14 @@ $app->post('/', function() use ($app) {
             $userAModificar->equipo_id = $_SESSION['usuarioLogin']['equipo_id'];
             $userAModificar->save();*/
 
-           /*$modificaEstadoPeticion = ORM::for_table('equipo_usuario')
+           $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
                 ->where('equipo_id',$_SESSION['usuarioLogin']['equipo_id'])
                 ->where('usuario_id',$_POST['botonAceptarSol'])
                 ->find_one();
+
             $modificaEstadoPeticion->estado = 'aprobada';
-            $modificaEstadoPeticion->save();*/
+            $modificaEstadoPeticion->save();
+
 
             $solicitudes = ORM::for_table('equipo_usuario')
                 ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))

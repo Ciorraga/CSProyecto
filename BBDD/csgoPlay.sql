@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2015 a las 21:18:33
+-- Tiempo de generación: 08-06-2015 a las 17:37:47
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `equipo` (
   `fecha_creacion` varchar(45) NOT NULL,
   `web` varchar(45) DEFAULT NULL,
   `grupo_steam` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `equipo`
@@ -93,7 +93,10 @@ CREATE TABLE IF NOT EXISTS `equipo` (
 INSERT INTO `equipo` (`id`, `nombre`, `logo`, `capitan_id`, `fecha_creacion`, `web`, `grupo_steam`) VALUES
 (1, 'Dignitas', '/imagenes/dignitas.jpg', 6, '2015/05/04', 'http://www.team-dignitas.net/', 'groups/dignitas'),
 (2, 'DinamicCS', '/imagenes/interrogacion.jpg', 2, '2015/05/12', 'www.dinamicCS.com', 'groups/dinamicCs'),
-(14, 'o', '/imagenes/interrogacion.jpg', 2, '2015/06/01', 'o', 'o');
+(14, 'o', '/imagenes/interrogacion.jpg', 2, '2015/06/01', 'o', 'o'),
+(15, 'Equipo B', '/imagenes/interrogacion.jpg', 17, '2015/06/08', 'www.equipob.com', 'www.steam.com/equipoB'),
+(16, 'Equipo C', '/imagenes/interrogacion.jpg', 22, '2015/06/08', 'www.foro.equiC.com', 'www.steam.com/equipoC'),
+(18, 'EQuipo i', '/imagenes/interrogacion.jpg', 47, '2015/06/08', 'www.equipoi.com', 'www.steam.com/equipoI');
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,9 @@ CREATE TABLE IF NOT EXISTS `equipo_usuario` (
 --
 
 INSERT INTO `equipo_usuario` (`equipo_id`, `usuario_id`, `estado`) VALUES
-(14, 1, 'pendiente');
+(14, 1, 'pendiente'),
+(15, 18, 'pendiente'),
+(18, 48, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -250,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(25) NOT NULL,
   `password` varchar(50) NOT NULL,
   `equipo_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -266,7 +271,52 @@ INSERT INTO `usuario` (`id`, `user`, `nombre`, `apellidos`, `edad`, `es_admin`, 
 (7, 'userD_2', 'UsuarioD2', NULL, 25, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userD_2', 'userD_2@dignitas.com', '123456', 1),
 (8, 'userD_3', 'UsuarioD3', NULL, 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userD_3', 'userD_3@dignitas.com', '123456', 1),
 (9, 'userD_4', 'UsuarioD4', '', 26, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userD_4', 'userD_4@dignitas.com', '123456', 1),
-(10, 'userD_5', 'UsuarioD5', NULL, 24, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userD_5', 'userD_5@dignitas.com', '123456', 1);
+(10, 'userD_5', 'UsuarioD5', NULL, 24, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userD_5', 'userD_5@dignitas.com', '123456', 1),
+(11, 'UserA_1', 'UsuarioA1', 'Uno', 23, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/UserA_1', 'usera1@email.com', '123456', NULL),
+(12, 'UserA_2', 'UsuarioA2', 'Dos', 23, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userA2', 'usera2@email.com', '123456', NULL),
+(14, 'UserA_3', 'UsuarioA3', 'TRes', 23, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usera3', 'usera3@email.com', '123456', NULL),
+(15, 'UserA_4', 'UserA4', 'Usuario', 34, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usera4', 'usera4@email.com', '123456', NULL),
+(16, 'userA_5', 'UserA5', 'Cinco', 26, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usera5', 'usera5@email,com', '', NULL),
+(17, 'UserB_1', 'Userb1', 'Uno', 26, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userb1', 'userb1@email.com', '123456', 15),
+(18, 'UserB_2', 'Userb2', 'Dos', 27, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userb2', 'userb2@email.com', '123456', 15),
+(19, 'Userb_3', 'Userb3', 'Tres', 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userb3', 'userb3@email.com', '123456', 15),
+(20, 'UserB_4', 'userb4', 'Cuatro', 26, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userb5', 'userb5@email.com', '123456', 15),
+(21, 'userB_5', 'userb5', 'Cinco', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userb5', 'userb5@email.com', '123456', 15),
+(22, 'userC_1', 'userc1', 'Uno', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userc1', 'userc1@email.com', '123456', 16),
+(23, 'USerC_2', 'userc2', 'Dos', 19, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userc2', 'userc2@email.com', '123456', 16),
+(24, 'userc_3', 'userc3', 'TRes', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userc3', 'userc3@email.com', '123456', 16),
+(25, 'userC_4', 'userc4', 'Cuatro', 24, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userc4', 'userc4@email.com', '123456', 16),
+(26, 'userC_5', 'userc5', 'Cinco', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userc5', 'userc5@email.com', '123456', 16),
+(27, 'userE_1', 'userE1', 'Uno', 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usere1', 'usere1@email.com', '123456', NULL),
+(28, 'userE_2', 'usere2', 'Dos', 23, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usere2', 'usere2@email.cm', '123456', NULL),
+(29, 'userE_3', 'usere3', 'Tres', 27, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usere3', 'usere3@email.com', '123456', NULL),
+(30, 'userE_4', 'usere4', 'Cuatro', 35, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usere4', 'usere4@email.com', '123456', NULL),
+(31, 'userE_5', 'usere5', 'Cinco', 25, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/usere5', 'usere5@email.com', '123456', NULL),
+(32, 'userF_1', 'userf1', 'Uno', 25, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userf1', 'userf1@email.com', '123456', NULL),
+(33, 'UserF_2', 'userf2', 'Dos', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userf2', 'userf2@email.com', '123456', NULL),
+(34, 'userF_3', 'userf3', 'Tres', 21, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userf3', 'userf3@email.com', '123456', NULL),
+(35, 'userF_4', 'userf4', 'Cuatro', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userf4', 'userf4@email.com', '123456', NULL),
+(36, 'userF_5', 'userF5', 'Cinco', 19, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userf5', 'userf5@email.com', '123456', NULL),
+(37, 'userG_1', 'userg1', 'Uno', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userg1', 'userg1@email.com', '123456', NULL),
+(38, 'userG_2', 'userg2', 'Dos', 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/user2g2', 'userg2@email.com', '123456', NULL),
+(39, 'UserG_3', 'userg3', 'Tres', 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userg3', 'userg3@email.com', '123456', NULL),
+(40, 'userG_4', 'usreg4', 'Cuatro', 26, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userg4', 'usreg4@email.com', '123456', NULL),
+(41, 'userG_5', 'userg5', 'Cinco', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userg5', 'userg5@email.com', '123456', NULL),
+(42, 'userH_1', 'userh1', 'Uno', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userh1', 'userh1@email.com', '123456', NULL),
+(43, 'userH_2', 'userh2', 'Dos', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userh2', 'userh2@email.com', '123456', NULL),
+(44, 'userH_3', 'userh3', 'Tres', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userh3', 'userh3@email.com', '123456', NULL),
+(45, 'userH_4', 'user4', 'Cuatro', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userh4', 'userh4@email.com', '123456', NULL),
+(46, 'userH_5', 'userh5', 'Cinco', 32, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userh5', 'userh5@email.com', '123456', NULL),
+(47, 'useri_1', 'useri1', 'Uno', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/useri1', 'useri1@email.com', '123456', 18),
+(48, 'useri_2', 'useri2', 'Dos', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/useri2', 'useri2@email.com', '123456', NULL),
+(49, 'useri_3', 'useri3', 'Tres', 39, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/useri3', 'useri3@email.com', '123456', NULL),
+(50, 'useri_4', 'useri4', 'Cuatro', 28, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/useri4', 'useri4@email.com', '123456', NULL),
+(51, 'useri_5', 'useri5', 'Cinco', 32, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/useri5', 'useri5@email.com', '123456', NULL),
+(52, 'userJ_1', 'userj1', 'Uno', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userj1', 'userj1@email.com', '123456', NULL),
+(53, 'userJ_2', 'userj2', 'Dos', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userj2', 'userj2@email.com', '123456', NULL),
+(54, 'userJ_3', 'userj3', 'Tres', 22, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userj3', 'userJ3@email.com', '123456', NULL),
+(55, 'userJ_4', 'userj4', 'Cuatro', 21, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userj4', 'userj4@email.com', '123456', NULL),
+(56, 'userJ_5', 'userj5', 'Cinco', 29, 0, 0, '/imagenes/interrogacion.jpg', 'www.steam.com/userj5', 'userj5@email.com', '123456', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -357,7 +407,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `fase`
 --
@@ -387,7 +437,7 @@ MODIFY `reto` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 --
 -- Restricciones para tablas volcadas
 --
