@@ -142,6 +142,10 @@ $app->get('/miCuenta', function() use ($app) {
 
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/entrada', function() use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
     $mensajes = ORM::for_table('mensaje')
         ->select('mensaje.id')
         ->select('mensaje.leido')
@@ -164,6 +168,10 @@ $app->get('/entrada', function() use ($app) {
 
 //Sección bandeja de entrada de MENSAJES de cada usuario
 $app->get('/salida', function() use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
     $mensajes = ORM::for_table('mensaje')
         ->select('mensaje.asunto')
         ->select('mensaje.fecha')
@@ -180,6 +188,10 @@ $app->get('/salida', function() use ($app) {
 })->name('salida');
 
 $app->get('/nuevoMensaje', function() use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
     $usuarios = ORM::for_table('usuario')
         ->select('user')
         ->select('id')
@@ -192,6 +204,10 @@ $app->get('/nuevoMensaje', function() use ($app) {
 
 //Cuando el usuario pulsa en "Equipos"
 $app->get('/equipos', function() use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
     //Si el usuario NO tiene equipo
     if($_SESSION['usuarioLogin']['equipo_id']==null){
         $equipo = null;
@@ -240,6 +256,10 @@ $app->get('/buscarEquipo/:id', function ($id) {
 
 
 $app->get('/equipos/:equipo', function ($equipo) use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
     $equipo = ORM::for_table('equipo')
         ->where('nombre',$equipo)
         ->find_many();
@@ -262,23 +282,36 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
 });
 
 $app->get('/solicitudes', function() use ($app) {
-    $solicitudes = ORM::for_table('equipo_usuario')
-        ->select('equipo_usuario.id')
-        ->select('usuario.user')
-        ->select('usuario.imagen')
-        ->select('usuario.nombre')
-        ->select('usuario.steam')
-        ->select('equipo_usuario.estado')
-        ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
-        ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
-        ->find_many();
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
+    $compCapitan = ORM::for_table('equipo')
+        ->where('capitan_id',$_SESSION['usuarioLogin']['id'])
+        ->find_one();
 
-    $req = new comun();
-    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    if(!$compCapitan){
+        $app->redirect($app->router()->urlFor('equipos'));
+        die();
+    }else{
+        $solicitudes = ORM::for_table('equipo_usuario')
+            ->select('equipo_usuario.id')
+            ->select('usuario.user')
+            ->select('usuario.imagen')
+            ->select('usuario.nombre')
+            ->select('usuario.steam')
+            ->select('equipo_usuario.estado')
+            ->join('usuario', array('equipo_usuario.usuario_id', '=', 'usuario.id'))
+            ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
+            ->find_many();
 
-    $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
 
+        $req = new comun();
+        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+        $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
+    }
 })->name('solicitudes');
 
 //------------------------------------------------------------------------POSTS-------------------------------------------------------------------------

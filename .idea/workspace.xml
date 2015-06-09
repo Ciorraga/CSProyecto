@@ -38,8 +38,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8403756" vertical-offset="11949" max-vertical-offset="12937">
-              <caret line="745" column="223" selection-start-line="745" selection-start-column="223" selection-end-line="745" selection-end-column="223" />
+            <state vertical-scroll-proportion="0.70828605" vertical-offset="4646" max-vertical-offset="13498">
+              <caret line="310" column="63" selection-start-line="310" selection-start-column="63" selection-end-line="310" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -48,8 +48,8 @@
       <file leaf-file-name="comun.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/comun.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
-              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+            <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="544">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -174,11 +174,11 @@
         <option value="$PROJECT_DIR$/public/js/dialogSolicitudAprobadaNotOk.js" />
         <option value="$PROJECT_DIR$/templates/solicitudes.html.twig" />
         <option value="$PROJECT_DIR$/public/css/estilos.css" />
-        <option value="$PROJECT_DIR$/public/comun.php" />
         <option value="$PROJECT_DIR$/public/js/dialogNuevaSolicitud.js" />
         <option value="$PROJECT_DIR$/public/js/dialogNuevoComentario.js" />
         <option value="$PROJECT_DIR$/templates/inicio.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.twig" />
+        <option value="$PROJECT_DIR$/public/comun.php" />
         <option value="$PROJECT_DIR$/public/index.php" />
       </list>
     </option>
@@ -732,14 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/comun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/dialogNuevaSolicitud.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
@@ -774,10 +766,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/comun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="544">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8403756" vertical-offset="11949" max-vertical-offset="12937">
-          <caret line="745" column="223" selection-start-line="745" selection-start-column="223" selection-end-line="745" selection-end-column="223" />
+        <state vertical-scroll-proportion="0.70828605" vertical-offset="4646" max-vertical-offset="13498">
+          <caret line="310" column="63" selection-start-line="310" selection-start-column="63" selection-end-line="310" selection-end-column="63" />
           <folding />
         </state>
       </provider>

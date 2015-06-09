@@ -23,4 +23,5 @@ class comun {
             ->where('usuario_id', $_SESSION['usuarioLogin']['id'])
             ->where('leido',0)->count();
     }
+
 }
