@@ -53,6 +53,7 @@ $app->get('/', function() use ($app) {
         $i = 0;
         foreach($noticias as $item){
             $comentarios = ORM::for_table('comentario')
+                ->order_by_asc('usuario.user')
                 ->select('comentario.texto')
                 ->select('comentario.fecha')
                 ->select('usuario.imagen')
@@ -94,6 +95,7 @@ $app->get('/', function() use ($app) {
                 ->select('usuario.user')
                 ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
                 ->where('noticia_id',$item['id'])
+                ->order_by_desc('comentario.fecha')
                 ->find_many();
 
             $miArray[$i]['id'] = $item['id'];
@@ -587,6 +589,7 @@ $app->post('/', function() use ($app) {
         $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok', 'numMensajes' => $_SESSION['numMensajes'], 'nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
+    //Al pulsar el boton aceptar del menú solicitudes del capitán de equipo
     if(isset($_POST['botonAceptarSol'])){
         //var_dump($_POST['botonAceptarSol']);die();
         $usuario = ORM::for_table('usuario')
@@ -661,6 +664,7 @@ $app->post('/', function() use ($app) {
         }
     }
 
+    //Al pulsar el boton denegar del menú solicitudes del capitán de equipo
     if(isset($_POST['botonDenegarSol'])){
         $us = ORM::for_table('equipo_usuario')
             ->where('id',$_POST['botonDenegarSol'])
@@ -689,6 +693,57 @@ $app->post('/', function() use ($app) {
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
         $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'notOk'));
+    }
+
+    //Al pulsar el responder en los comentarios de las noticias
+    if(isset($_POST['botonResponderNoticia'])){
+        $texto = htmlentities($_POST['textoComentario']);
+        $fechaYHora = date("Y-m-d H:i:s");
+
+        $nuevoComentario = ORM::for_table('comentario')->create();
+        $nuevoComentario->texto = $texto;
+        $nuevoComentario->fecha = $fechaYHora;
+        $nuevoComentario->usuario_id = $_SESSION['usuarioLogin']['id'];
+        $nuevoComentario->noticia_id = $_POST['botonResponderNoticia'];
+        $nuevoComentario->save();
+
+        $noticias = ORM::for_table('noticia')
+            ->select('noticia.id')
+            ->select('noticia.titulo')
+            ->select('noticia.texto')
+            ->select('noticia.fecha')
+            ->select('usuario.user')
+            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
+            ->order_by_desc('noticia.fecha')
+            ->find_array();
+
+        $miArray = [];
+        $i = 0;
+        foreach($noticias as $item){
+            $comentarios = ORM::for_table('comentario')
+                ->select('comentario.texto')
+                ->select('comentario.fecha')
+                ->select('usuario.imagen')
+                ->select('usuario.user')
+                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
+                ->where('noticia_id',$item['id'])
+                ->order_by_desc('comentario.fecha')
+                ->find_many();
+
+            $miArray[$i]['id'] = $item['id'];
+            $miArray[$i]['titulo'] = $item['titulo'];
+            $miArray[$i]['texto'] = $item['texto'];
+            $miArray[$i]['fecha'] = $item['fecha'];
+            $miArray[$i]['user'] = $item['user'];
+            $miArray[$i]['comentarios'] = $comentarios;
+            $i++;
+        }
+
+        $req = new comun();
+        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+        $app->render('inicio.html.twig', array('nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $miArray,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'comentarioEnv' => 'ok','registrado' => 'env'));
     }
 
 });

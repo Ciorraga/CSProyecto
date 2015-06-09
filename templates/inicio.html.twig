@@ -42,13 +42,11 @@
                             {% endfor %}
 
                             {% if registrado=='env' %}
-                            <form class="ui reply form">
+                            <form class="ui reply form" action="/" method="POST">
                                 <div class="field" >
-                                    <textarea style="height:10%"></textarea>
+                                    <textarea name="textoComentario" style="height:10%" placeholder="Escribe aquí tu comentario"></textarea>
                                 </div>
-                                <div class="ui blue labeled submit icon button">
-                                    <i class="icon edit"></i> Enviar
-                                </div>
+                                    <button class="ui blue submit icon button" name="botonResponderNoticia" type="submit" value="{{ noticia.id }}"><i class="fa fa-paper-plane"></i>  Enviar</button>
                             </form>
                             {% endif %}
                         </div>

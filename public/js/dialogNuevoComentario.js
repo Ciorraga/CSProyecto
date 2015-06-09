@@ -3,7 +3,7 @@
 
         // create the notification
         var notification = new NotificationFx({
-            message : '<p>Solicitud enviada con éxito</p>',
+            message : '<p>Comentario enviado!</p>',
             layout : 'growl',
             effect : 'scale',
             type : 'error' // notice, warning, error or success
@@ -15,4 +15,3 @@
     }, 500 );
 
 })();
-

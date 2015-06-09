@@ -15,8 +15,6 @@ class comun {
             if($_SESSION['solicitudes']==0){
                 $_SESSION['solicitudes'] = "vacio";
             }
-        }else{
-
         }
     }
 
