@@ -27,8 +27,7 @@
                 {% for eq in equipo %}
                 <div class="row">
                     <div class="col-md-4">
-                        <div  id="imagenEquipo">
-                            <img src="{{ eq.logo }}"/>
+                        <div  id="imagenEquipo" style="background-image: url('{{ eq.logo }}');">
                         </div>
                     </div>
                     <div class="col-md-7 col-md-offset-1" id="datosEquipo">

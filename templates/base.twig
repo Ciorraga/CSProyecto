@@ -73,14 +73,22 @@
         </div>
     </div>
 </div>
-
-
+<div class="row">
 {% block contenido %}
 {% endblock %}
+</div>
+
+<div class="row">
+    <div id="banner2">
+        <div id="textoPie">CSGOPlay &copy; All rights reserved | Diseño realizado por Ciorraga´s Entertainment</div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
     <div class="modal-dialog">
+
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -111,23 +119,22 @@
                                     <input type="checkbox" name="checkCookie" value="remember-me">
                                     Recordar
                                 </label>
-
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="panel-footer" style="text-align:right">
                 <button type="submit" name="loginUsuario"  class="btn btn-primary">Entrar</button>
 
                 <a href="/registro" name="recordar" class="btn btn-success" >Registrar<a>
-                        </form>
+                            </form>
             </div>
-            </form>
         </div>
     </div>
 </div>
+
+
+
 {% if alta=='ok' %}
     <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
     <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
