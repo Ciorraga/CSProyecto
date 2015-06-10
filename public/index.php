@@ -314,6 +314,16 @@ $app->get('/solicitudes', function() use ($app) {
     }
 })->name('solicitudes');
 
+$app->get('/retos', function() use ($app) {
+
+    $req = new comun();
+    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+    $app->render('retos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+
+})->name('retos');
+
 //------------------------------------------------------------------------POSTS-------------------------------------------------------------------------
 
 $app->post('/registro', function() use ($app) {

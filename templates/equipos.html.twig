@@ -26,11 +26,11 @@
             {% else %}
                 {% for eq in equipo %}
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" >
                         <div  id="imagenEquipo" style="background-image: url('{{ eq.logo }}');">
                         </div>
                     </div>
-                    <div class="col-md-7 col-md-offset-1" id="datosEquipo">
+                    <div class="col-md-7 col-md-offset-1" id="datosEquipo" style="border-left:1px solid black">
                         <p><label class="labelEquipo">Nombre del equipo: </label><br/>{{ eq.nombre }} <br/></p>
                         <p><label class="labelEquipo">Creado: </label><br/>{{ eq.fecha_creacion }} <br/></p>
                         <p><label class="labelEquipo">Web: </label><br/>{{ eq.web }} <br/></p>
@@ -38,7 +38,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
                 <div class="row" id="integrantesEquipo">
                     <h2 id="integrantesLabel">Integrantes</h2>
                     <div class="col-md-11" id="datosUsuariosEquipo">
