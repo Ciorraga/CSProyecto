@@ -39,79 +39,15 @@ $app->get('/', function() use ($app) {
         unset($_SESSION);
         session_destroy();
 
-        $noticias = ORM::for_table('noticia')
-            ->select('noticia.id')
-            ->select('noticia.titulo')
-            ->select('noticia.texto')
-            ->select('noticia.fecha')
-            ->select('usuario.user')
-            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-            ->order_by_desc('noticia.fecha')
-            ->find_array();
-
-        $miArray = [];
-        $i = 0;
-        foreach($noticias as $item){
-            $comentarios = ORM::for_table('comentario')
-                ->order_by_asc('usuario.user')
-                ->select('comentario.texto')
-                ->select('comentario.fecha')
-                ->select('usuario.imagen')
-                ->select('usuario.user')
-                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
-                ->where('noticia_id',$item['id'])
-                ->find_many();
-
-            $miArray[$i]['id'] = $item['id'];
-            $miArray[$i]['titulo'] = $item['titulo'];
-            $miArray[$i]['texto'] = $item['texto'];
-            $miArray[$i]['fecha'] = $item['fecha'];
-            $miArray[$i]['user'] = $item['user'];
-            $miArray[$i]['comentarios'] = $comentarios;
-            $i++;
-        }
-
-        session_start();
-        $_SESSION['not']=$noticias;
-        $app->render('inicio.html.twig',array('noticias' => $miArray));
-    } else { //Si es un usaurio registrado
-        $noticias = ORM::for_table('noticia')
-            ->select('noticia.id')
-            ->select('noticia.titulo')
-            ->select('noticia.texto')
-            ->select('noticia.fecha')
-            ->select('usuario.user')
-            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-            ->order_by_desc('noticia.fecha')
-            ->find_array();
-
-        $miArray = [];
-        $i = 0;
-        foreach($noticias as $item){
-            $comentarios = ORM::for_table('comentario')
-                ->select('comentario.texto')
-                ->select('comentario.fecha')
-                ->select('usuario.imagen')
-                ->select('usuario.user')
-                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
-                ->where('noticia_id',$item['id'])
-                ->order_by_desc('comentario.fecha')
-                ->find_many();
-
-            $miArray[$i]['id'] = $item['id'];
-            $miArray[$i]['titulo'] = $item['titulo'];
-            $miArray[$i]['texto'] = $item['texto'];
-            $miArray[$i]['fecha'] = $item['fecha'];
-            $miArray[$i]['user'] = $item['user'];
-            $miArray[$i]['comentarios'] = $comentarios;
-            $i++;
-        }
-
-        $_SESSION['not']=$noticias;
         $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $app->render('inicio.html.twig',array('noticias' => $notic));
+    } else { //Si es un usaurio registrado
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('inicio.html.twig', array('nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $miArray,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'registrado' => 'env'));
+        $app->render('inicio.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $notic,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'registrado' => 'env'));
     }
 })->name('inicio');
 
@@ -133,7 +69,7 @@ $app->get('/miCuenta', function() use ($app) {
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('miCuenta.html.twig',array('numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('miCuenta.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
     }else{
         $app->redirect($app->router()->urlFor('inicio'));
         die();
@@ -162,11 +98,11 @@ $app->get('/entrada', function() use ($app) {
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
     //var_dump($mensajes);die();
-    $app->render('mensajesEntradaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajesEntradaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 })->name('entrada');
 
-//Sección bandeja de entrada de MENSAJES de cada usuario
+//Sección bandeja de salida de MENSAJES de cada usuario
 $app->get('/salida', function() use ($app) {
     if(!isset($_SESSION['usuarioLogin'])){
         $app->redirect($app->router()->urlFor('inicio'));
@@ -183,7 +119,7 @@ $app->get('/salida', function() use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $app->render('mensajesSalidaUsuario.html.twig',array('mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajesSalidaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 })->name('salida');
 
@@ -199,7 +135,7 @@ $app->get('/nuevoMensaje', function() use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $app->render('mensajeNuevo.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajeNuevo.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
 })->name('nuevoMensaje');
 
 //Cuando el usuario pulsa en "Equipos"
@@ -213,7 +149,7 @@ $app->get('/equipos', function() use ($app) {
         $equipo = null;
         $req = new comun();
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
     }else{
         //Consulta para extraer los datos del equipo
         $equipo = ORM::for_table('equipo')
@@ -238,7 +174,7 @@ $app->get('/equipos', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'miEquipo' => $miEquipo,'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'miEquipo' => $miEquipo,'nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
 
@@ -278,7 +214,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-    $app->render('equipos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
 });
 
 $app->get('/solicitudes', function() use ($app) {
@@ -310,17 +246,46 @@ $app->get('/solicitudes', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
+        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes));
     }
 })->name('solicitudes');
 
 $app->get('/retos', function() use ($app) {
+    $clasRetos = ORM::for_table('reto')
+        ->join('equipo', array('reto.ganador', '=', 'equipo.id'))
+        ->select_expr('COUNT(*)', 'total')
+        ->select('reto.ganador')
+        ->select('equipo.nombre')
+        ->group_by('ganador')
+        ->order_by_desc('total')
+        ->find_many();
+
+
+    $totalJugadoEquipo = ORM::for_table('reto')
+        ->select_expr('count(*)','total_partidos')
+        ->where_raw('(`retador_id` = ? OR `retado_id` = ?)', array(26, 26))
+        ->find_many();
+
+
+
+
+
+
+    foreach ($clasRetos as $item) {
+        echo $item['nombre'];
+        echo " - ";
+        echo $item['ganador'];
+        echo " - ";
+        echo $item['total'];
+        echo "|||";
+    }
+    die();
 
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-    $app->render('retos.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
 
 })->name('retos');
 
@@ -328,12 +293,51 @@ $app->get('/retos', function() use ($app) {
 
 $app->post('/registro', function() use ($app) {
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
-        $app->render('nuevoUser.html.twig', array('alta' => "campos"));
+        $app->render('nuevoUser.html.twig', array('mensajeError' => "Debes rellenar como mínimo los campos marcados"));
         die();
     }else{
         if ($_POST['pass1'] == $_POST['pass2']) {
-            $nuevoUser = ORM::for_table('usuario')->create();
+            if($_FILES["imagenUser"]['name'] != null){
+                $comp = 1;
+                //Subida de la imagen
+                $num = 0;
+                $dir = "./imagenes/usuarios/";
+                $file = basename($_FILES["imagenUser"]["name"]);
 
+                // Comprueba si es una imagen o no
+                $check = getimagesize($_FILES["imagenUser"]["tmp_name"]);
+                if($check == false) {
+                    //Lanzar alerta de que no es una imagen
+                    $mensajeError = "El archivo que ha seleccionado NO es una imagen";
+                    $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
+                    die();
+                }
+
+                // Comprobamos el tamaño de la imagen
+                if ($_FILES["imagenUser"]["size"] > 300000) {
+                    $mensajeError = "El archivo es demasiado grande";
+                    $app->render('nuevoUser.html.twig',array('mensajeError' => $mensajeError));
+                    die();
+                }
+
+                //Comprobación de que si el fichero existe, se le añade un número
+                $fileN = explode(".",$file);
+                while(file_exists($dir . $file)){
+                    $num++;
+                    $file = $fileN[0]."".$num.".".$fileN[1];
+                }
+                $dirFile = $dir ."". $file;
+
+                // Subimos la imagen
+                if (move_uploaded_file($_FILES["imagenUser"]["tmp_name"], $dirFile)) {
+                    $mensajeOk = "El archivo ". basename( $_FILES["imagenUser"]["name"]). " ha sido subido con éxito";
+                } else {
+                    $mensajeError = "El archivo no pudo ser subido";
+                    $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
+                    die();
+                }
+            }
+            $nuevoUser = ORM::for_table('usuario')->create();
             $nuevoUser->user = $_POST['user'];
             $nuevoUser->password = $_POST['pass1'];
             $nuevoUser->nombre = $_POST['nombre'];
@@ -345,16 +349,20 @@ $app->post('/registro', function() use ($app) {
             $nuevoUser->email = $_POST['email'];
             $nuevoUser->steam = $_POST['steam'];
             $nuevoUser->edad = $_POST['edad'];
-            if(!isset($_POST['imagen'])){
-                $nuevoUser->imagen = "imagenes/interrogacion.jpg";
+            if($_FILES["imagenUser"]['name'] == null){
+                $nuevoUser->imagen = "/imagenes/interrogacion.jpg";
             }else{
-                $nuevoUser->imagen = $_POST['imagen'];
+                $nuevoUser->imagen = $dirFile;
             }
+
+            $notic = $req = new comun();
+            $req->mostrarNoticias();
+
             $nuevoUser->save();
-            $app->render('inicio.html.twig', array('alta' => "ok"));
+            $app->render('inicio.html.twig', array('mensajeOk' => "Usuario creado con éxito!!Prueba a ingresar!",'noticias' => $notic));
             die();
         } else {
-            $app->render('nuevoUser.html.twig', array('alta' => "pass"));
+            $app->render('nuevoUser.html.twig', array('mensajeError' => "Las contraseñas no coinciden"));
             die();
         }
     }
@@ -366,7 +374,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }else{
         if ($_POST['pass1'] == $_POST['pass2']) {
@@ -388,14 +396,14 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-            $app->render('miCuenta.html.twig', array('msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }else{
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-            $app->render('miCuenta.html.twig', array('msgCuenta' => array("danger","Las contraseñas no son iguales"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","Las contraseñas no son iguales"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }
     }
@@ -428,7 +436,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => 'Mensaje enviado con éxito','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
@@ -437,16 +445,16 @@ $app->post('/', function() use ($app) {
         if($usuario){
             $_SESSION['solicitudes'] = 0;
             $_SESSION['usuarioLogin'] = $usuario;
-
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-
             $app->redirect($app->router()->urlFor('inicio'));
             die();
         }
         else{
-            $app->render('inicio.html.twig',array('noticias' => $_SESSION['not'] ,'usuarioLoginError' => '1'));
+            $req = new comun();
+            $notic = $req->mostrarNoticias();
+            $app->render('inicio.html.twig',array('noticias' => $notic ,'usuarioLoginError' => '1'));
             die();
         }
     }
@@ -471,7 +479,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('mensajeEntrada.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('mensajeEntrada.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
@@ -504,7 +512,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('mensajeSalida.html.twig', array('mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('mensajeSalida.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
@@ -544,7 +552,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('mensajesEntradaUsuario.html.twig', array('mensajeRespEnviado' => 'ok','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => 'Mensaje enviado!','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
@@ -553,14 +561,57 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('nuevoEquipo.html.twig', array('numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
     if(isset($_POST['botonFormNuevoEquipo'])){
+        $mensajeOk = "";
         $nombre = htmlentities($_POST['nombreEquipo']);
         $urlSteam = htmlentities($_POST['urlSteam']);
         $fecha_actual=date("Y/m/d");
+
+        if($_FILES["logoEquipo"]['name'] != null){
+            $comp = 1;
+            //Subida de la imagen
+            $num = 0;
+            $dir = "./imagenes/equipos/";
+            $file = basename($_FILES["logoEquipo"]["name"]);
+
+            // Comprueba si es una imagen o no
+            $check = getimagesize($_FILES["logoEquipo"]["tmp_name"]);
+            if($check == false) {
+                //Lanzar alerta de que no es una imagen
+                $mensajeError = "El archivo que ha seleccionado NO es una imagen";
+                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                die();
+            }
+
+            // Comprobamos el tamaño de la imagen
+            if ($_FILES["logoEquipo"]["size"] > 300000) {
+                $mensajeError = "El archivo es demasiado grande";
+                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                die();
+            }
+
+            //Comprobación de que si el fichero existe, se le añade un número
+            $fileN = explode(".",$file);
+            while(file_exists($dir . $file)){
+                $num++;
+                $file = $fileN[0]."".$num.".".$fileN[1];
+            }
+            $dirFile = $dir ."". $file;
+
+            // Subimos la imagen
+            if (move_uploaded_file($_FILES["logoEquipo"]["tmp_name"], $dirFile)) {
+                //Lanzar alerta Ok
+                $mensajeOk = "El archivo ". basename( $_FILES["logoEquipo"]["name"]). " ha sido subido con éxito";
+            } else {
+                $mensajeError = "El archivo no pudo ser subido";
+                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                die();
+            }
+        }
 
         //Guardamos el equipo en la BBDD
         $nuevoEquipo = ORM::for_table('equipo')->create();
@@ -571,10 +622,10 @@ $app->post('/', function() use ($app) {
         if(isset($_POST['webEquipo'])){
             $nuevoEquipo->web = htmlentities($_POST['webEquipo']);
         }
-        if($_POST['logoEquipo']==""){
+        if($_FILES["logoEquipo"]['name'] == null){
             $nuevoEquipo->logo = "/imagenes/interrogacion.jpg";
         }else{
-            $nuevoEquipo->logo = $_POST['logoEquipo'];
+            $nuevoEquipo->logo = $dirFile;
         }
         $nuevoEquipo->save();
 
@@ -606,7 +657,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('equipos.html.twig',array('mensajeNuevoEquipo' => 'ok','usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => $mensajeOk,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }
 
@@ -616,20 +667,12 @@ $app->post('/', function() use ($app) {
         $nuevaSolicitud->usuario_id = $_SESSION['usuarioLogin']['id'];
         $nuevaSolicitud->save();
 
-        $noticias = ORM::for_table('noticia')
-            ->select('noticia.titulo')
-            ->select('noticia.texto')
-            ->select('noticia.fecha')
-            ->select('usuario.user')
-            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-            ->order_by_desc('noticia.fecha')
-            ->find_array();
-
         $req = new comun();
+        $notic = $req->mostrarNoticias();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('inicio.html.twig', array('noticias' => $noticias,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeNuevaSolicitud' => 'ok', 'numMensajes' => $_SESSION['numMensajes'], 'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('inicio.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'noticias' => $notic,'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeOk' => 'Solicitud enviada con éxito', 'numMensajes' => $_SESSION['numMensajes'], 'nuevaSolicitud' => $_SESSION['solicitudes']));
     }
 
     //Al pulsar el boton aceptar del menú solicitudes del capitán de equipo
@@ -680,7 +723,7 @@ $app->post('/', function() use ($app) {
                 ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
                 ->find_many();
 
-            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok'));
+            $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok','mensajeOk' => "Solicitud aprobada con éxito"));
         }else{
 
             $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
@@ -703,7 +746,7 @@ $app->post('/', function() use ($app) {
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-            $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
+            $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
         }
     }
 
@@ -735,7 +778,7 @@ $app->post('/', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('solicitudes.html.twig',array('usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'notOk'));
+        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'notOk','mensajeError' => 'Solicitud denegada con éxito'));
     }
 
     //Al pulsar el responder en los comentarios de las noticias
@@ -750,43 +793,12 @@ $app->post('/', function() use ($app) {
         $nuevoComentario->noticia_id = $_POST['botonResponderNoticia'];
         $nuevoComentario->save();
 
-        $noticias = ORM::for_table('noticia')
-            ->select('noticia.id')
-            ->select('noticia.titulo')
-            ->select('noticia.texto')
-            ->select('noticia.fecha')
-            ->select('usuario.user')
-            ->join('usuario', array('noticia.usuario_id', '=', 'usuario.id'))
-            ->order_by_desc('noticia.fecha')
-            ->find_array();
-
-        $miArray = [];
-        $i = 0;
-        foreach($noticias as $item){
-            $comentarios = ORM::for_table('comentario')
-                ->select('comentario.texto')
-                ->select('comentario.fecha')
-                ->select('usuario.imagen')
-                ->select('usuario.user')
-                ->join('usuario', array('comentario.usuario_id', '=', 'usuario.id'))
-                ->where('noticia_id',$item['id'])
-                ->order_by_desc('comentario.fecha')
-                ->find_many();
-
-            $miArray[$i]['id'] = $item['id'];
-            $miArray[$i]['titulo'] = $item['titulo'];
-            $miArray[$i]['texto'] = $item['texto'];
-            $miArray[$i]['fecha'] = $item['fecha'];
-            $miArray[$i]['user'] = $item['user'];
-            $miArray[$i]['comentarios'] = $comentarios;
-            $i++;
-        }
-
         $req = new comun();
+        $notic = $req->mostrarNoticias();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('inicio.html.twig', array('nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $miArray,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'comentarioEnv' => 'ok','registrado' => 'env'));
+        $app->render('inicio.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $notic,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeOk' => 'Comentario enviado con éxito','registrado' => 'env'));
     }
 
 });

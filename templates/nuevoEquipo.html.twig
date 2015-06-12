@@ -12,7 +12,7 @@
     {% if msgCuenta %}
         <div class='alert alert-{{ msgCuenta['0'] }}' role='alert' style='text-align:center;'>{{ msgCuenta['1'] }}</div>
     {% endif %}
-    <form class="form-horizontal" action="/" method="POST">
+    <form class="form-horizontal" action="/" method="POST" enctype="multipart/form-data">
         <div class="row" style="text-align:center">
             <p style="padding:50px;">
                 Aquí podrás crear tu nuevo equipo.
@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
             <span class="input input--manami">
-    		    <input class="input__field input__field--manami" type="file" id="input-32" name="logoEquipo"/>
+    		    <input name="logoEquipo" id="logoEquipo" class="input__field input__field--manami" type="file" id="input-32" />
                 <label class="input__label input__label--manami" for="input-32">
                     <span class="input__label-content input__label-content--manami">Logo de equipo</span>
                 </label>
@@ -57,7 +57,9 @@
         <a href="/equipos"><button class="btn btn-default">Atrás</button></a>
     </div>
     </form>
+    {% endblock %}
 
+    {% block scripts %}
     <script src="js/classie.js"></script>
     <script>
         (function() {
@@ -94,4 +96,4 @@
             }
         })();
     </script>
-{% endblock %}
+    {% endblock %}

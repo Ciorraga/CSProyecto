@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="col-md-4 col-md-offset-4">
+<div style="text-align:center">
     <h1>Crear nuevo usuario</h1>
 </div>
 <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
-    <form class="form-signin" action="/registro" method="post" id="formNuevoUsuario">
+    <form class="form-signin" action="/registro" method="post" id="formNuevoUsuario" enctype="multipart/form-data">
         <div class="col-md-5 col-md-offset-1">
             <div class="input-group">
                 <label for="username">Usuario</label>
@@ -48,13 +48,15 @@
 
                 <br/><br/><br/><br/>
                 <label for="imagen">Imagen</label>
-                <input id='imagen' type="file" name="imagen" class="form-control">
+                <input id='imagen' type="file" name="imagenUser" id="imagenUser" class="form-control">
             </div>
         </div>
+        <div class="col-md-4 col-md-offset-4" style="text-align:center;margin-top:2%">
+            <button type="button" name="registro" onClick="envio('formNuevoUsuario')" class="btn btn-primary">Crear</button>
+            <a href="/"><button class="btn btn-default">Atrás</button></a>
+        </div>
     </form>
+</div>
 
-    <div class="col-md-4 col-md-offset-4" style="text-align:center;margin-top:2%">
-        <button type="button" name="registro" onClick="envio('formNuevoUsuario')" class="btn btn-primary">Crear</button>
-        <a href="/"><button class="btn btn-default">Atrás</button></a>
-    </div>
+
 {% endblock %}

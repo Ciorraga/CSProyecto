@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="/css/cs-skin-slide.css" />
     <link rel="stylesheet" type="text/css" href="/css/set2.css" />
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"/>
+
 </head>
 <body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
 <nav class="navbar navbar-inverse" style="border-radius: 0px;">
@@ -57,7 +58,7 @@
                 <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
             {% else %}
             <div class="dropdown">
-                <img src="/imagenes/interrogacion.jpg" class="img-thumbnail" style="width:60px;height:60px;border:1px solid white;" alt="" data-toggle="dropdown" aria-expanded="true"/>
+                <img src="{{ imagenUser }}" class="img-thumbnail" style="width:60px;height:60px;border:1px solid white;" alt="" data-toggle="dropdown" aria-expanded="true"/>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
                     <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>
@@ -134,71 +135,37 @@
     </div>
 </div>
 
+<script src="/js/jquery.bootstrap-growl.js"></script>
+{% if mensajeOk %}
+    <script type="text/javascript">
+        $(function() {
+            setTimeout(function() {
+                $.bootstrapGrowl("{{ mensajeOk }}", { type: 'success' });
+            }, 1000);
+        });
+    </script>
+{% endif %}
+{% if mensajeError %}
+    <script type="text/javascript">
+        $(function() {
+            setTimeout(function() {
+                $.bootstrapGrowl("{{ mensajeError }}", { type: 'danger' });
+
+            }, 500);
+        });
+    </script>
+{% endif %}
 
 
-{% if alta=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogOk.js"></script>
-{% endif %}
-{% if alta=='pass' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-warn.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogPass.js"></script>
-{% endif %}
-{% if alta=='campos' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-warn.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogCampos.js"></script>
-{% endif %}
-{% if mensajeRespEnviado=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogMensajeRespOk.js"></script>
-{% endif %}
-{% if mensajeNuevoEquipo=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogNuevoEquipo.js"></script>
-{% endif %}
-{% if mensajeNuevaSolicitud=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogNuevaSolicitud.js"></script>
-{% endif %}
-{% if aprobada=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogSolicitudAprobada.js"></script>
-{% endif %}
-{% if aprobada=='notOk' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogSolicitudAprobadaNotOk.js"></script>
-{% endif %}
-{% if comentarioEnv=='ok' %}
-    <link rel="stylesheet" type="text/css" href="/css/ns-default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ns-dialog-ok.css" />
-    <script src="/js/classie.js"></script>
-    <script src="/js/notificationFx.js"></script>
-    <script src="/js/dialogNuevoComentario.js"></script>
-{% endif %}
+
+
+
+
+
+
+
+{% block scripts %}
+{% endblock %}
 
 </body>
 </html>
