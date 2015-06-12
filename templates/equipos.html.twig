@@ -9,7 +9,6 @@
         <h1>Equipos</h1>
     </div>
     <div class="col-md-10 col-md-offset-1" id="divPrincipalEquipos">
-
         <div class="col-md-8 col-md-offset-1" id="equiposSeccion">
             {% if miEquipo == true %}
                 <h2>Mi equipo</h2>
@@ -81,10 +80,13 @@
                     </form>
                 {% endif %}
             </div>
-            <div id="livesearch"></div>
+            <div id="livesearch">
+
+            </div>
         </div>
     </div>
-
+{% endblock %}
+{% block scripts %}
     <script src="js/classie.js"></script>
     <script>
         (function() {

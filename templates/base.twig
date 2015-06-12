@@ -80,18 +80,11 @@
 {% endblock %}
 </div>
 
-<div class="row">
-    <div id="banner2">
-        <div id="textoPie">CSGOPlay &copy; All rights reserved | Diseño realizado por Ciorraga´s Entertainment</div>
-    </div>
-</div>
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
     <div class="modal-dialog">
-
         <div class="modal-content">
+            <form class="form-signin" action="/" method="post" id="formLogin">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Acceso</h4>
@@ -103,7 +96,6 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="account-wall">
-                            <form class="form-signin" action="/" method="post" id="formLogin">
                                 <div class="input-group">
 								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
 								  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -127,11 +119,16 @@
             </div>
             <div class="panel-footer" style="text-align:right">
                 <button type="submit" name="loginUsuario"  class="btn btn-primary">Entrar</button>
-
                 <a href="/registro" name="recordar" class="btn btn-success" >Registrar<a>
-                            </form>
             </div>
+            </form>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="banner2">
+        <div id="textoPie">CSGOPlay &copy; All rights reserved | Diseño realizado por Ciorraga´s Entertainment</div>
     </div>
 </div>
 
@@ -155,13 +152,6 @@
         });
     </script>
 {% endif %}
-
-
-
-
-
-
-
 
 
 {% block scripts %}

@@ -378,6 +378,46 @@ $app->post('/actualizaUsuario', function() use ($app) {
         die();
     }else{
         if ($_POST['pass1'] == $_POST['pass2']) {
+            if($_FILES["imagen"]['name'] != null){
+                //Subida de la imagen
+                $num = 0;
+                $dir = "./imagenes/usuarios/";
+                $file = basename($_FILES["imagen"]["name"]);
+
+                // Comprueba si es una imagen o no
+                $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+                if($check == false) {
+                    //Lanzar alerta de que no es una imagen
+                    $mensajeError = "El archivo que ha seleccionado NO es una imagen";
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+
+                // Comprobamos el tamaño de la imagen
+                if ($_FILES["imagen"]["size"] > 300000) {
+                    $mensajeError = "El archivo es demasiado grande";
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+
+                //Comprobación de que si el fichero existe, se le añade un número
+                $fileN = explode(".",$file);
+                while(file_exists($dir . $file)){
+                    $num++;
+                    $file = $fileN[0]."".$num.".".$fileN[1];
+                }
+                $dirFile = $dir ."". $file;
+
+                // Subimos la imagen
+                if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $dirFile)) {
+                    //Lanzar alerta Ok
+                    $mensajeOk = "El archivo ". basename( $_FILES["imagen"]["name"]). " ha sido subido con éxito";
+                } else {
+                    $mensajeError = "El archivo no pudo ser subido";
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+            }
             $userAModificar = ORM::for_table('usuario')->find_one($_SESSION['usuarioLogin']['id']);
             $userAModificar->user = $_POST['user'];
             $userAModificar->password = $_POST['pass1'];
@@ -386,6 +426,12 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $userAModificar->email = $_POST['email'];
             $userAModificar->steam = $_POST['steam'];
             $userAModificar->edad = $_POST['edad'];
+            if($_FILES["imagen"]['name'] == null){
+                $userAModificar->imagen = "/imagenes/interrogacion.jpg";
+            }else{
+                $userAModificar->imagen = $dirFile;
+                $_SESSION['usuarioLogin']['imagen'] = $dirFile;
+            }
             $userAModificar->save();
 
             $usuario = ORM::for_table('usuario')
@@ -572,7 +618,6 @@ $app->post('/', function() use ($app) {
         $fecha_actual=date("Y/m/d");
 
         if($_FILES["logoEquipo"]['name'] != null){
-            $comp = 1;
             //Subida de la imagen
             $num = 0;
             $dir = "./imagenes/equipos/";
