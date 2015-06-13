@@ -260,7 +260,7 @@ $app->get('/retos', function() use ($app) {
         ->order_by_desc('total')
         ->find_many();
 
-
+    var_dump($clasRetos);die();
     $totalJugadoEquipo = ORM::for_table('reto')
         ->select_expr('count(*)','total_partidos')
         ->where_raw('(`retador_id` = ? OR `retado_id` = ?)', array(26, 26))
@@ -288,6 +288,19 @@ $app->get('/retos', function() use ($app) {
     $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
 
 })->name('retos');
+
+$app->get('/administracion', function() use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
+    if($_SESSION['usuarioLogin']['es_admin']==0){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
+    $app->render('administracion.html.twig');
+    die();
+});
 
 //------------------------------------------------------------------------POSTS-------------------------------------------------------------------------
 
