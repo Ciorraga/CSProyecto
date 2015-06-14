@@ -10,46 +10,84 @@
 </div>
 <div class="col-md-8 col-md-offset-2" id="primerDiv">
     <form class="form-signin" action="/registro" method="post" id="formNuevoUsuario" enctype="multipart/form-data">
-        <div class="col-md-5 col-md-offset-1">
-            <div class="input-group">
-                <label for="username">Usuario</label>
-                <input id="user" type="text" name="user" class="form-control"  required autofocus>
-
-                <br/><br/><br/>	<br/>
-                <label for="pass1">Contraseña</label>
-                <input id="pass1" type="password" name="pass1" class="form-control"  required>
-
-                <br/><br/><br/>	<br/>
-                <label for="pass2">Repita contraseña</label>
-                <input id='pass2' type="password" name="pass2" class="form-control"  required>
-
-                <br/><br/><br/><br/>
-                <label for="email">E-Mail</label>
-                <input id='email' type="email" name="email" class="form-control"  required>
-
-                <br/><br/><br/><br/>
-                <label for="steam">Steam</label>
-                <input id='steam' type="text" name="steam" class="form-control"  required>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="entradilla">
+                En esta sección podrás darte de alta en la web. ¿A qué estás esperando?<br>
+                Date de alta y empieza a jugar con tus amigos
             </div>
         </div>
 
+        <div class="row">
         <div class="col-md-5 col-md-offset-1">
             <div class="input-group">
-                <label for="nombre">Nombre</label>
-                <input id="nombre" type="text" name="nombre" class="form-control"  required>
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="text" id="input-32" name="user" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Usuario</span>
+                    </label>
+                </span>
 
-                <br/><br/><br/>	<br/>
-                <label for="apellidos">Apellidos</label>
-                <input id="apellidos" type="text" name="apellidos" class="form-control">
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="password" id="input-32" name="pass1" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Contraseña</span>
+                    </label>
+                </span>
 
-                <br/><br/><br/><br/>
-                <label for="edad">Edad</label>
-                <input id='edad' type="text" name="edad" class="form-control"  required>
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="password" id="input-32" name="pass2" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Repita contraseña</span>
+                    </label>
+                </span>
 
-                <br/><br/><br/><br/>
-                <label for="imagen">Imagen</label>
-                <input id='imagen' type="file" name="imagenUser" id="imagenUser" class="form-control">
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="email" id="input-32" name="email" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">E-mail</span>
+                    </label>
+                </span>
+
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="text" id="input-32" name="steam" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Url Steam</span>
+                    </label>
+                </span>
             </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="input-group">
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="text" id="input-32" name="nombre" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Nombre</span>
+                    </label>
+                </span>
+
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="text" id="input-32" name="apellidos"/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Apellidos</span>
+                    </label>
+                </span>
+
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="text" id="input-32" name="edad" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Edad</span>
+                    </label>
+                </span>
+
+                <span class="input input--manami">
+                    <input class="input__field input__field--manami" type="file" id="input-32" name="imagenUser" required/>
+                    <label class="input__label input__label--manami" for="input-32">
+                        <span class="input__label-content input__label-content--manami">Imagen</span>
+                    </label>
+                </span>
+            </div>
+        </div>
         </div>
         <div class="col-md-4 col-md-offset-4" id="botonesFormMiCuenta">
             <button type="button" name="registro" onClick="envio('formNuevoUsuario')" class="btn btn-primary">Crear</button>
@@ -59,4 +97,40 @@
 </div>
 {% endblock %}
 {% block scripts %}
+    <script src="js/classie.js"></script>
+    <script>
+        (function() {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
+        })();
+    </script>
 {% endblock %}

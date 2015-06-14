@@ -301,3 +301,10 @@ h1{
     text-align:center;
     margin-top:2%;
 }
+
+#entradilla{
+    font-family: 'Droid Sans', sans-serif;
+    font-size:1.3em;
+    padding-bottom: 50px;
+    text-align: center;
+}

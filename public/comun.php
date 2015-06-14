@@ -59,5 +59,12 @@ class comun {
         return $miArray;
     }
 
+    public function compruebaNombres($tabla,$donde,$que){
+        $comp = ORM::for_table($tabla)
+            ->where($donde,$que)
+            ->find_one();
+        return $comp;
+    }
+
 
 }

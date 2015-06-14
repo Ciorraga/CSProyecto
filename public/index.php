@@ -338,70 +338,79 @@ $app->post('/registro', function() use ($app) {
         die();
     }else{
         if ($_POST['pass1'] == $_POST['pass2']) {
-            if($_FILES["imagenUser"]['name'] != null){
-                $comp = 1;
-                //Subida de la imagen
-                $num = 0;
-                $dir = "./imagenes/usuarios/";
-                $file = basename($_FILES["imagenUser"]["name"]);
-
-                // Comprueba si es una imagen o no
-                $check = getimagesize($_FILES["imagenUser"]["tmp_name"]);
-                if($check == false) {
-                    //Lanzar alerta de que no es una imagen
-                    $mensajeError = "El archivo que ha seleccionado NO es una imagen";
-                    $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
-                    die();
-                }
-
-                // Comprobamos el tamaño de la imagen
-                if ($_FILES["imagenUser"]["size"] > 300000) {
-                    $mensajeError = "El archivo es demasiado grande";
-                    $app->render('nuevoUser.html.twig',array('mensajeError' => $mensajeError));
-                    die();
-                }
-
-                //Comprobación de que si el fichero existe, se le añade un número
-                $fileN = explode(".",$file);
-                while(file_exists($dir . $file)){
-                    $num++;
-                    $file = $fileN[0]."".$num.".".$fileN[1];
-                }
-                $dirFile = $dir ."". $file;
-
-                // Subimos la imagen
-                if (move_uploaded_file($_FILES["imagenUser"]["tmp_name"], $dirFile)) {
-                    $mensajeOk = "El archivo ". basename( $_FILES["imagenUser"]["name"]). " ha sido subido con éxito";
-                } else {
-                    $mensajeError = "El archivo no pudo ser subido";
-                    $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
-                    die();
-                }
+            $req = new comun();
+            $compUser = $req->compruebaNombres('usuario','user',$_POST['user']);
+            $compMail = $req->compruebaNombres('usuario','email',$_POST['email']);
+            if($compUser){
+                $app->render('nuevoUser.html.twig', array('mensajeError' => "El nombre de usuario ya exite. Por favor, elije otro"));
+                die();
             }
-            $nuevoUser = ORM::for_table('usuario')->create();
-            $nuevoUser->user = $_POST['user'];
-            $nuevoUser->password = $_POST['pass1'];
-            $nuevoUser->nombre = $_POST['nombre'];
-            if(!$_POST['apellidos']){
-                $nuevoUser->apellidos = " ";
-            }else{
-                $nuevoUser->apellidos = $_POST['apellidos'];
+            if($compMail){
+                $app->render('nuevoUser.html.twig', array('mensajeError' => "El e-mail ya existe. Por favor elije  otro"));
+                die();
             }
-            $nuevoUser->email = $_POST['email'];
-            $nuevoUser->steam = $_POST['steam'];
-            $nuevoUser->edad = $_POST['edad'];
-            if($_FILES["imagenUser"]['name'] == null){
-                $nuevoUser->imagen = "/imagenes/interrogacion.jpg";
-            }else{
-                $nuevoUser->imagen = $dirFile;
-            }
+                if($_FILES["imagenUser"]['name'] != null){
+                    //Subida de la imagen
+                    $num = 0;
+                    $dir = "./imagenes/usuarios/";
+                    $file = basename($_FILES["imagenUser"]["name"]);
 
-            $notic = $req = new comun();
-            $req->mostrarNoticias();
+                    // Comprueba si es una imagen o no
+                    $check = getimagesize($_FILES["imagenUser"]["tmp_name"]);
+                    if($check == false) {
+                        //Lanzar alerta de que no es una imagen
+                        $mensajeError = "El archivo que ha seleccionado NO es una imagen";
+                        $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
+                        die();
+                    }
 
-            $nuevoUser->save();
-            $app->render('inicio.html.twig', array('mensajeOk' => "Usuario creado con éxito!!Prueba a ingresar!",'noticias' => $notic));
-            die();
+                    // Comprobamos el tamaño de la imagen
+                    if ($_FILES["imagenUser"]["size"] > 300000) {
+                        $mensajeError = "El archivo es demasiado grande";
+                        $app->render('nuevoUser.html.twig',array('mensajeError' => $mensajeError));
+                        die();
+                    }
+
+                    //Comprobación de que si el fichero existe, se le añade un número
+                    $fileN = explode(".",$file);
+                    while(file_exists($dir . $file)){
+                        $num++;
+                        $file = $fileN[0]."".$num.".".$fileN[1];
+                    }
+                    $dirFile = $dir ."". $file;
+
+                    // Subimos la imagen
+                    if (move_uploaded_file($_FILES["imagenUser"]["tmp_name"], $dirFile)) {
+                        $mensajeOk = "El archivo ". basename( $_FILES["imagenUser"]["name"]). " ha sido subido con éxito";
+                    } else {
+                        $mensajeError = "El archivo no pudo ser subido";
+                        $app->render('nuevoUser.html.twig', array('mensajeError' => $mensajeError));
+                        die();
+                    }
+                }
+                $nuevoUser = ORM::for_table('usuario')->create();
+                $nuevoUser->user = $_POST['user'];
+                $nuevoUser->password = $_POST['pass1'];
+                $nuevoUser->nombre = $_POST['nombre'];
+                if(!$_POST['apellidos']){
+                    $nuevoUser->apellidos = " ";
+                }else{
+                    $nuevoUser->apellidos = $_POST['apellidos'];
+                }
+                $nuevoUser->email = $_POST['email'];
+                $nuevoUser->steam = $_POST['steam'];
+                $nuevoUser->edad = $_POST['edad'];
+                if($_FILES["imagenUser"]['name'] == null){
+                    $nuevoUser->imagen = "/imagenes/interrogacion.jpg";
+                }else{
+                    $nuevoUser->imagen = $dirFile;
+                }
+                $nuevoUser->save();
+
+                $notic = $req->mostrarNoticias();
+                $app->render('inicio.html.twig', array('mensajeOk' => "Usuario creado con éxito!!Prueba a ingresar!",'noticias' => $notic));
+                die();
+
         } else {
             $app->render('nuevoUser.html.twig', array('mensajeError' => "Las contraseñas no coinciden"));
             die();
@@ -411,13 +420,31 @@ $app->post('/registro', function() use ($app) {
 
 //Cuando pulsamos el botón actualizar en la sección "Mi cuenta"
 $app->post('/actualizaUsuario', function() use ($app) {
+    $user = htmlentities($_POST['user']);
+    $pass = htmlentities($_POST['pass1']);
+    $nombre = htmlentities($_POST['nombre']);
+    $apellidos = htmlentities($_POST['apellidos']);
+    $email = htmlentities($_POST['email']);
+    $steam =htmlentities($_POST['steam']);
+    $edad =htmlentities($_POST['edad']);
+
+    $req = new comun();
+    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $compUser = $req->compruebaNombres('usuario','user',$user);
+    $compEmail = $req->compruebaNombres('usuario','email',$email);
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
-        $req = new comun();
-        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }else{
+        if($compUser && $user != $_SESSION['usuarioLogin']['user']){
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","El nombre de usuario ya existe"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            die();
+        }
+        if($compEmail){
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","El e-mail que has introducido ya existe"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            die();
+        }
         if ($_POST['pass1'] == $_POST['pass2']) {
             if($_FILES["imagen"]['name'] != null){
                 //Subida de la imagen
@@ -460,13 +487,13 @@ $app->post('/actualizaUsuario', function() use ($app) {
                 }
             }
             $userAModificar = ORM::for_table('usuario')->find_one($_SESSION['usuarioLogin']['id']);
-            $userAModificar->user = $_POST['user'];
-            $userAModificar->password = $_POST['pass1'];
-            $userAModificar->nombre = $_POST['nombre'];
-            $userAModificar->apellidos = $_POST['apellidos'];
-            $userAModificar->email = $_POST['email'];
-            $userAModificar->steam = $_POST['steam'];
-            $userAModificar->edad = $_POST['edad'];
+            $userAModificar->user = $user;
+            $userAModificar->password = $pass;
+            $userAModificar->nombre = $nombre;
+            $userAModificar->apellidos = $apellidos;
+            $userAModificar->email = $email;
+            $userAModificar->steam = $steam;
+            $userAModificar->edad = $edad;
             if($_FILES["imagen"]['name'] == null){
                 $userAModificar->imagen = "/imagenes/interrogacion.jpg";
             }else{
@@ -482,6 +509,10 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+            $usuario = ORM::for_table('usuario')->where('user', $user)
+                ->find_one();
+            $_SESSION['usuarioLogin'] = $usuario;
 
             $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
@@ -659,94 +690,104 @@ $app->post('/', function() use ($app) {
         $nombre = htmlentities($_POST['nombreEquipo']);
         $urlSteam = htmlentities($_POST['urlSteam']);
         $fecha_actual=date("Y/m/d");
-
-        if($_FILES["logoEquipo"]['name'] != null){
-            //Subida de la imagen
-            $num = 0;
-            $dir = "./imagenes/equipos/";
-            $file = basename($_FILES["logoEquipo"]["name"]);
-
-            // Comprueba si es una imagen o no
-            $check = getimagesize($_FILES["logoEquipo"]["tmp_name"]);
-            if($check == false) {
-                //Lanzar alerta de que no es una imagen
-                $mensajeError = "El archivo que ha seleccionado NO es una imagen";
-                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
-                die();
-            }
-
-            // Comprobamos el tamaño de la imagen
-            if ($_FILES["logoEquipo"]["size"] > 300000) {
-                $mensajeError = "El archivo es demasiado grande";
-                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
-                die();
-            }
-
-            //Comprobación de que si el fichero existe, se le añade un número
-            $fileN = explode(".",$file);
-            while(file_exists($dir . $file)){
-                $num++;
-                $file = $fileN[0]."".$num.".".$fileN[1];
-            }
-            $dirFile = $dir ."". $file;
-
-            // Subimos la imagen
-            if (move_uploaded_file($_FILES["logoEquipo"]["tmp_name"], $dirFile)) {
-                //Lanzar alerta Ok
-                $mensajeOk = "El archivo ". basename( $_FILES["logoEquipo"]["name"]). " ha sido subido con éxito";
-            } else {
-                $mensajeError = "El archivo no pudo ser subido";
-                $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
-                die();
-            }
-        }
-
-        //Guardamos el equipo en la BBDD
-        $nuevoEquipo = ORM::for_table('equipo')->create();
-        $nuevoEquipo->nombre = $nombre;
-        $nuevoEquipo->grupo_steam = $urlSteam;
-        $nuevoEquipo->capitan_id = $_SESSION['usuarioLogin']['id'];
-        $nuevoEquipo->fecha_creacion = $fecha_actual;
-        if(isset($_POST['webEquipo'])){
-            $nuevoEquipo->web = htmlentities($_POST['webEquipo']);
-        }
-        if($_FILES["logoEquipo"]['name'] == null){
-            $nuevoEquipo->logo = "/imagenes/interrogacion.jpg";
-        }else{
-            $nuevoEquipo->logo = $dirFile;
-        }
-        $nuevoEquipo->save();
-
-        //Extraemos el id del equipo que se acaba de crear
-        $equipoId = ORM::for_table('equipo')
-            ->select('id')
-            ->where('nombre',$nombre)
-            ->find_one();
-
-        //Agregamos el campo "equipo_id"con el equipo que esté usuario creó anteriormente
-        $userAModificar = ORM::for_table('usuario')->find_one($_SESSION['usuarioLogin']['id']);
-        $userAModificar->equipo_id = $equipoId['id'];
-        $userAModificar->save();
-
-        //Volvemos a grabar la sesion con los nuevos datos
-        $_SESSION['usuarioLogin'] = ORM::for_table('usuario')
-            ->where('id', $_SESSION['usuarioLogin']['id'])
-            ->find_one();
-        //Consulta para extraer los datos del equipo
-        $equipo = ORM::for_table('equipo')
-            ->where('id',$_SESSION['usuarioLogin']['equipo_id'])
-            ->find_many();
-        //Consulta para extraer los datos de los miembros del equipo
-        $usuarios = ORM::for_table('usuario')
-            ->where('equipo_id',$equipo[0]['id'])
-            ->find_many();
-
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $compEquipo = $req->compruebaNombres('equipo','nombre',$nombre);
 
-        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => $mensajeOk,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
-        die();
+        if($compEquipo){
+            $mensajeError = "El nombre de equipo ya existe. Pruebe con otro";
+            $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            die();
+        }else{
+            if($_FILES["logoEquipo"]['name'] != null){
+                //Subida de la imagen
+                $num = 0;
+                $dir = "./imagenes/equipos/";
+                $file = basename($_FILES["logoEquipo"]["name"]);
+
+                // Comprueba si es una imagen o no
+                $check = getimagesize($_FILES["logoEquipo"]["tmp_name"]);
+                if($check == false) {
+                    //Lanzar alerta de que no es una imagen
+                    $mensajeError = "El archivo que ha seleccionado NO es una imagen";
+                    $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+
+                // Comprobamos el tamaño de la imagen
+                if ($_FILES["logoEquipo"]["size"] > 300000) {
+                    $mensajeError = "El archivo es demasiado grande";
+                    $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+
+                //Comprobación de que si el fichero existe, se le añade un número
+                $fileN = explode(".",$file);
+                while(file_exists($dir . $file)){
+                    $num++;
+                    $file = $fileN[0]."".$num.".".$fileN[1];
+                }
+                $dirFile = $dir ."". $file;
+
+                // Subimos la imagen
+                if (move_uploaded_file($_FILES["logoEquipo"]["tmp_name"], $dirFile)) {
+                    //Lanzar alerta Ok
+                    $mensajeOk = "El archivo ". basename( $_FILES["logoEquipo"]["name"]). " ha sido subido con éxito";
+                } else {
+                    $mensajeError = "El archivo no pudo ser subido";
+                    $app->render('nuevoEquipo.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    die();
+                }
+            }
+
+            //Guardamos el equipo en la BBDD
+            $nuevoEquipo = ORM::for_table('equipo')->create();
+            $nuevoEquipo->nombre = $nombre;
+            $nuevoEquipo->grupo_steam = $urlSteam;
+            $nuevoEquipo->capitan_id = $_SESSION['usuarioLogin']['id'];
+            $nuevoEquipo->fecha_creacion = $fecha_actual;
+            if(isset($_POST['webEquipo'])){
+                $nuevoEquipo->web = htmlentities($_POST['webEquipo']);
+            }
+            if($_FILES["logoEquipo"]['name'] == null){
+                $nuevoEquipo->logo = "/imagenes/interrogacion.jpg";
+            }else{
+                $nuevoEquipo->logo = $dirFile;
+            }
+            $nuevoEquipo->save();
+
+            //Extraemos el id del equipo que se acaba de crear
+            $equipoId = ORM::for_table('equipo')
+                ->select('id')
+                ->where('nombre',$nombre)
+                ->find_one();
+
+            //Agregamos el campo "equipo_id"con el equipo que esté usuario creó anteriormente
+            $userAModificar = ORM::for_table('usuario')->find_one($_SESSION['usuarioLogin']['id']);
+            $userAModificar->equipo_id = $equipoId['id'];
+            $userAModificar->save();
+
+            //Volvemos a grabar la sesion con los nuevos datos
+            $_SESSION['usuarioLogin'] = ORM::for_table('usuario')
+                ->where('id', $_SESSION['usuarioLogin']['id'])
+                ->find_one();
+            //Consulta para extraer los datos del equipo
+            $equipo = ORM::for_table('equipo')
+                ->where('id',$_SESSION['usuarioLogin']['equipo_id'])
+                ->find_many();
+            //Consulta para extraer los datos de los miembros del equipo
+            $usuarios = ORM::for_table('usuario')
+                ->where('equipo_id',$equipo[0]['id'])
+                ->find_many();
+
+            $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+            $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+            $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => $mensajeOk,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
+            die();
+        }
+
     }
 
     if(isset($_POST['botonSolicitud'])){
