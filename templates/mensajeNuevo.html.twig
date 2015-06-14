@@ -21,25 +21,24 @@
                         <span class="input__label-content input__label-content--makiko"><span id="textoSearch">Escribe para buscar un usuario</span></span>
                     </label>
                 </span>
-                <select id="livesearch"></select>
-                <!--<select class="cs-select cs-skin-elastic" name="id_usuario" size="7" id="selectNuevoMensaje">
-                    <option value="" disabled selected>Selecciona un usuario</option>
-                    {% for usuario in usuarios %}
-                        <option value="{{ usuario.id }}" data-class="flag-france">{{ usuario.user }}</option>
-                    {% endfor %}
-                </select>-->
+                <div id="livesearch">
+                    {% if usuarioMensaje %}
+                        {{ usuarioMensaje['user'] }}
+                    {% endif %}
+                </div>
 
             </div>
             <div style="margin-top:15px;">
                 <input type="text" class="form-control" name="asunto" placeholder="Escibe aquí el asunto de tu mensaje"><br/>
                 <textarea placeholder="Escribe aquí el contenido de tu mensaje" class="form-control" rows="5" id="comment" name="mensaje"></textarea>
-                <button class="ui blue submit icon button" style="margin-top:15px;" type="submit" name="enviarNuevoMensaje">
+                <button class="ui blue submit icon button" style="margin-top:15px;" {% if usuarioMensaje %}value="{{ usuarioMensaje['id'] }}"{% endif %} type="submit" name="enviarNuevoMensaje">
                     <i class="fa fa-paper-plane"></i> Enviar
                 </button>
             </div>
         </form>
     </div>
-
+{% endblock %}
+{% block scripts %}
     <script src="js/classie.js"></script>
     <script src="js/selectFx.js"></script>
     <script>
@@ -47,6 +46,42 @@
             [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
                 new SelectFx(el);
             } );
+        })();
+    </script>
+
+    <script>
+        (function() {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
         })();
     </script>
 

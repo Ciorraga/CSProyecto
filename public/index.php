@@ -190,6 +190,33 @@ $app->get('/buscarEquipo/:id', function ($id) {
     };
 })->name('buscarEquipo');
 
+$app->get('/buscarUsuario/:id', function ($id) {
+    $usuario = ORM::for_table('usuario')
+        ->where_like('user', '%'. $id .'%')
+        ->find_many();
+
+    foreach ($usuario as $valor){
+        echo "<a href='/mensajeNuevo/".$valor['id']."'>". $valor['user'] ."</a><br/>" ;
+    };
+})->name('buscarUsuario');
+
+$app->get('/mensajeNuevo/:id', function ($id) use ($app) {
+    if(!isset($_SESSION['usuarioLogin'])){
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }
+
+    $cons = ORM::for_table('usuario')
+        ->where('id', $id)
+        ->find_one();
+
+    $req = new comun();
+    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+    $app->render('mensajeNuevo.html.twig',array('usuarioMensaje' => $cons ,'imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    die();
+});
 
 $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     if(!isset($_SESSION['usuarioLogin'])){
@@ -590,7 +617,7 @@ $app->post('/', function() use ($app) {
     if(isset($_POST['enviarNuevoMensaje'])){
         $asunto = htmlentities($_POST['asunto']);
         $mensaje = htmlentities($_POST['mensaje']);
-        $id_usuario= htmlentities($_POST['id_usuario']);
+        $id_usuario= htmlentities($_POST['enviarNuevoMensaje']);
         $id_remitente = $_SESSION['usuarioLogin']['id'];
         $fecha_actual=date("Y/m/d");
 
