@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerDiv">
         <ul class="nav nav-tabs nav-justified">
             <li role="presentation" class="active"><a href="/entrada">Bandeja de entrada</a></li>
             <li role="presentation"><a href="/salida">Bandeja de salida</a></li>
@@ -13,7 +13,7 @@
         </ul>
         <p></p>
         <form action="/" method="POST">
-            <div id="mensajeUsuario" style="text-align:center">
+            <div id="h2Centrado">
                 <h2>Bandeja de entrada</h2>
                 <table class="table table-hover">
                     <thead>
@@ -32,7 +32,7 @@
                             <td>{{ mensaje.asunto }}</td>
                             <td>{{ mensaje.user }}</td>
                             <td>{{ mensaje.fecha }}</td>
-                            <td style="text-align:right">
+                            <td id="divBotonesMensajesEntrada">
                                 <div class="btn-group">
                                     <button type="submit" name="botonMostrar" class="btn btn-success" value="{{ mensaje.id }}">Ver</button>
                                     <button type="submit" name="botonBorrar" class="btn btn-danger" value="{{ mensaje.id }}">Borrar</button>
@@ -46,6 +46,9 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();

@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-4 col-md-offset-4" style="text-align:center">
+    <div class="col-md-4 col-md-offset-4" id="h2Centrado">
         <h1>Nuevo equipo</h1>
     </div>
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerDiv">
     {% if msgCuenta %}
-        <div class='alert alert-{{ msgCuenta['0'] }}' role='alert' style='text-align:center;'>{{ msgCuenta['1'] }}</div>
+        <div class='alert alert-{{ msgCuenta['0'] }}' role='alert' id="h2Centrado">{{ msgCuenta['1'] }}</div>
     {% endif %}
     <form class="form-horizontal" action="/" method="POST" enctype="multipart/form-data">
-        <div class="row" style="text-align:center">
-            <p style="padding:50px;">
+        <div class="row" id="h2Centrado">
+            <p id="textoEntradaMiCuenta">
                 Aquí podrás crear tu nuevo equipo.
             </p>
         </div>
@@ -52,7 +52,7 @@
         </div>
 
 
-    <div class="col-md-4 col-md-offset-4" style="text-align:center;margin-top:2%">
+    <div class="col-md-4 col-md-offset-4" id="botonesFormMiCuenta">
         <button type="submit"  class="btn btn-primary" name="botonFormNuevoEquipo">Crear</button>
         <a href="/equipos"><button class="btn btn-default">Atrás</button></a>
     </div>

@@ -18,6 +18,8 @@ body{
     background-size: 100% 100%;
     height:400px;
     margin-bottom:20px;
+    text-align:right;
+    color:white
 }
 
 #banner2{
@@ -79,12 +81,6 @@ h1{
     color:white;
 }
 
-#divPrincipalEquipos{
-    margin-top:2%;
-    background-color:white;
-    padding:1.5%
-}
-
 #integrantesEquipo{
     margin-top:15px;
 }
@@ -96,7 +92,7 @@ h1{
 
 #datosEquipo{
     font-size: 1.4em;
-
+    border-left:1px solid black;
 }
 
 #integrantesLabel{
@@ -149,4 +145,155 @@ h1{
     background-size: 100% 100%;
 }
 
+#elNav{
+    border-radius: 0px;
+}
 
+#entrar{
+    color:white;
+}
+
+#imagenUser{
+    width:60px !important;
+    height:60px !important;
+    border:1px solid white !important;
+    border:1px solid white !important;
+}
+
+#badgeMensajes{
+    margin-botom:0px;
+}
+
+#badgeSolicitudes{
+    margin-botom:0px;
+}
+
+#errorLogin{
+    text-align:center;
+}
+
+#inputLoginUser{
+    background-color:#c6c6c6;
+}
+
+#inputLoginPass{
+    background-color:#c6c6c6;
+}
+
+#inputLoginBotones{
+    text-align:right;
+}
+
+#titulo{
+    text-align:center;
+}
+
+#jumbotronEquipos{
+    padding:3%;
+}
+
+#botonesEquipo{
+    margin-top:5%;
+}
+
+#divNoticias{
+    margin-bottom:20px;
+}
+
+#panelNoticias{
+    border-bottom:2px solid darkblue !important;
+}
+
+#headerPanelNoticias{
+    text-align:center;
+}
+
+#footerPanelNoticias{
+    text-align:right;
+    margin-bottom:10px;
+}
+
+#comentariosNoticias{
+    background-color:white;
+    padding:15px;
+    border-top:4px solid darkblue !important;
+}
+
+#comentarioImagen{
+    float:left;
+}
+
+#textoComentario{
+    height:10%;
+}
+
+#divTituloMensajeEntrada{
+    margin-top:2%;
+    background-color:white;
+    padding:1.5%;
+}
+
+#divPanelMensajeEntrada{
+    margin-top:2%;
+    background-color:#d8d8d8;
+    padding:1.5%
+}
+
+#h2Centrado{
+    text-align:center;
+}
+
+#divPanelHeadingMensajeEntrada{
+    text-align:center;
+}
+
+#divPanelFooterMensajeEntrada{
+    text-align:right;
+}
+
+#tituloOcultoMensaje{
+    display:none;
+}
+
+
+
+#mensajeUuario{
+    text-align:center !important;
+}
+
+#formNuevoUsuario{
+    margin-top:15px;
+}
+
+#botonesFormNuevoMensaje{
+    margin-top:15px;
+}
+
+
+
+#footerPanelMensajesSalida{
+    text-align:right;
+}
+
+#primerDiv{
+    margin-top:2%;
+    background-color:white;
+    padding:1.5%;
+}
+
+#divBotonesMensajesEntrada{
+    text-align:right;
+}
+
+#divBotonesMensajesSalida{
+    text-align:right;
+}
+
+#textoEntradaMiCuenta{
+    padding:50px;
+}
+
+#botonesFormMiCuenta{
+    text-align:center;
+    margin-top:2%;
+}

@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerdiv">
         <ul class="nav nav-tabs nav-justified">
             <li role="presentation" class="active"><a href="/entrada">Bandeja de entrada</a></li>
             <li role="presentation"><a href="/salida">Bandeja de salida</a></li>
             <li role="presentation"><a href="#">Nuevo</a></li>
         </ul>
-        <div id="a" style="text-align:center">
+        <div id="a" id="h2Centrado">
             <h2>Bandeja de entrada</h2>
             <table class="table table-hover">
                 <thead>
@@ -34,6 +34,8 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

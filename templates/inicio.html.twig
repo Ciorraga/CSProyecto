@@ -8,25 +8,25 @@
 <div id="noticias">
     <div class="col-md-8">
         {% for noticia in noticias %}
-            <div class="col-md-12" style="margin-bottom:20px">
-                <div class="panel panel-default" style="border-bottom:2px solid darkblue !important;">
+            <div class="col-md-12" id="divNoticias">
+                <div class="panel panel-default" id="panelNoticias">
                     <div class="panel-body">
-                        <div class="page-header" style="text-align:center">
+                        <div class="page-header" id="headerPanelNoticias">
                             <h2>{{ noticia.titulo }}</h2>
                         </div>
-                        <div class="panel-footer" style="text-align:right;margin-bottom:10px;">
+                        <div class="panel-footer" id="footerPanelNoticias">
                             <span>Noticia creada por: {{ noticia.user }} el {{ noticia.fecha }}</span>
                         </div>
                         {{ noticia.texto }}
                     </div>
 
-                    <div class="col-md-12" style="background-color:white;padding:15px;border-top:4px solid darkblue !important;">
+                    <div class="col-md-12" id="comentariosNoticias">
                         <div>
                             <h3>Comentarios</h3>
                             <hr>
                             {% for comentario in noticia.comentarios %}
                                 <div class="contentComment">
-                                    <a style="float:left;">
+                                    <a id="comentarioImagen">
                                         <img style="padding-right:7px;width:50px;height:50px;" src="{{ comentario.imagen }}">
                                     </a>
                                     <div>
@@ -44,7 +44,7 @@
                             {% if registrado=='env' %}
                             <form class="ui reply form" action="/" method="POST">
                                 <div class="field" >
-                                    <textarea name="textoComentario" style="height:10%" placeholder="Escribe aquí tu comentario"></textarea>
+                                    <textarea name="textoComentario" id="textoComentario" placeholder="Escribe aquí tu comentario"></textarea>
                                 </div>
                                     <button class="ui blue submit icon button" name="botonResponderNoticia" type="submit" value="{{ noticia.id }}"><i class="fa fa-paper-plane"></i>  Enviar</button>
                             </form>
@@ -85,3 +85,6 @@
 
 
 {%endblock%}
+
+{% block scripts %}
+{% endblock %}

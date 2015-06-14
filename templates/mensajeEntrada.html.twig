@@ -6,25 +6,25 @@
 
 {% block contenido %}
     <p></p>
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
-        <h2 style="text-align:center">Mensaje de {{ mensaje.user }}</h2>
-        <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:#d8d8d8;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerDiv">
+        <h2 id="h2Centrado">Mensaje de {{ mensaje.user }}</h2>
+        <div class="col-md-8 col-md-offset-2" id="divPanelMensajeEntrada">
             <div class="panel panel-default">
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="text-align:center;">
+                    <div class="panel-heading" id="divPanelHeadingMensajeEntrada">
                         <h4>{{ mensaje.asunto }}</h4>
                     </div>
                     <div class="panel-body">
                         {{ mensaje.mensaje }}
                     </div>
-                    <div class="panel-footer" style="text-align:right;">
+                    <div class="panel-footer" id="divPanelFooterMensajeEntrada">
                         <span>Fecha: {{ mensaje.fecha }}</span>
                     </div>
                 </div>
             </div>
             <form class="ui reply form" action="/" method="POST">
                 <div class="field">
-                    <textarea name="titulo"  style="display:none">{{ mensaje.asunto }}</textarea>
+                    <textarea name="titulo" id="tituloOcultoMensaje" >{{ mensaje.asunto }}</textarea>
                     <textarea name="textoMensaje"></textarea>
                 </div>
                 <button class="ui blue submit icon button" type="submit" value="{{ mensaje.remitente_id }}" name="botonRespondeMensaje">
@@ -33,6 +33,7 @@
             </form>
         </div>
     </div>
+{% endblock %}
 
-
+{% block scripts %}
 {% endblock %}

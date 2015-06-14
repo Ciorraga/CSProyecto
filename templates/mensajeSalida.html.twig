@@ -6,18 +6,18 @@
 
 {% block contenido %}
     <p></p>
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
-        <h2 style="text-align:center">Mensaje de {{ mensaje.user }}</h2>
-        <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:#d8d8d8;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerDiv">
+        <h2 id="h2Centrado">Mensaje de {{ mensaje.user }}</h2>
+        <div class="col-md-8 col-md-offset-2" id="divPanelMensajesSalida">
             <div class="panel panel-default">
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="text-align:center;">
+                    <div class="panel-heading" id="h2Centrado">
                         <h4>{{ mensaje.asunto }}</h4>
                     </div>
                     <div class="panel-body">
                         {{ mensaje.mensaje }}
                     </div>
-                    <div class="panel-footer" style="text-align:right;">
+                    <div class="panel-footer" id="footerPanelMensajesSalida">
                         <span>Fecha: {{ mensaje.fecha }}</span>
                     </div>
                 </div>
@@ -25,4 +25,7 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

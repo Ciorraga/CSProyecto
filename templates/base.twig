@@ -22,7 +22,7 @@
 
 </head>
 <body {% if usuarioLoginError %}onload="document.getElementById('entrar').click()"{% endif %}>
-<nav class="navbar navbar-inverse" style="border-radius: 0px;">
+<nav class="navbar navbar-inverse" id="elNav">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/" id="mainTitle">CSGOPlay</a>
@@ -44,7 +44,7 @@
                     <a href='/equipos'>Equipos</a>
                 </li>
                 <li class='dropdown'>
-                    <a href='/retos'  role='button'>Retos</a>
+                    <a href='/retos'  role='button'>Retos {% if hayReto %}<span id="badgeMensajes" class="badge">{{ hayReto }}</span>{% endif %}</a>
                 </li>
             </ul>
         </div>
@@ -52,19 +52,19 @@
 </nav>
 
 <div class="row">
-    <div class="col-md-12" id="banner" style="text-align:right;color:white">
+    <div class="col-md-12" id="banner">
         <div id="inicioAcciones" >
             {% if not usuarioLogin %}
-                <a href="" style="color:white" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
+                <a href="" data-toggle="modal" data-target="#myModal" id="entrar"><i class="fa fa-sign-in"></i> Entrar</a>
             {% else %}
             <div class="dropdown">
-                <img src="{{ imagenUser }}" class="img-thumbnail" style="width:60px;height:60px;border:1px solid white;" alt="" data-toggle="dropdown" aria-expanded="true"/>
+                <img src="{{ imagenUser }}" class="img-thumbnail" id="imagenUser" alt="" data-toggle="dropdown" aria-expanded="true"/>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="entrar">
                     <li role="presentation" class="dropdown-header"><span class="usuarioPanel">{{ usuarioLogin['user'] }}</span></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/miCuenta"><i class="fa fa-user"> Mi cuenta </i></a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/entrada"><i class="fa fa-envelope"> Mensajes <span style="margin-botom:0px" class="badge">{% if numMensajes != 0 %} {{ numMensajes }} {% endif %}</span></i></a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/entrada"><i class="fa fa-envelope"> Mensajes <span id="badgeMensajes" class="badge">{% if numMensajes != 0 %} {{ numMensajes }} {% endif %}</span></i></a></li>
                     {% if nuevaSolicitud!='noCapi' %}
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/solicitudes"><i class="fa fa-child"> Solicitudes {% if nuevaSolicitud>0 %} <span style="margin-botom:0px" class="badge">{{ nuevaSolicitud }}</span>{% endif %} </i></a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/solicitudes"><i class="fa fa-child"> Solicitudes {% if nuevaSolicitud>0 %} <span id="badgeSolicitudes" class="badge">{{ nuevaSolicitud }}</span>{% endif %} </i></a></li>
                     {% endif %}
                     <li role="presentation" class="divider"></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><a href="/cerrarSesion"><i class="fa fa-sign-out">Salir</i></a></a></li>
@@ -91,20 +91,20 @@
             </div>
             <div class="modal-body">
                 {% if usuarioLoginError %}
-                    <div class="alert alert-danger" role="alert" style="text-align:center;">El usuario o la contraseña no son válidos</div>
+                    <div class="alert alert-danger" role="alert" id="errorLogin">El usuario o la contraseña no son válidos</div>
                 {% endif %}
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="account-wall">
                                 <div class="input-group">
-								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
+								  		<span class="input-group-addon" id="basic-addon1" id="inputLoginUser">
 								  			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								  		</span>
                                     <input type="text" name="username" class="form-control" placeholder="Usuario" required autofocus>
                                 </div>
                                 <br/>
                                 <div class="input-group">
-								  		<span class="input-group-addon" id="basic-addon1" style="background-color:#c6c6c6;">
+								  		<span class="input-group-addon" id="basic-addon1" id="inputLoginPass">
 								  			<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
 									  	</span>
                                     <input type="password" name="password" class="form-control" placeholder="Contraseña" >
@@ -117,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer" style="text-align:right">
+            <div class="panel-footer" id="inputLoginBotones">
                 <button type="submit" name="loginUsuario"  class="btn btn-primary">Entrar</button>
                 <a href="/registro" name="recordar" class="btn btn-success" >Registrar<a>
             </div>

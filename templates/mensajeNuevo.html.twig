@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-8 col-md-offset-2" style="margin-top:2%;background-color:white;padding:1.5%">
+    <div class="col-md-8 col-md-offset-2" id="primerDiv">
         <ul class="nav nav-tabs nav-justified">
             <li role="presentation"><a href="/entrada">Bandeja de entrada</a></li>
             <li role="presentation"><a href="/salida">Bandeja de salida</a></li>
@@ -28,10 +28,10 @@
                 </div>
 
             </div>
-            <div style="margin-top:15px;">
+            <div id="formNuevoMensaje">
                 <input type="text" class="form-control" name="asunto" placeholder="Escibe aquí el asunto de tu mensaje"><br/>
                 <textarea placeholder="Escribe aquí el contenido de tu mensaje" class="form-control" rows="5" id="comment" name="mensaje"></textarea>
-                <button class="ui blue submit icon button" style="margin-top:15px;" {% if usuarioMensaje %}value="{{ usuarioMensaje['id'] }}"{% endif %} type="submit" name="enviarNuevoMensaje">
+                <button class="ui blue submit icon button" id="botonesFormNuevoMensaje" {% if usuarioMensaje %}value="{{ usuarioMensaje['id'] }}"{% endif %} type="submit" name="enviarNuevoMensaje">
                     <i class="fa fa-paper-plane"></i> Enviar
                 </button>
             </div>

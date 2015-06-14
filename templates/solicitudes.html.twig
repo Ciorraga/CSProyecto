@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-4 col-md-offset-4" style="text-align:center">
+    <div class="col-md-4 col-md-offset-4" id="h2Centrado">
         <h1>Solicitudes de admisión</h1>
     </div>
-    <div class="col-md-10 col-md-offset-1" id="divPrincipalEquipos">
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
         {% if tieneEquipo=='ok' %}
-            <div class="alert alert-danger" role="alert" style="text-align:center;">Este usuario ya ha sido admitido en otro equipo</div>
+            <div class="alert alert-danger" role="alert" id="h2Centrado">Este usuario ya ha sido admitido en otro equipo</div>
         {% endif %}
         <div class="row">
             <form action="/" method="POST">
@@ -46,4 +46,7 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
