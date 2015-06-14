@@ -240,8 +240,9 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $imagenUser = ".".$_SESSION['usuarioLogin']['imagen'];
 
-    $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
 });
 
 $app->get('/solicitudes', function() use ($app) {
@@ -495,7 +496,28 @@ $app->post('/actualizaUsuario', function() use ($app) {
     }
 });
 
+
+
 $app->post('/', function() use ($app) {
+    if(isset($_POST['loginUsuario'])){
+        $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
+        if($usuario){
+            $_SESSION['solicitudes'] = 0;
+            $_SESSION['usuarioLogin'] = $usuario;
+            $req = new comun();
+            $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+            $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+            $app->redirect($app->router()->urlFor('inicio'));
+            die();
+        }
+        else{
+            $req = new comun();
+            $notic = $req->mostrarNoticias();
+            $app->render('inicio.html.twig',array('noticias' => $notic ,'usuarioLoginError' => '1'));
+            die();
+        }
+    }
+
     if(isset($_POST['botonRespondeMensaje'])){
         $fecha_actual=date("Y/m/d");
         $titulo = "Re:".$_POST['titulo'];
@@ -524,25 +546,6 @@ $app->post('/', function() use ($app) {
 
         $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => 'Mensaje enviado con éxito','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
-    }
-
-    if(isset($_POST['loginUsuario'])){
-        $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
-        if($usuario){
-            $_SESSION['solicitudes'] = 0;
-            $_SESSION['usuarioLogin'] = $usuario;
-            $req = new comun();
-            $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-            $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-            $app->redirect($app->router()->urlFor('inicio'));
-            die();
-        }
-        else{
-            $req = new comun();
-            $notic = $req->mostrarNoticias();
-            $app->render('inicio.html.twig',array('noticias' => $notic ,'usuarioLoginError' => '1'));
-            die();
-        }
     }
 
     if(isset($_POST['botonMostrar'])){

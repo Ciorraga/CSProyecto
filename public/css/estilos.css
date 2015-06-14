@@ -24,18 +24,17 @@ body{
 
 #banner2{
     background-image: url('../imagenes/7.jpg');
-    position: relative;
     background-repeat:no-repeat;
     background-size: 100% 100%;
     height:250px;
+    text-align:center;
     margin-top:100px;
     color:white;
 }
 
 #textoPie{
-    position:absolute;
-    bottom:5px;
-    left:30%;
+
+    vertical-align:bottom;
 }
 
 nav{
@@ -55,6 +54,11 @@ nav{
 
 a{
     text-decoration:none;
+}
+
+#aMensaje{
+    text-decoration:none;
+    color:white;
 }
 
 a:hover{
