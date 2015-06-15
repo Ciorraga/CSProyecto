@@ -170,8 +170,6 @@ $app->get('/equipos', function() use ($app) {
             $miEquipo = true;
         }
 
-
-
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
@@ -281,17 +279,13 @@ $app->get('/solicitudes', function() use ($app) {
 })->name('solicitudes');
 
 $app->get('/retos', function() use ($app) {
-    /*$clasRetos = ORM::for_table('reto')
-        ->join('equipo', array('reto.ganador', '=', 'equipo.id'))
-        ->select_expr('COUNT(*)', 'total')
-        ->select('reto.ganador')
-        ->select('equipo.nombre')
-        ->group_by('ganador')
-        ->order_by_desc('total')
+    //SELECT retador_id, count(*), sum(retador_id=ganador), sum(retador_id<>ganador) FROM reto GROUP BY retador_id
+    $clasRetos = ORM::for_table('reto')
+        ->raw_query('SELECT reto.retador_id, equipo.nombre ,count(*) as total, sum(reto.retador_id=reto.ganador) as ganados, sum(reto.retador_id<>reto.ganador) as perdidos, (sum(reto.retador_id=reto.ganador)-sum(reto.retador_id<>reto.ganador))/count(*) as ratio FROM reto join equipo on equipo.id=reto.retador_id GROUP BY reto.retador_id ORDER BY ratio')
         ->find_many();
 
-    var_dump($clasRetos);die();
-    $totalJugadoEquipo = ORM::for_table('reto')
+
+    /*$totalJugadoEquipo = ORM::for_table('reto')
         ->select_expr('count(*)','total_partidos')
         ->where_raw('(`retador_id` = ? OR `retado_id` = ?)', array(26, 26))
         ->find_many();
@@ -309,13 +303,13 @@ $app->get('/retos', function() use ($app) {
         echo $item['total'];
         echo "|||";
     }
-    die();
+    die();*/
 
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);*/
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-    $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'clasificacion' => $clasRetos));
 
 })->name('retos');
 
@@ -966,6 +960,31 @@ $app->post('/', function() use ($app) {
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'mensajeOk' => 'Has abandonado el equipo'));
     }
 
+    if(isset($_POST['botonDestruirEquipo'])){
+        $usuarios = ORM::for_table('usuario')
+            ->where('equipo_id',$_POST['botonDestruirEquipo'])
+            ->find_many();
+        foreach ($usuarios as $item) {
+            $item->equipo_id = null;
+            $item->save();
+        }
+
+
+        $capitan = ORM::for_table('equipo')
+            ->where('id',$_POST['botonDestruirEquipo'])
+            ->find_one();
+        $capitan->capitan_id = null;
+        $capitan->save();
+
+        ORM::for_table('equipo')
+            ->find_one($_POST['botonDestruirEquipo'])->delete();
+
+        $req = new comun();
+        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'mensajeOk' => 'Equipo eliminado con éxito'));
+    }
 });
 
 

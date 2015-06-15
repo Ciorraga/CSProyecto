@@ -13579,6 +13579,7 @@
 			 *    $.fn.dataTable.ext.type.search['title-numeric'] = function ( d ) {
 			 *      return d.replace(/\n/g," ").replace( /<.*?>/g, "" );
 			 *    }
+			 *
 			 */
 			search: {},
 	

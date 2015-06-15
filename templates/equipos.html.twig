@@ -98,7 +98,7 @@
                 {% endif %}
                 {% if usuarioLogin['id']==equipo[0]['capitan_id'] %}
                     <form action="/" method="POST">
-                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ usuarioLogin['id'] }}">Eliminar equipo</button>
+                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ equipo[0]['id'] }}">Eliminar equipo</button>
                     </form>
                 {% endif %}
 
