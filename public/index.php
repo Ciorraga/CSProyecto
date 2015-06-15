@@ -240,7 +240,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $imagenUser = ".".$_SESSION['usuarioLogin']['imagen'];
+    $imagenUser = $_SESSION['usuarioLogin']['imagen'];
 
     $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes']));
 });
@@ -281,36 +281,19 @@ $app->get('/solicitudes', function() use ($app) {
 $app->get('/retos', function() use ($app) {
     //SELECT retador_id, count(*), sum(retador_id=ganador), sum(retador_id<>ganador) FROM reto GROUP BY retador_id
     $clasRetos = ORM::for_table('reto')
-        ->raw_query('SELECT reto.retador_id, equipo.nombre ,count(*) as total, sum(reto.retador_id=reto.ganador) as ganados, sum(reto.retador_id<>reto.ganador) as perdidos, (sum(reto.retador_id=reto.ganador)-sum(reto.retador_id<>reto.ganador))/count(*) as ratio FROM reto join equipo on equipo.id=reto.retador_id GROUP BY reto.retador_id ORDER BY ratio')
+        ->raw_query('SELECT reto.retador_id, equipo.nombre,equipo.id ,count(*) as total, sum(reto.retador_id=reto.ganador) as ganados, sum(reto.retador_id<>reto.ganador) as perdidos, (sum(reto.retador_id=reto.ganador)-sum(reto.retador_id<>reto.ganador))/count(*) as ratio FROM reto join equipo on equipo.id=reto.retador_id GROUP BY reto.retador_id ORDER BY ratio')
         ->find_many();
 
-
-    /*$totalJugadoEquipo = ORM::for_table('reto')
-        ->select_expr('count(*)','total_partidos')
-        ->where_raw('(`retador_id` = ? OR `retado_id` = ?)', array(26, 26))
+    $ultJugados = ORM::for_table('reto')
+        ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC limit 10')
         ->find_many();
-
-
-
-
-
-
-    foreach ($clasRetos as $item) {
-        echo $item['nombre'];
-        echo " - ";
-        echo $item['ganador'];
-        echo " - ";
-        echo $item['total'];
-        echo "|||";
-    }
-    die();*/
+    //var_dump($ultJugados);die();
 
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-    $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'clasificacion' => $clasRetos));
-
+    $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'clasificacion' => $clasRetos,'ultimosJugados' => $ultJugados));
 })->name('retos');
 
 $app->get('/administracion', function() use ($app) {
@@ -978,7 +961,7 @@ $app->post('/', function() use ($app) {
 
         $eq = ORM::for_table('equipo')
             ->find_one($_POST['botonDestruirEquipo']);
-        $eq->nombre = null;
+        $eq->nombre = "Eq. eliminado";
         $eq->save();
 
         $usuario = ORM::for_table('usuario')->where('id', $_SESSION['usuarioLogin']['id'])

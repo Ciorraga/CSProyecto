@@ -5,13 +5,18 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="col-md-8 col-md-offset-1" id="primerDiv">
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="entradilla">
+                Aquí podrás ver la clasificación de los equipos según los retos ganados y perdidos que hayan tenido
+                Además también podrás retar a los equipos que puedes ver. ¿Te atreves?
+            </div>
+        </div>
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">Clasificación de retos</div>
             <div class="panel-body">
-                <p>Aquí podrás ver la clasificación de los equipos según los retos ganados y perdidos que hayan tenido</p>
-                <p>Además también podrás retar a los equipos que puedes ver. ¿Te atreves?</p>
+
 
 
             <table id="myTable" class="table table-hover">
@@ -22,17 +27,21 @@
                     <th>Ganados</th>
                     <th>Perdidos</th>
                     <th>W/D Ratio</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in clasificacion %}
+                    {% if item.nombre!='Eq. eliminado' %}
                     <tr>
                         <td>{{ item.nombre }}</td>
                         <td>{{ item.total }}</td>
                         <td>{{ item.ganados }}</td>
                         <td>{{ item.perdidos }}</td>
                         <td>{{ item.ratio }}</td>
+                        <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
                     </tr>
+                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
@@ -46,73 +55,31 @@
                 <table id="myTable" class="table table-hover">
                     <thead>
                     <tr>
-                        <td>002</td>
-                        <td>Charles</td>
-                        <td>United Kingdom</td>
-                        <td>28000</td>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
                     </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>Sravani</td>
-                        <td>Australia</td>
-                        <td>7000</td>
-                    </tr>
-                    <tr>
-                        <td>004</td>
-                        <td>Amar</td>
-                        <td>India</td>
-                        <td>18000</td>
-                    </tr>
-                    <tr>
-                        <td>005</td>
-                        <td>Lakshmi</td>
-                        <td>India</td>
-                        <td>12000</td>
-                    </tr>
-                    <tr>
-                        <td>006</td>
-                        <td>James</td>
-                        <td>Canada</td>
-                        <td>50000</td>
-                    </tr>
-
-                    <tr>
-                        <td>007</td>
-                        <td>Ronald</td>
-                        <td>US</td>
-                        <td>75000</td>
-                    </tr>
-                    <tr>
-                        <td>008</td>
-                        <td>Mike</td>
-                        <td>Belgium</td>
-                        <td>100000</td>
-                    </tr>
-                    <tr>
-                        <td>009</td>
-                        <td>Andrew</td>
-                        <td>Argentina</td>
-                        <td>45000</td>
-                    </tr>
-
-                    <tr>
-                        <td>010</td>
-                        <td>Stephen</td>
-                        <td>Austria</td>
-                        <td>30000</td>
-                    </tr>
-                    <tr>
-                        <td>011</td>
-                        <td>Sara</td>
-                        <td>China</td>
-                        <td>750000</td>
-                    </tr>
-                    <tr>
-                        <td>012</td>
-                        <td>JonRoot</td>
-                        <td>Argentina</td>
-                        <td>65000</td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for elem in ultimosJugados %}
+                            <tr>
+                                <td>{{ elem.nombreEq1 }}</td>
+                                <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                                <td id="resEq"><b>{{ elem.resEq1 }}</b></td>
+                                <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                                <td id="resEq"><b>{{ elem.resEq2 }}</b></td>
+                                <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                                <td>{{ elem.nombreEq2 }}</td>
+                                <td>{{ elem.fecha }}</td>
+                                <td>{{ elem.mapa }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -136,7 +103,4 @@
 
         });
     </script>
-    $('#example').dataTable( {
-    "order": [[ 0, 'asc' ], [ 1, 'asc' ]]
-    } );
 {% endblock %}
