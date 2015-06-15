@@ -50,6 +50,39 @@
 
         <div class="panel panel-default">
             <!-- Default panel contents -->
+            <div class="panel-heading">Próximos retos</div>
+            <div class="panel-body">
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for elem in pendientes %}
+                        <tr>
+                            <td>{{ elem.nombreEq1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                            <td>{{ elem.nombreEq2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
             <div class="panel-heading">Últimos retos jugados</div>
             <div class="panel-body">
                 <table id="myTable" class="table table-hover">
