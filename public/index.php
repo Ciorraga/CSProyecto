@@ -976,14 +976,21 @@ $app->post('/', function() use ($app) {
         $capitan->capitan_id = null;
         $capitan->save();
 
-        ORM::for_table('equipo')
-            ->find_one($_POST['botonDestruirEquipo'])->delete();
+        $eq = ORM::for_table('equipo')
+            ->find_one($_POST['botonDestruirEquipo']);
+        $eq->nombre = null;
+        $eq->save();
+
+        $usuario = ORM::for_table('usuario')->where('id', $_SESSION['usuarioLogin']['id'])
+            ->find_one();
+        $_SESSION['usuarioLogin'] = $usuario;
 
         $req = new comun();
+        $notic = $req->mostrarNoticias();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'mensajeOk' => 'Equipo eliminado con éxito'));
+        $app->render('inicio.html.twig',array('noticias' => $notic,'imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'mensajeOk' => 'Equipo eliminado con éxito'));
     }
 });
 

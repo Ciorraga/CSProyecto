@@ -28,10 +28,10 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58965516" vertical-offset="16233" max-vertical-offset="17000">
-              <caret line="975" column="36" selection-start-line="975" selection-start-column="36" selection-end-line="975" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.7362069" vertical-offset="16539" max-vertical-offset="17119">
+              <caret line="998" column="0" selection-start-line="998" selection-start-column="0" selection-end-line="998" selection-end-column="0" />
               <folding>
-                <marker date="1434367203193" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
+                <marker date="1434367967791" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
               </folding>
             </state>
           </provider>
@@ -379,7 +379,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -465,7 +465,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16214">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1434367203193" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
+            <marker date="1434367967791" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
           </folding>
         </state>
       </provider>
@@ -796,10 +796,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58965516" vertical-offset="16233" max-vertical-offset="17000">
-          <caret line="975" column="36" selection-start-line="975" selection-start-column="36" selection-end-line="975" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.7362069" vertical-offset="16539" max-vertical-offset="17119">
+          <caret line="998" column="0" selection-start-line="998" selection-start-column="0" selection-end-line="998" selection-end-column="0" />
           <folding>
-            <marker date="1434367203193" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
+            <marker date="1434367967791" expanded="true" signature="11204:11535" placeholder="SELECT reto...reto..." />
           </folding>
         </state>
       </provider>
