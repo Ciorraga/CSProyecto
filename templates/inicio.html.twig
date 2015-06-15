@@ -24,22 +24,24 @@
                         <div>
                             <h3>Comentarios</h3>
                             <hr>
-                            {% for comentario in noticia.comentarios %}
-                                <div class="contentComment">
-                                    <a id="comentarioImagen">
-                                        <img style="padding-right:7px;width:50px;height:50px;" src="{{ comentario.imagen }}">
-                                    </a>
-                                    <div>
-                                        <a>{{ comentario.user }}</a>
+                            <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" value="{{ loop.index }}" onclick="muestraComentarios(this.value)">Mostrar comentarios</button>
+                            <div id="{{ loop.index }}" hidden >
+                                {% for comentario in noticia.comentarios %}
+                                    <div class="contentComment">
+                                        <a id="comentarioImagen">
+                                            <img style="padding-right:7px;width:50px;height:50px;" src="{{ comentario.imagen }}">
+                                        </a>
                                         <div>
-                                            <span id="pepe">Enviado el: {{ comentario.fecha }}</span>
-                                        </div>
-                                        <div>
-                                            {{ comentario.texto }}
+                                            <a>{{ comentario.user }}</a>
+                                            <div>
+                                                <span id="pepe">Enviado el: {{ comentario.fecha }}</span>
+                                            </div>
+                                            <div>
+                                                {{ comentario.texto }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
 
                             {% if registrado=='env' %}
                             <form class="ui reply form" action="/" method="POST">
@@ -49,6 +51,7 @@
                                     <button class="ui blue submit icon button" name="botonResponderNoticia" type="submit" value="{{ noticia.id }}"><i class="fa fa-paper-plane"></i>  Enviar</button>
                             </form>
                             {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,21 +65,54 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo modi velit incidunt accusantium architecto dicta impedit iste fugit quis illum amet voluptas nostrum, dolorem, deleniti sit magnam inventore beatae nemo! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eaque ea consequuntur, officiis laborum ab vel debitis enim recusandae cumque voluptatem aspernatur, sequi est, aliquam aliquid maiores dolore hic quibusdam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum unde vitae impedit soluta delectus, dolore incidunt deleniti hic enim ipsam deserunt, quod iste ratione maxime placeat. Voluptates, non esse laudantium?
+                    <a href="http://csgolounge.com">
+                        <img id="linkPag" src="/imagenes/csgolounge.png" alt=""/>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo modi velit incidunt accusantium architecto dicta impedit iste fugit quis illum amet voluptas nostrum, dolorem, deleniti sit magnam inventore beatae nemo! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eaque ea consequuntur, officiis laborum ab vel debitis enim recusandae cumque voluptatem aspernatur, sequi est, aliquam aliquid maiores dolore hic quibusdam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum unde vitae impedit soluta delectus, dolore incidunt deleniti hic enim ipsam deserunt, quod iste ratione maxime placeat. Voluptates, non esse laudantium?
+                    <a href="https://play.esea.net/">
+                        <img id="linkPag" src="/imagenes/esea.jpg" alt=""/>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo modi velit incidunt accusantium architecto dicta impedit iste fugit quis illum amet voluptas nostrum, dolorem, deleniti sit magnam inventore beatae nemo! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eaque ea consequuntur, officiis laborum ab vel debitis enim recusandae cumque voluptatem aspernatur, sequi est, aliquam aliquid maiores dolore hic quibusdam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum unde vitae impedit soluta delectus, dolore incidunt deleniti hic enim ipsam deserunt, quod iste ratione maxime placeat. Voluptates, non esse laudantium?
+                    <a href="http://www.faceit.com">
+                        <img id="linkPag" src="/imagenes/faceit.jpg" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="http://www.lvp.es">
+                        <img id="linkPag" src="/imagenes/lvp.png" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="http://www.eslgaming.com">
+                        <img id="linkPag" src="/imagenes/esl.jpg" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="http://www.cevo.com">
+                        <img id="linkPag" src="/imagenes/cevo.jpg" alt=""/>
+                    </a>
                 </div>
             </div>
         </div>
@@ -87,4 +123,10 @@
 {%endblock%}
 
 {% block scripts %}
+    <script>
+        function muestraComentarios(elem){
+            $( "#"+elem ).toggle( "slow" );
+        }
+
+    </script>
 {% endblock %}

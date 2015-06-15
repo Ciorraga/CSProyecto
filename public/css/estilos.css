@@ -88,6 +88,8 @@ h1{
 
 #integrantesEquipo{
     margin-top:15px;
+    border:1px solid #c9c9c9;
+    padding:10px;
 }
 
 #equiposSeccion{
@@ -221,7 +223,7 @@ h1{
 #comentariosNoticias{
     background-color:white;
     padding:15px;
-    border-top:4px solid darkblue !important;
+    border-top:4px solid rgba(115, 123, 139, 0.30) !important;
 }
 
 #comentarioImagen{
@@ -344,4 +346,8 @@ h1{
     -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+}
+
+#linkPag{
+    width:100%
 }
