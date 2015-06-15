@@ -170,6 +170,8 @@ $app->get('/equipos', function() use ($app) {
             $miEquipo = true;
         }
 
+
+
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);

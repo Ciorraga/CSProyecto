@@ -53,11 +53,20 @@
                             {% for usuario in usuarios %}
                                 <tr>
                                     <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
-                                    <td>{{ usuario.user }}</td>
-                                    <td>{{ usuario.nombre }}</td>
-                                    <td>{{ usuario.edad }}</td>
-                                    <td>{{ usuario.email }}</td>
-                                    <td>{{ usuario.steam }}</td>
+                                    {% if usuario['id'] == equipo[0]['capitan_id'] %}
+                                        <td><b>{{ usuario.user }}</b></td>
+                                        <td><b>{{ usuario.nombre }}</b></td>
+                                        <td><b>{{ usuario.edad }}</b></td>
+                                        <td><b>{{ usuario.email }}</b></td>
+                                        <td><b>{{ usuario.steam }}</b></td>
+                                    {% else %}
+                                        <td>{{ usuario.user }}</td>
+                                        <td>{{ usuario.nombre }}</td>
+                                        <td>{{ usuario.edad }}</td>
+                                        <td>{{ usuario.email }}</td>
+                                        <td>{{ usuario.steam }}</td>
+                                    {% endif %}
+
                                     <td><button type="submit" class="btn btn-success" value="{{ usuario.id }}" name="enviaMensajeUsuario">
                                             <a id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></button></td>
                                 </tr>
@@ -85,6 +94,11 @@
                 {% if usuarioLogin['equipo_id']!=null %}
                     <form action="/" method="POST">
                         <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDejarEquipo" value="{{ usuarioLogin['id'] }}">Dejar equipo</button>
+                    </form>
+                {% endif %}
+                {% if usuarioLogin['id']==equipo[0]['capitan_id'] %}
+                    <form action="/" method="POST">
+                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ usuarioLogin['id'] }}">Eliminar equipo</button>
                     </form>
                 {% endif %}
 
