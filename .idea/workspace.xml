@@ -28,23 +28,19 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35201794" vertical-offset="4497" max-vertical-offset="16898">
-              <caret line="283" column="322" selection-start-line="283" selection-start-column="322" selection-end-line="283" selection-end-column="322" />
+            <state vertical-scroll-proportion="0.7903587" vertical-offset="3392" max-vertical-offset="16983">
+              <caret line="241" column="353" selection-start-line="241" selection-start-column="353" selection-end-line="241" selection-end-column="353" />
               <folding>
-                <marker date="1434382541766" expanded="true" signature="11200:11572" placeholder="SELECT reto...reto..." />
-                <marker date="1434382541766" expanded="true" signature="11661:12003" placeholder="select eq1.n..reto..." />
-                <marker date="1434382541766" expanded="true" signature="12092:12460" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="6530:6905" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="6530:7003" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="9635:9949" placeholder="select reto...reto..." />
+                <marker date="1434385055110" expanded="true" signature="9635:10064" placeholder="select reto...reto..." />
+                <marker date="1434385055110" expanded="true" signature="12189:12561" placeholder="SELECT reto...reto..." />
+                <marker date="1434385055110" expanded="true" signature="12650:12992" placeholder="select eq1.n..reto..." />
+                <marker date="1434385055110" expanded="true" signature="13081:13449" placeholder="select eq1.n..reto..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mensajeNuevo.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/mensajeNuevo.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7818182" vertical-offset="0" max-vertical-offset="1989">
-              <caret line="9" column="52" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="52" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -52,8 +48,18 @@
       <file leaf-file-name="retos.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/retos.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.26923" vertical-offset="664" max-vertical-offset="2465">
-              <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
+            <state vertical-scroll-proportion="-24.807692" vertical-offset="1327" max-vertical-offset="2465">
+              <caret line="116" column="24" selection-start-line="87" selection-start-column="16" selection-end-line="116" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="comun.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/comun.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="1275">
+              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -64,6 +70,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="629">
               <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="equipos.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/equipos.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.26923" vertical-offset="1276" max-vertical-offset="3723">
+              <caret line="103" column="80" selection-start-line="103" selection-start-column="80" selection-end-line="103" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -119,16 +135,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mensajeEntrada.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/mensajeEntrada.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7818182" vertical-offset="0" max-vertical-offset="748">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
@@ -179,11 +185,11 @@
         <option value="$PROJECT_DIR$/public/css/set2.css" />
         <option value="$PROJECT_DIR$/templates/base.twig" />
         <option value="$PROJECT_DIR$/public/comun.php" />
-        <option value="$PROJECT_DIR$/templates/equipos.html.twig" />
         <option value="$PROJECT_DIR$/public/js/jquery.dataTables.js" />
         <option value="$PROJECT_DIR$/templates/nuevoEquipo.html.twig" />
         <option value="$PROJECT_DIR$/public/css/estilos.css" />
         <option value="$PROJECT_DIR$/templates/retos.html.twig" />
+        <option value="$PROJECT_DIR$/templates/equipos.html.twig" />
         <option value="$PROJECT_DIR$/public/index.php" />
       </list>
     </option>
@@ -465,9 +471,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16214">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1434382541766" expanded="true" signature="11200:11572" placeholder="SELECT reto...reto..." />
-            <marker date="1434382541766" expanded="true" signature="11661:12003" placeholder="select eq1.n..reto..." />
-            <marker date="1434382541766" expanded="true" signature="12092:12460" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6905" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:7003" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="9635:9949" placeholder="select reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="9635:10064" placeholder="select reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="12189:12561" placeholder="SELECT reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="12650:12992" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="13081:13449" placeholder="select eq1.n..reto..." />
           </folding>
         </state>
       </provider>
@@ -678,14 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/comun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1275">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/jquery.dataTables.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="53552" max-vertical-offset="248727">
@@ -708,14 +712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5" vertical-offset="9" max-vertical-offset="969">
           <caret line="12" column="19" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/equipos.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4727273" vertical-offset="345" max-vertical-offset="3043">
-          <caret line="38" column="21" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -792,22 +788,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/comun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/retos.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.26923" vertical-offset="664" max-vertical-offset="2465">
-          <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
+        <state vertical-scroll-proportion="-24.807692" vertical-offset="1327" max-vertical-offset="2465">
+          <caret line="116" column="24" selection-start-line="87" selection-start-column="16" selection-end-line="116" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/equipos.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.26923" vertical-offset="1276" max-vertical-offset="3723">
+          <caret line="103" column="80" selection-start-line="103" selection-start-column="80" selection-end-line="103" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35201794" vertical-offset="4497" max-vertical-offset="16898">
-          <caret line="283" column="322" selection-start-line="283" selection-start-column="322" selection-end-line="283" selection-end-column="322" />
+        <state vertical-scroll-proportion="0.7903587" vertical-offset="3392" max-vertical-offset="16983">
+          <caret line="241" column="353" selection-start-line="241" selection-start-column="353" selection-end-line="241" selection-end-column="353" />
           <folding>
-            <marker date="1434382541766" expanded="true" signature="11200:11572" placeholder="SELECT reto...reto..." />
-            <marker date="1434382541766" expanded="true" signature="11661:12003" placeholder="select eq1.n..reto..." />
-            <marker date="1434382541766" expanded="true" signature="12092:12460" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6826" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:6905" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="6530:7003" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="9635:9949" placeholder="select reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="9635:10064" placeholder="select reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="12189:12561" placeholder="SELECT reto...reto..." />
+            <marker date="1434385055110" expanded="true" signature="12650:12992" placeholder="select eq1.n..reto..." />
+            <marker date="1434385055110" expanded="true" signature="13081:13449" placeholder="select eq1.n..reto..." />
           </folding>
         </state>
       </provider>

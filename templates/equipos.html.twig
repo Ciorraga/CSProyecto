@@ -41,36 +41,76 @@
                     <h2 id="integrantesLabel">Integrantes</h2>
                     <div class="col-md-11" id="datosUsuariosEquipo">
                         <table class="table table-striped">
-                            <tr>
-                                <th></th>
-                                <th>Usuario</th>
-                                <th>Nombre</th>
-                                <th>Edad</th>
-                                <th>E-mail</th>
-                                <th>Url Steam</th>
-                                <th></th>
-                            </tr>
-                            {% for usuario in usuarios %}
+                            <thead>
                                 <tr>
-                                    <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
-                                    {% if usuario['id'] == equipo[0]['capitan_id'] %}
-                                        <td><b>{{ usuario.user }}</b></td>
-                                        <td><b>{{ usuario.nombre }}</b></td>
-                                        <td><b>{{ usuario.edad }}</b></td>
-                                        <td><b>{{ usuario.email }}</b></td>
-                                        <td><b>{{ usuario.steam }}</b></td>
-                                    {% else %}
-                                        <td>{{ usuario.user }}</td>
-                                        <td>{{ usuario.nombre }}</td>
-                                        <td>{{ usuario.edad }}</td>
-                                        <td>{{ usuario.email }}</td>
-                                        <td>{{ usuario.steam }}</td>
-                                    {% endif %}
+                                    <th></th>
+                                    <th>Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Edad</th>
+                                    <th>E-mail</th>
+                                    <th>Url Steam</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in usuarios %}
+                                    <tr>
+                                        <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
+                                        {% if usuario['id'] == equipo[0]['capitan_id'] %}
+                                            <td><b>{{ usuario.user }}</b></td>
+                                            <td><b>{{ usuario.nombre }}</b></td>
+                                            <td><b>{{ usuario.edad }}</b></td>
+                                            <td><b>{{ usuario.email }}</b></td>
+                                            <td><b>{{ usuario.steam }}</b></td>
+                                        {% else %}
+                                            <td>{{ usuario.user }}</td>
+                                            <td>{{ usuario.nombre }}</td>
+                                            <td>{{ usuario.edad }}</td>
+                                            <td>{{ usuario.email }}</td>
+                                            <td>{{ usuario.steam }}</td>
+                                        {% endif %}
 
-                                    <td><button type="submit" class="btn btn-success" value="{{ usuario.id }}" name="enviaMensajeUsuario">
-                                            <a id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></button></td>
+                                        <td><button type="submit" class="btn btn-success" value="{{ usuario.id }}" name="enviaMensajeUsuario">
+                                                <a id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></button></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="row" id="integrantesEquipo">
+                    <h2 id="integrantesLabel">Retos jugados</h2>
+                    <div class="col-md-11" id="datosUsuariosEquipo">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Retador</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Retado</th>
+                                <th>Fecha</th>
+                                <th>Mapa</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for elem in misRetos %}
+                                <tr>
+                                    <td>{{ elem.nombreEq1 }}</td>
+                                    <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                                    <td id="resEq"><b>{{ elem.resEq1 }}</b></td>
+                                    <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                                    <td id="resEq"><b>{{ elem.resEq2 }}</b></td>
+                                    <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                                    <td>{{ elem.nombreEq2 }}</td>
+                                    <td>{{ elem.fecha }}</td>
+                                    <td>{{ elem.mapa }}</td>
                                 </tr>
                             {% endfor %}
+                            </tbody>
                         </table>
 
                     </div>
