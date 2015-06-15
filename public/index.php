@@ -279,7 +279,7 @@ $app->get('/solicitudes', function() use ($app) {
 })->name('solicitudes');
 
 $app->get('/retos', function() use ($app) {
-    $clasRetos = ORM::for_table('reto')
+    /*$clasRetos = ORM::for_table('reto')
         ->join('equipo', array('reto.ganador', '=', 'equipo.id'))
         ->select_expr('COUNT(*)', 'total')
         ->select('reto.ganador')
@@ -311,7 +311,7 @@ $app->get('/retos', function() use ($app) {
 
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);*/
 
     $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
 
@@ -928,6 +928,40 @@ $app->post('/', function() use ($app) {
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
         $app->render('inicio.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'nuevaSolicitud' => $_SESSION['solicitudes'],'noticias' => $notic,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajeOk' => 'Comentario enviado con éxito','registrado' => 'env'));
+    }
+
+    if(isset($_POST['botonDejarEquipo'])){
+        $consEqId = ORM::for_table('usuario')
+            ->where('id',$_POST['botonDejarEquipo'])
+            ->find_one();
+
+        $equipoCapitan = ORM::for_table('equipo')
+            ->where('capitan_id',$_POST['botonDejarEquipo'])
+            ->find_one();
+
+        if($equipoCapitan){
+            $consIntegrantes = ORM::for_table('usuario')
+                ->where('equipo_id',$consEqId['equipo_id'])
+                ->find_many();
+
+            $equipoCapitan->capitan_id = $consIntegrantes[1]['id'];
+            $equipoCapitan->save();
+        }
+
+
+        $userAModificar = ORM::for_table('usuario')->find_one($_POST['botonDejarEquipo']);
+        $userAModificar->equipo_id = null;
+        $userAModificar->save();
+
+        $usuario = ORM::for_table('usuario')->where('id', $_POST['botonDejarEquipo'])
+            ->find_one();
+        $_SESSION['usuarioLogin'] = $usuario;
+
+        $req = new comun();
+        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'mensajeOk' => 'Has abandonado el equipo'));
     }
 
 });

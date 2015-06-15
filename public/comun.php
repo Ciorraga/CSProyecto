@@ -1,10 +1,8 @@
 <?php
 
 class comun {
-    // Declaración de una propiedad
     public $var = null;
 
-    // Declaración de un método
     public function mostrarSolicitudes($param) {
         $es_capitan = ORM::for_table('equipo')->where('capitan_id', $param)->find_one();
         if($es_capitan){
@@ -15,6 +13,8 @@ class comun {
             if($_SESSION['solicitudes']==0){
                 $_SESSION['solicitudes'] = "vacio";
             }
+        }else{
+            $_SESSION['solicitudes'] = "noCapi";
         }
     }
 
