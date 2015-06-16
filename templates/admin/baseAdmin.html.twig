@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/themes/flat/style.css"/>
+    <script src="/js/miJs.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -33,7 +35,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Noticias <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="">Agregar noticia</a></li>
+                    <li><a href="/administracion/nuevanoticia">Agregar noticia</a></li>
                     <li><a href="/administracion/listanoticias">Listado noticias</a></li>
                 </ul>
             </li>
@@ -71,6 +73,7 @@
         });
     </script>
 {% endif %}
+
 {% block scripts %}
 {% endblock %}
 </body>

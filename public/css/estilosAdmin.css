@@ -12,3 +12,26 @@ body{
 table{
     text-align: center;
 }
+
+#taWisy{
+    width:90%;
+}
+
+.classWisi {
+    width: 100%;
+    height: 400px;
+}
+
+#titulo{
+    text-align:center;
+    color:white;
+}
+
+#botonesFormMiCuenta{
+    text-align:center;
+    margin-top:2%;
+}
+
+#tituloNoticia{
+    margin-bottom: 20px;
+}

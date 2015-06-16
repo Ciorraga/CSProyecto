@@ -17,6 +17,11 @@ $app->get('/administracion/listanoticias', function() use ($app) {
     die();
 })->name("listaNoticias");
 
+$app->get('/administracion/nuevanoticia', function() use ($app) {
+    $app->render('admin/nuevanoticia.html.twig');
+    die();
+})->name("listaNoticias");
+
 /*-----------------------------------------BOTONES---------------------------------------*/
 
 $app->post('/', function() use ($app) {
@@ -30,4 +35,13 @@ $app->post('/', function() use ($app) {
         die();
     }
 });
+
+$app->post('/', function() use ($app) {
+    if(isset($_POST)){
+        echo "Entra";die();
+        $app->redirect($app->router()->urlFor('listaNoticias'));
+        die();
+    }
+});
+
 
