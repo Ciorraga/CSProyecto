@@ -32,6 +32,8 @@ $view->parserExtensions = array(
 session_cache_limiter(false);
 session_start();
 
+include "controller/administracion.php";
+
 //Página de inicio de la aplicación
 $app->get('/', function() use ($app) {
     //Si es un usaurio NO registrado
@@ -304,19 +306,6 @@ $app->get('/retos', function() use ($app) {
 
     $app->render('retos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'clasificacion' => $clasRetos,'ultimosJugados' => $ultJugados,'pendientes' => $pendientes));
 })->name('retos');
-
-$app->get('/administracion', function() use ($app) {
-    if(!isset($_SESSION['usuarioLogin'])){
-        $app->redirect($app->router()->urlFor('inicio'));
-        die();
-    }
-    if($_SESSION['usuarioLogin']['es_admin']==0){
-        $app->redirect($app->router()->urlFor('inicio'));
-        die();
-    }
-    $app->render('administracion.html.twig');
-    die();
-});
 
 //------------------------------------------------------------------------POSTS-------------------------------------------------------------------------
 

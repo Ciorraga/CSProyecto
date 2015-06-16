@@ -1,0 +1,26 @@
+{%extends "admin/baseAdmin.html.twig" %}
+
+{% block admincontenido %}
+    <div id="primerDiv" class="col-md-8 col-md-offset-2">
+        <form action="/" method="POST">
+            <table class="table table-bordered">
+                <tr>
+                    <th></th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Fecha</th>
+                    <th></th>
+                {% for noticia in noticias %}
+                    </tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ noticia.titulo }}</td>
+                        <td>{{ noticia.user }}</td>
+                        <td class="botonBorrarAlign">{{ noticia.fecha }}</td>
+                        <td><button type="submit" class="btn btn-danger" value="{{ noticia.id }}">Borrar</button></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+{% endblock %}
+
