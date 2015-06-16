@@ -16,7 +16,7 @@
                         <td>{{ noticia.titulo }}</td>
                         <td>{{ noticia.user }}</td>
                         <td class="botonBorrarAlign">{{ noticia.fecha }}</td>
-                        <td><button type="submit" class="btn btn-danger" value="{{ noticia.id }}">Borrar</button></td>
+                        <td><button type="submit" class="btn btn-danger" value="{{ noticia.id }}" name="botonBorrarNoticia" >Borrar</button></td>
                     </tr>
                 {% endfor %}
             </table>

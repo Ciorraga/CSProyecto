@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"/>
-
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -52,6 +51,26 @@
 {% block admincontenido %}
 {% endblock %}
 
+<script src="/js/jquery.bootstrap-growl.js"></script>
+{% if mensajeOk %}
+    <script type="text/javascript">
+        $(function() {
+            setTimeout(function() {
+                $.bootstrapGrowl("{{ mensajeOk }}", { type: 'success' });
+            }, 1000);
+        });
+    </script>
+{% endif %}
+{% if mensajeError %}
+    <script type="text/javascript">
+        $(function() {
+            setTimeout(function() {
+                $.bootstrapGrowl("{{ mensajeError }}", { type: 'danger' });
+
+            }, 500);
+        });
+    </script>
+{% endif %}
 {% block scripts %}
 {% endblock %}
 </body>

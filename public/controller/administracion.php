@@ -17,3 +17,17 @@ $app->get('/administracion/listanoticias', function() use ($app) {
     die();
 })->name("listaNoticias");
 
+/*-----------------------------------------BOTONES---------------------------------------*/
+
+$app->post('/', function() use ($app) {
+    if(isset($_POST['botonBorrarNoticia'])){
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        ORM::for_table('noticia')
+            ->find_one($_POST['botonBorrarNoticia'])->delete();
+
+        $app->redirect($app->router()->urlFor('listaNoticias'));
+        die();
+    }
+});
+
