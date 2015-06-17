@@ -17,14 +17,14 @@
                         <div class="panel-footer" id="footerPanelNoticias">
                             <span>Noticia creada por: {{ noticia.user }} el {{ noticia.fecha }}</span>
                         </div>
-                        {{ noticia.texto }}
+                        {{ noticia.texto | raw}}
                     </div>
 
                     <div class="col-md-12" id="comentariosNoticias">
                         <div>
                             <h3>Comentarios</h3>
                             <hr>
-                            <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" value="{{ loop.index }}" onclick="muestraComentarios(this.value)">Mostrar comentarios</button>
+                            <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" value="{{ loop.index }}" onclick="muestraComentarios(this.value)">Mostrar comentarios ({{ noticia.comentarios|length }})</button>
                             <div id="{{ loop.index }}" hidden >
                                 {% for comentario in noticia.comentarios %}
                                     <div class="contentComment">
@@ -56,7 +56,6 @@
                     </div>
                 </div>
             </div>
-
         {% endfor %}
     </div>
 </div>

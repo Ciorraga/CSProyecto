@@ -10,24 +10,6 @@ if(isset($_POST['botonBorrarNoticia'])){
     die();
 }
 
-if(isset($_POST['loginUsuario'])){
-    $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
-    if($usuario){
-        $_SESSION['solicitudes'] = 0;
-        $_SESSION['usuarioLogin'] = $usuario;
-        $req = new comun();
-        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->redirect($app->router()->urlFor('inicio'));
-        die();
-    }
-    else{
-        $req = new comun();
-        $notic = $req->mostrarNoticias();
-        $app->render('inicio.html.twig',array('noticias' => $notic ,'usuarioLoginError' => '1'));
-        die();
-    }
-}
 
 if(isset($_POST['botonEnviaNoticia'])){
     if($_POST['tituloNoticia']=="" || $_POST['textoNoticia']==""){
@@ -45,7 +27,7 @@ if(isset($_POST['botonEnviaNoticia'])){
         $req = new comun();
         $notic = $req->mostrarNoticias();
 
-        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,'mensajeOk' => 'Noticia agregada con éxito'));
+        $app->render('admin/listadoNoticias.html.twig',array('inicio' => $notic,'mensajeOk' => 'Noticia agregada con éxito'));
     }
 
 

@@ -88,7 +88,7 @@ h1{
 
 #integrantesEquipo{
     margin-top:15px;
-    border:1px solid #c9c9c9;
+
     padding:10px;
 }
 
@@ -127,6 +127,7 @@ h1{
     padding:10%;
     font-family: baseFont;
     font-size:1.4em;
+    background-color: #ffffff;
 }
 
 #pepe{

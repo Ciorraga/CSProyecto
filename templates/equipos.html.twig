@@ -40,6 +40,7 @@
                 <div class="row" id="integrantesEquipo">
                     <h2 id="integrantesLabel">Integrantes</h2>
                     <div class="col-md-12" id="datosUsuariosEquipo">
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -70,9 +71,7 @@
                                             <td>{{ usuario.steam }}</td>
                                         {% endif %}
 
-                                        <td><button type="submit" class="btn btn-success" value="{{ usuario.id }}" name="enviaMensajeUsuario">
-                                                <a id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></button></td>
-                                    </tr>
+                                        <td><a class="btn btn-success" id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></td></tr>
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -143,11 +142,17 @@
                         <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ equipo[0]['id'] }}">Eliminar equipo</button>
                     </form>
                 {% endif %}
-                {% if miEquipo == false %}
-                    <form action="/" method="POST">
-                        <button id="botonReto" class="button button--wapasha button--round-s" name="botonRetarEquipo" value="{{ equipo[0]['id'] }}">Retar</button>
-                    </form>
+
+                {% if not miEquipo %}
+                    {% if usuarioLogin['equipo_id']!="" %}
+                        {% if equipoUsuario['capitan_id']==usuarioLogin['id'] %}
+                            <form action="/" method="POST">
+                                <button id="botonReto" class="button button--wapasha button--round-s" name="botonRetarEquipo" value="{{ equipo[0]['id'] }}">Retar</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
+
 
             </div>
             <div id="livesearch">

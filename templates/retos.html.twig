@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Retos</h1>
+    </div>
     <div class="col-md-10 col-md-offset-1" id="primerDiv">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" id="entradilla">
@@ -27,7 +30,9 @@
                     <th>Ganados</th>
                     <th>Perdidos</th>
                     <th>W/D Ratio</th>
-                    <th></th>
+                    {% if esCapitan %}
+                        <td></td>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
@@ -39,7 +44,9 @@
                         <td>{{ item.ganados }}</td>
                         <td>{{ item.perdidos }}</td>
                         <td>{{ item.ratio }}</td>
-                        <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
+                        {% if esCapitan %}
+                            <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
+                        {% endif %}
                     </tr>
                     {% endif %}
                 {% endfor %}
