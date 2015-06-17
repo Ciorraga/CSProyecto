@@ -39,6 +39,7 @@ class comun {
         $i = 0;
         foreach($noticias as $item){
             $comentarios = ORM::for_table('comentario')
+                ->select('comentario.id')
                 ->select('comentario.texto')
                 ->select('comentario.fecha')
                 ->select('usuario.imagen')

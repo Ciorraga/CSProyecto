@@ -34,12 +34,14 @@
                                         <div>
                                             <a>{{ comentario.user }}</a>
                                             <div>
-                                                <span id="pepe">Enviado el: {{ comentario.fecha }}</span>
+                                                <span id="pepe">Enviado el: {{ comentario.fecha }}</span><span style="float:right"><a
+                                                            href="/reportar/{{ comentario.id }}"><i data-toggle="tooltip" class="fa fa-exclamation-triangle" title="Reportar comentario"></i></a></span></span>
                                             </div>
                                             <div>
                                                 {{ comentario.texto }}
                                             </div>
                                         </div>
+
                                     </div>
                                 {% endfor %}
 

@@ -84,7 +84,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $imagenUser = $_SESSION['usuarioLogin']['imagen'];
+    $imagenUser = ".".$_SESSION['usuarioLogin']['imagen'];
 
     $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes'],'misRetos' => $ultJugados, 'equipoUsuario' => $equipoUsuarioActual));
 });

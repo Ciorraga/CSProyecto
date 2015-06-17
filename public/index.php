@@ -153,7 +153,6 @@ $app->post('/registro', function() use ($app) {
 
 
 $app->post('/', function() use ($app) {
-
     include "controller/inicio/botonesInicio.php";
     include "controller/administracion/botonesAdministracion.php";
     include "controller/equipos/botonesEquipo.php";
