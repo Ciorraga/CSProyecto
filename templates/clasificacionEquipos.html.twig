@@ -1,0 +1,78 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Retos
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Retos</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="entradilla">
+                Aquí podrás ver la clasificación de los equipos según los retos ganados y perdidos que hayan tenido
+                Además también podrás retar a los equipos que puedes ver. ¿Te atreves?
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Clasificación de retos</div>
+            <div class="panel-body">
+
+
+
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Jugados</th>
+                        <th>Ganados</th>
+                        <th>Perdidos</th>
+                        <th>W/D Ratio</th>
+                        {% if esCapitan %}
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in clasificacion %}
+                        {% if item.nombre!='Eq. eliminado' %}
+                            <tr>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.total }}</td>
+                                <td>{{ item.ganados }}</td>
+                                <td>{{ item.perdidos }}</td>
+                                <td>{{ item.ratio }}</td>
+                                {% if esCapitan %}
+                                    <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#myTable').dataTable({
+                "order": [[ 4, 'desc' ]],
+                "aoColumnDefs": [
+                    { "bSearchable": true, "aTargets": [ 0 ] },
+                    { "bSearchable": false, "aTargets": [ 1] },
+                    { "bSearchable": false, "aTargets": [ 2] },
+                    { "bSearchable": false, "aTargets": [ 3] },
+                    { "bSearchable": false, "aTargets": [ 4] }]
+            });
+
+        });
+    </script>
+{% endblock %}
+
+

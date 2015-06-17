@@ -17,6 +17,46 @@
         </div>
         <div class="panel panel-default">
             <!-- Default panel contents -->
+            <div class="panel-heading">Clasificación de retos</div>
+            <div class="panel-body">
+
+
+
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Jugados</th>
+                        <th>Ganados</th>
+                        <th>Perdidos</th>
+                        <th>W/D Ratio</th>
+                        {% if esCapitan %}
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in clasificacion %}
+                        {% if item.nombre!='Eq. eliminado' %}
+                            <tr>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.total }}</td>
+                                <td>{{ item.ganados }}</td>
+                                <td>{{ item.perdidos }}</td>
+                                <td>{{ item.ratio }}</td>
+                                {% if esCapitan %}
+                                    <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
             <div class="panel-heading">Próximos retos</div>
             <div class="panel-body">
                 <table id="myTable" class="table table-hover">
@@ -67,19 +107,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for elem in ultimosJugados %}
-                            <tr>
-                                <td>{{ elem.nombreEq1 }}</td>
-                                <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
-                                <td id="resEq"><b>{{ elem.resEq1 }}</b></td>
-                                <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
-                                <td id="resEq"><b>{{ elem.resEq2 }}</b></td>
-                                <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
-                                <td>{{ elem.nombreEq2 }}</td>
-                                <td>{{ elem.fecha }}</td>
-                                <td>{{ elem.mapa }}</td>
-                            </tr>
-                        {% endfor %}
+                    {% for elem in ultimosJugados %}
+                        <tr>
+                            <td>{{ elem.nombreEq1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                            <td id="resEq"><b>{{ elem.resEq1 }}</b></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td id="resEq"><b>{{ elem.resEq2 }}</b></td>
+                            <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                            <td>{{ elem.nombreEq2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -90,7 +130,7 @@
 {% block scripts %}
     <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
     <script>
-     /*   $(document).ready(function(){
+        $(document).ready(function(){
             $('#myTable').dataTable({
                 "order": [[ 4, 'desc' ]],
                 "aoColumnDefs": [
@@ -101,6 +141,6 @@
                     { "bSearchable": false, "aTargets": [ 4] }]
             });
 
-        });*/
+        });
     </script>
 {% endblock %}

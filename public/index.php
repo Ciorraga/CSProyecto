@@ -39,6 +39,7 @@ include "controller/miCuenta/miCuenta.php";
 include "controller/mensajes/mensajes.php";
 include "controller/solicitudes/solicitudes.php";
 include "controller/retos/retos.php";
+include "controller/clasificacion/clasificacionEquipos.php";
 
 
 //Cuando pulsamos en Salir para cerrar nuestra sesión
