@@ -39,7 +39,7 @@
                     {% for item in clasificacion %}
                         {% if item.nombre!='Eq. eliminado' %}
                             <tr>
-                                <td>{{ item.nombre }}</td>
+                                <td><a href="/equipos/{{ item.nombre }}">{{ item.nombre }}</a></td>
                                 <td>{{ item.total }}</td>
                                 <td>{{ item.ganados }}</td>
                                 <td>{{ item.perdidos }}</td>

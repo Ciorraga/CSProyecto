@@ -35,9 +35,9 @@
                     {% for elem in pendientes %}
                         <tr>
                             <td>{{ elem.nombreEq1 }}</td>
-                            <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                            <td><a href="/equipos/{{ elem.nombreEq1 }}"><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></a></td>
                             <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
-                            <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                            <td><a href="/equipos/{{ elem.nombreEq2 }}"><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></a></td>
                             <td>{{ elem.nombreEq2 }}</td>
                             <td>{{ elem.fecha }}</td>
                             <td>{{ elem.mapa }}</td>
