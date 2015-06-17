@@ -32,7 +32,7 @@ $view->parserExtensions = array(
 session_cache_limiter(false);
 session_start();
 
-include "controller/administracion.php";
+include "controller/administracion/administracion.php";
 
 //Página de inicio de la aplicación
 $app->get('/', function() use ($app) {
@@ -507,6 +507,9 @@ $app->post('/actualizaUsuario', function() use ($app) {
 
 
 $app->post('/', function() use ($app) {
+
+    include "controller/administracion/botonesAdministracion.php";
+
     if(isset($_POST['loginUsuario'])){
         $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
         if($usuario){
