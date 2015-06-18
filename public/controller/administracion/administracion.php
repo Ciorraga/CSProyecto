@@ -9,7 +9,7 @@ $app->get('/administracion', function() use ($app) {
         $req = new comun();
         $notic = $req->mostrarNoticias();
 
-        $app->render('admin/listadoNoticias.html.twig', array('inicio' => $notic));
+        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic));
     }
 });
 
@@ -22,7 +22,7 @@ $app->get('/administracion/listanoticias', function() use ($app) {
         $req = new comun();
         $notic = $req->mostrarNoticias();
 
-        $app->render('admin/listadoNoticias.html.twig', array('inicio' => $notic));
+        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic));
         die();
     }
 })->name("listaNoticias");

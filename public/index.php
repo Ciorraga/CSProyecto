@@ -2,7 +2,10 @@
 
 include "../vendor/autoload.php";
 require_once "../config.php";
-include "comun.php";
+require('phpMailer/class.phpmailer.php');
+require('phpMailer/class.smtp.php');
+include "php/comun.php";
+include "php/mail.php";
 
 
 $app = new \Slim\Slim(
