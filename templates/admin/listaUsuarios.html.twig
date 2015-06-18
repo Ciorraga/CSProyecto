@@ -6,7 +6,50 @@
     </div>
     <div id="primerDiv" class="col-md-8 col-md-offset-2">
         <form action="/" method="POST">
-            <!-- Sitio para la jquery datatable donde iran mostrados los usuarios -->
+            <table id="myTable2" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th></th>
+                        <th>User</th>
+                        <th>Nombre</th>
+                        <th>E-mail</th>
+                        <th>Edad</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td><img id="imagenUsuario" src="{{ usuario.imagen }}" alt=""/></td>
+                        <td>{{ usuario.user }}</td>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.edad }}</td>
+                        <td><button type="submit" class="btn btn-danger" value="{{ usuario.id }}" name="botonAdminBorrarUsuario">Eliminar</button></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </form>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="/js/jquery.dataTables2.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#myTable2').dataTable({
+                "order": [[ 1, 'asc' ]],
+                "aoColumnDefs": [
+                    { "bSearchable": false, "aTargets": [ 0 ] },
+                    { "bSearchable": false, "aTargets": [ 1] },
+                    { "bSearchable": true, "aTargets": [ 2] },
+                    { "bSearchable": false, "aTargets": [ 3] },
+                    { "bSearchable": false, "aTargets": [ 4] }]
+            });
+
+        });
+    </script>
 {% endblock %}
