@@ -44,7 +44,16 @@ $app->get('/administracion/usuarios', function() use ($app) {
         $app->redirect($app->router()->urlFor('inicio'));
         die();
     }else{
-        $app->render('admin/listaUsuarios.html.twig');
+        $usuarios = ORM::for_table('usuario')
+            ->select('usuario.id')
+            ->select('usuario.imagen')
+            ->select('usuario.user')
+            ->select('usuario.nombre')
+            ->select('usuario.email')
+            ->select('usuario.edad')
+            ->find_many();
+
+        $app->render('admin/listaUsuarios.html.twig',array('usuarios' => $usuarios));
         die();
     }
 })->name("listaUsuarios");

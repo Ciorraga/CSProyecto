@@ -27,8 +27,52 @@ if(isset($_POST['botonEnviaNoticia'])){
         $req = new comun();
         $notic = $req->mostrarNoticias();
 
-        $app->render('admin/listadoNoticias.html.twig',array('inicio' => $notic,'mensajeOk' => 'Noticia agregada con éxito'));
+        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,'mensajeOk' => 'Noticia agregada con éxito'));
     }
+}
 
+if(isset($_POST['botonAdminBorrarUsuario'])){
+    $consEqId = ORM::for_table('usuario')
+        ->where('id',$_POST['botonAdminBorrarUsuario'])
+        ->find_one();
+
+    $equipoCapitan = ORM::for_table('equipo')
+        ->where('capitan_id',$_POST['botonAdminBorrarUsuario'])
+        ->find_one();
+
+    if($equipoCapitan) {
+        $consIntegrantes = ORM::for_table('usuario')
+            ->where('equipo_id', $consEqId['equipo_id'])
+            ->find_many();
+
+        if (count($consIntegrantes) == 1) {
+            $equipoCapitan->nombre="Eq. eliminado";
+            $equipoCapitan->capitan_id=null;
+            $equipoCapitan->save();
+        } else {
+            $equipoCambiaCap = ORM::for_table('usuario')
+                ->where('equipo_id', $equipoCapitan['id'])
+                ->where_not_equal('id', $_POST['botonAdminBorrarUsuario'])
+                ->find_many();
+
+            $equipoCapitan->capitan_id = $consIntegrantes[1]['id'];
+            $equipoCapitan->save();
+        }
+    }
+    $borrar = ORM::for_table('usuario')
+        ->find_one($_POST['botonAdminBorrarUsuario']);
+
+    $borrar->delete();
+
+    $usuarios = ORM::for_table('usuario')
+        ->select('usuario.id')
+        ->select('usuario.imagen')
+        ->select('usuario.user')
+        ->select('usuario.nombre')
+        ->select('usuario.email')
+        ->select('usuario.edad')
+        ->find_many();
+
+    $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito','usuarios' => $usuarios));
 
 }
