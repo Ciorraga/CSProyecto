@@ -89,7 +89,7 @@ $app->get('/retoActualiza/:id', function ($id) {
         echo "</form>";
 
 
-})->name('buscarEquipo');
+})->name('actualizarRetos');
 
 
 

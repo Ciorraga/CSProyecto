@@ -61,7 +61,7 @@
                         <td>
                             <div class="btn-group">
                                 <span onclick="showResult({{ elem.id }})"  class="btn btn-primary" value="{{ elem.id }}">Actualizar</span>
-                                <button type="submit" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
+                                <button onclick="ConfirmDelete(); return false;" type="submit" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
                             </div>
                         </td>
                     </tr>
@@ -72,6 +72,16 @@
     </div>
 {% endblock %}
 {% block scripts %}
+    <script>
+        function ConfirmDelete(elem)
+        {
+            var x = confirm("¿Seguro que quieres eliminar el este reto ?");
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+    </script>
     <script>
         function showResult(str) {
             if (str.length==0) {

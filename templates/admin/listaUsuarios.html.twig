@@ -28,7 +28,7 @@
                         <td>{{ usuario.nombre }}</td>
                         <td>{{ usuario.email }}</td>
                         <td>{{ usuario.edad }}</td>
-                        <td><button type="submit" class="btn btn-danger" value="{{ usuario.id }}" name="botonAdminBorrarUsuario">Eliminar</button></td>
+                        <td><button onclick="ConfirmDelete('{{ usuario.user }}'); return false;"  class="btn btn-danger" value="{{ usuario.id }}" name="botonAdminBorrarUsuario">Eliminar</button></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -38,6 +38,16 @@
 {% endblock %}
 {% block scripts %}
     <script type="text/javascript" src="/js/jquery.dataTables2.js"></script>
+    <script>
+        function ConfirmDelete(elem)
+        {
+            var x = confirm("¿Seguro que quieres eliminar el usuario "+elem+" ?");
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+    </script>
     <script>
         $(document).ready(function(){
             $('#myTable2').dataTable({

@@ -127,7 +127,7 @@
                 </span>
                 {% if botonSolicitud[0] == true %}
                     <form action="/" method="POST">
-                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonSolicitud" value="{{ botonSolicitud[1] }}">Mandar solicitud de admisión</button>
+                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonSolicitud" onclick="a()" value="{{ botonSolicitud[1] }}">Mandar solicitud de admisión</button>
                     </form>
                 {% endif %}
                 {% if usuarioLogin['equipo_id']!=null %}
@@ -200,6 +200,9 @@
     </script>
 
     <script>
+        function a(){
+            confirm("seguro que blabla?");
+        }
         function showResult(str) {
             if (str.length==0) {
                 document.getElementById("livesearch").innerHTML="";

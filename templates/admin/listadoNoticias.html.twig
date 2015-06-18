@@ -19,11 +19,24 @@
                         <td>{{ noticia.titulo }}</td>
                         <td>{{ noticia.user }}</td>
                         <td class="botonBorrarAlign">{{ noticia.fecha }}</td>
-                        <td><button type="submit" class="btn btn-danger" value="{{ noticia.id }}" name="botonBorrarNoticia" >Borrar</button></td>
+                        <td><button onclick="ConfirmDelete(); return false;" type="submit" class="btn btn-danger" value="{{ noticia.id }}" name="botonBorrarNoticia" >Borrar</button></td>
                     </tr>
                 {% endfor %}
             </table>
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function ConfirmDelete(elem)
+        {
+            var x = confirm("¿Seguro que quieres eliminar esta noticia ?");
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+    </script>
 {% endblock %}
 
