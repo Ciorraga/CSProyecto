@@ -95,7 +95,11 @@ if(isset($_POST['fijaResultadoReto'])){
         ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS null AND reto.aceptado IS NOT false ORDER BY reto.fecha ASC limit 10')
         ->find_many();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto actualizado'));
+    $retosCerrados = ORM::for_table('reto')
+        ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC ')
+        ->find_many();
+
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto actualizado','retosCerrados' => $retosCerrados));
     die();
 }
 
@@ -108,8 +112,11 @@ if(isset($_POST['botonBorrarReto'])){
     $retosEq = ORM::for_table('reto')
         ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS null AND reto.aceptado IS NOT false ORDER BY reto.fecha ASC limit 10')
         ->find_many();
+    $retosCerrados = ORM::for_table('reto')
+        ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC ')
+        ->find_many();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto borrado'));
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto borrado','retosCerrados' => $retosCerrados));
     die();
 }
 

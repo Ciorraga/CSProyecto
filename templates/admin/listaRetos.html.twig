@@ -11,7 +11,7 @@
             </p>
         </div>
         <form action="/" method="POST">
-            <table id="myTable" class="table table-hover">
+            <table id="myTable" class="table table-bordered">
 
                 <tbody>
                 {% for elem in retosEq %}
@@ -35,8 +35,40 @@
             </table>
         </form>
     </div>
-    <div id="segundoDiv" style="display: none" class="col-md-8 col-md-offset-2">
 
+    <div id="segundoDiv" style="display: none" class="col-md-8 col-md-offset-2"></div>
+
+    <div id="primerDiv" class="col-md-8 col-md-offset-2">
+        <div class="row" id="h2Centrado">
+            <p id="textoEntradaMiCuenta">
+                Retos cerrados
+            </p>
+        </div>
+        <form action="/" method="POST">
+            <table id="myTable" class="table table-bordered">
+
+                <tbody>
+                {% for elem in retosCerrados %}
+                    <tr>
+                        <td>{{ elem.nombreEq1 }}</td>
+                        <td><b>{{ elem.resEq1 }}</b></td>
+                        <td><a href="/equipos/{{ elem.nombreEq1 }}"><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></a></td>
+                        <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                        <td><a href="/equipos/{{ elem.nombreEq2 }}"><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></a></td>
+                        <td><b>{{ elem.resEq2 }}</b></td>
+                        <td>{{ elem.nombreEq2 }}</td>
+                        <td>{{ elem.fecha }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <span onclick="showResult({{ elem.id }})"  class="btn btn-primary" value="{{ elem.id }}">Actualizar</span>
+                                <button type="submit" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
     </div>
 {% endblock %}
 {% block scripts %}
