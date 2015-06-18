@@ -9,6 +9,12 @@ body{
     padding:1.5%;
 }
 
+#segundoDiv{
+    margin-top:1%;
+    background-color:white;
+    padding:1.5%;
+}
+
 table{
     text-align: center;
 }
@@ -39,4 +45,28 @@ table{
 #imagenUsuario{
     width:40px;
     height:40px;
+}
+
+#imagenVs{
+    width:20px;
+    height:20px;
+    margin-left:0px;
+}
+
+#imagenReto{
+    width:40px;
+    height:40px;
+}
+th{
+    text-align: center
+}
+
+#spanMargin{
+    margin-left:5px;
+}
+
+#textoEntradaMiCuenta{
+    text-align:center;
+    font-size:1.5em;
+    padding-bottom:20px;
 }
