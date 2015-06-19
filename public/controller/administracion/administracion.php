@@ -1,19 +1,22 @@
 <?php
 
 $app->get('/administracion', function() use ($app) {
+    $req = new comun();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
     if (!isset($_SESSION['usuarioLogin'])) {
         session_destroy();
         $app->redirect($app->router()->urlFor('inicio'));
         die();
     }else{
-        $req = new comun();
         $notic = $req->mostrarNoticias();
 
-        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic));
+        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic,'repNum' => $rep, 'retNum' => $ret));
     }
 });
 
 $app->get('/administracion/listanoticias', function() use ($app) {
+
     if (!isset($_SESSION['usuarioLogin'])) {
         session_destroy();
         $app->redirect($app->router()->urlFor('inicio'));
@@ -21,8 +24,10 @@ $app->get('/administracion/listanoticias', function() use ($app) {
     }else{
         $req = new comun();
         $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
 
-        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic));
+        $app->render('admin/listadoNoticias.html.twig', array('noticias' => $notic,'repNum' => $rep, 'retNum' => $ret));
         die();
     }
 })->name("listaNoticias");
@@ -33,7 +38,11 @@ $app->get('/administracion/nuevanoticia', function() use ($app) {
         $app->redirect($app->router()->urlFor('inicio'));
         die();
     }else{
-        $app->render('admin/nuevanoticia.html.twig');
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
+        $app->render('admin/nuevanoticia.html.twig',array('repNum' => $rep, 'retNum' => $ret));
         die();
     }
 })->name("nuevaNoticia");
@@ -53,7 +62,12 @@ $app->get('/administracion/usuarios', function() use ($app) {
             ->select('usuario.edad')
             ->find_many();
 
-        $app->render('admin/listaUsuarios.html.twig',array('usuarios' => $usuarios));
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
+
+        $app->render('admin/listaUsuarios.html.twig',array('usuarios' => $usuarios,'repNum' => $rep, 'retNum' => $ret));
         die();
     }
 })->name("listaUsuarios");
@@ -72,7 +86,12 @@ $app->get('/administracion/retos', function() use ($app) {
             ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC ')
             ->find_many();
 
-        $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq,'retosCerrados' => $retosCerrados));
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
+
+        $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq,'retosCerrados' => $retosCerrados,'repNum' => $rep, 'retNum' => $ret));
         die();
     }
 })->name("listaRetos");
@@ -91,6 +110,24 @@ $app->get('/retoActualiza/:id', function ($id) {
 
 })->name('actualizarRetos');
 
+$app->get('/administracion/reportes', function() use ($app) {
+    $reportes = ORM::for_table('reporte_comentario')
+        ->join('usuario', array('reporte_comentario.usuario_id', '=', 'usuario.id'))
+        ->join('comentario',array('reporte_comentario.usuario_id','=','comentario.id'))
+        ->select('usuario.user')
+        ->select('comentario.texto')
+        ->select('comentario.id')
+        ->select('reporte_comentario.fecha')
+        ->order_by_asc('reporte_comentario.fecha')
+        ->find_array();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes));
+    die();
+});
 
 
 
