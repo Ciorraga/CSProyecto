@@ -34,8 +34,7 @@
                                         <div>
                                             <a>{{ comentario.user }}</a>
                                             <div>
-                                                <span id="pepe">Enviado el: {{ comentario.fecha }}</span><span style="float:right"><a
-                                                            href="/reportar/{{ comentario.id }}"><i data-toggle="tooltip" class="fa fa-exclamation-triangle" title="Reportar comentario"></i></a></span></span>
+                                                <span id="pepe">Enviado el: {{ comentario.fecha }}</span>{% if usuarioLogin %}<span onclick="showResult( {{ comentario.id }})" style="float:right"><i data-toggle="tooltip" class="fa fa-exclamation-triangle" title="Reportar comentario"></i></span>{% endif %}
                                             </div>
                                             <div>
                                                 {{ comentario.texto }}
@@ -124,10 +123,32 @@
 {%endblock%}
 
 {% block scripts %}
+
     <script>
         function muestraComentarios(elem){
             $( "#"+elem ).toggle( "slow" );
         }
 
+        function showResult(str) {
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                    $(function() {
+                        setTimeout(function() {
+                            $.bootstrapGrowl("Comentario reportado", { type: 'success' });
+                        }, 100);
+                    });
+                    //document.getElementById(body).innerHTML=xmlhttp.responseText;
+
+                }
+            }
+            xmlhttp.open("GET","/reportarComentario/"+str,true);
+            xmlhttp.send();
+        }
     </script>
 {% endblock %}
