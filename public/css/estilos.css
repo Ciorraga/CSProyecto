@@ -111,6 +111,11 @@ h1{
     height:40px;
 }
 
+#imagenUsuarioReto{
+    width:200px;
+    height:200px;
+}
+
 #lupaEquipos{
     font-size: 20px !important;
 }
@@ -364,4 +369,16 @@ h1{
 
 #linkPag{
     width:100%
+}
+
+#paraRetos{
+    margin-top:2%;
+    background-color:#EEEEEE;
+    padding:1.5%;
+}
+
+#botonEnviaReto{
+    margin-top:50px;
+    width:100%;
+    text-align: center;
 }

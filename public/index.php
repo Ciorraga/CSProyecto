@@ -46,6 +46,7 @@ include "controller/retos1vs1/retos1vs1.php";
 include "controller/clasificacion/clasificacionEquipos.php";
 include "controller/clasificacion/clasificacion1vs1.php";
 include "controller/usuarios/usuarios.php";
+include "controller/creaReto/creaReto.php";
 
 
 //Cuando pulsamos en Salir para cerrar nuestra sesión
@@ -59,12 +60,6 @@ $app->get('/cerrarSesion', function() use ($app) {
 $app->get('/registro', function() use ($app) {
     $app->render('nuevoUser.html.twig');
 })->name('registro');
-
-
-
-
-
-
 
 //------------------------------------------------------------------------POSTS-------------------------------------------------------------------------
 
@@ -154,10 +149,6 @@ $app->post('/registro', function() use ($app) {
     }
 });
 
-
-
-
-
 $app->post('/', function() use ($app) {
     include "controller/inicio/botonesInicio.php";
     include "controller/administracion/botonesAdministracion.php";
@@ -166,6 +157,7 @@ $app->post('/', function() use ($app) {
     include "controller/solicitudes/botonesSolicitudes.php";
     include "controller/retos/botonesReto.php";
     include "controller/usuarios/usuariosBotones.php";
+    include "controller/creaReto/creaRetoBotones.php";
 
     if(isset($_POST['loginUsuario'])){
         $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
