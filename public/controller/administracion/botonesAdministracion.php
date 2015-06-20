@@ -120,3 +120,77 @@ if(isset($_POST['botonBorrarReto'])){
     die();
 }
 
+if(isset($_POST['botonBorrarReporte'])){
+    $reporte = ORM::for_table('reporte_comentario')
+        ->where('id',$_POST['botonBorrarReporte'])
+        ->find_one();
+    $reporte->delete();
+
+    $reportes = ORM::for_table('reporte_comentario')
+        ->join('usuario', array('reporte_comentario.usuario_id', '=', 'usuario.id'))
+        ->join('comentario',array('reporte_comentario.usuario_id','=','comentario.id'))
+        ->select('reporte_comentario.id')
+        ->select('usuario.user')
+        ->select('comentario.texto')
+        ->select('comentario.id')
+        ->select('reporte_comentario.fecha')
+        ->order_by_asc('reporte_comentario.fecha')
+        ->find_array();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes,'mensajeOk' => 'Reporte eliminado con éxito'));
+    die();
+}
+
+if(isset($_POST['eliminaComentarioReportado'])){
+    $eliminaComentario = ORM::for_table('comentario')
+        ->find_one($_POST['eliminaComentarioReportado']);
+    $eliminaComentario->delete();
+
+    $reportes = ORM::for_table('reporte_comentario')
+        ->join('usuario', array('reporte_comentario.usuario_id', '=', 'usuario.id'))
+        ->select('reporte_comentario.id')
+        ->select('usuario.user')
+        ->select('reporte_comentario.fecha')
+        ->where('reporte_comentario.comprobado','0')
+        ->order_by_asc('reporte_comentario.fecha')
+        ->find_array();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes, 'mensajeOk' => 'Comentario eliminado con éxito'));
+    die();
+}
+
+if(isset($_POST['descartaComentarioReportado'])){
+    $descartaComentario = ORM::for_table('reporte_comentario')
+        ->where('id',$_POST['descartaComentarioReportado'])
+        ->find_one();
+    $descartaComentario->comprobado = "1";
+    $descartaComentario->save();
+
+    $reportes = ORM::for_table('reporte_comentario')
+        ->join('usuario', array('reporte_comentario.usuario_id', '=', 'usuario.id'))
+        ->select('reporte_comentario.id')
+        ->select('reporte_comentario.comentario_id')
+        ->select('usuario.user')
+        ->select('reporte_comentario.fecha')
+        ->where('reporte_comentario.comprobado','0')
+        ->order_by_asc('reporte_comentario.fecha')
+        ->find_array();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes, 'mensajeOk' => 'Reporte de comentario descartado con éxito'));
+    die();
+}
+
+
+

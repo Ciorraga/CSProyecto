@@ -113,11 +113,11 @@ $app->get('/retoActualiza/:id', function ($id) {
 $app->get('/administracion/reportes', function() use ($app) {
     $reportes = ORM::for_table('reporte_comentario')
         ->join('usuario', array('reporte_comentario.usuario_id', '=', 'usuario.id'))
-        ->join('comentario',array('reporte_comentario.usuario_id','=','comentario.id'))
+        ->select('reporte_comentario.id')
+        ->select('reporte_comentario.comentario_id')
         ->select('usuario.user')
-        ->select('comentario.texto')
-        ->select('comentario.id')
         ->select('reporte_comentario.fecha')
+        ->where('reporte_comentario.comprobado','0')
         ->order_by_asc('reporte_comentario.fecha')
         ->find_array();
 
@@ -128,6 +128,32 @@ $app->get('/administracion/reportes', function() use ($app) {
     $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes));
     die();
 });
+
+$app->get('/muestraReporte/:id', function ($id) {
+    //$id es is del reporte
+    $comentarioReporte = ORM::for_table('comentario')
+        ->join('usuario',array('comentario.usuario_id','=','usuario.id'))
+        ->where('comentario.id',$id)
+        ->select('comentario.id')
+        ->select('comentario.texto')
+        ->select('usuario.user')
+        ->find_one();
+    $idReporte = ORM::for_table('reporte_comentario')
+        ->where('comentario_id',$id)
+        ->where('comprobado','0')
+        ->find_one();
+
+
+    echo "<form action='/' method='POST'>
+              <td>Autor:".$comentarioReporte['user']."</td>
+              <td>".$comentarioReporte['texto']."</td>
+              <td>
+                <button type='submit' class='btn btn-danger'  value='". $comentarioReporte['id'] ."' name='eliminaComentarioReportado'>Eliminar</button><br/><br/>
+                <button type='submit' class='btn btn-warning'  value='". $idReporte['id'] ."' name='descartaComentarioReportado'>Descartar</button>
+              </td>
+          </form>";
+
+})->name('muestraRep');
 
 
 

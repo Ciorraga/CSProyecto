@@ -8,8 +8,8 @@
         <form action="/" method="POST">
             <table class="table table-bordered">
                 <tr>
-                    <th>Reportado por:</th>
-                    <th>Fecha</th>
+                    <th style="text-align:center">Reportado por:</th>
+                    <th style="text-align:center">Fecha</th>
                     <th></th>
                 </tr>
                 {% for reporte in reportes %}
@@ -18,10 +18,13 @@
                     <td>{{ reporte.fecha }}</td>
                     <td>
                         <div class="btn-group">
-                            <span class="btn btn-primary" value="{{ elem.id }}">Actualizar</span>
-                            <button type="submit" onclick="ConfirmDelete(); return false;" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
+                            <span class="btn btn-primary" onclick="showResult({{ reporte.comentario_id }})" value="{{ reporte.comentario_id }}">Ver</span>
+                            <!--<button type="submit" onclick="ConfirmDelete(); return false;" name="botonBorrarReporte" class="btn btn-danger" value="{{ reporte.id }}">Eliminar</button>-->
                         </div>
                     </td>
+                </tr>
+                <tr id="{{ reporte.comentario_id }}" style="display:none">
+
                 </tr>
                 {% endfor %}
             </table>
@@ -38,6 +41,29 @@
                 document.getElementById(this).submit();
             else
                 return false;
+        }
+
+        function showResult(str) {
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                    console.log(xmlhttp.responseText);
+
+                    document.getElementById(str).innerHTML=xmlhttp.responseText;
+                    $( "#"+str ).toggle( "slow" )
+                }
+            }
+            xmlhttp.open("GET","/muestraReporte/"+str,true);
+            xmlhttp.send();
+        }
+
+        function muestraReporte(elem){
+            $( "#"+elem ).toggle( "slow" );
         }
     </script>
 {% endblock %}

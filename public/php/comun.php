@@ -69,7 +69,7 @@ class comun {
 
     public function compruebaReportes(){
         $comp = ORM::for_table('reporte_comentario')
-            ->where('eliminado',"0")
+            ->where('comprobado',"0")
             ->count();
 
         return $comp;
