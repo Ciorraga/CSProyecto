@@ -44,7 +44,7 @@
                                 <td>{{ item.perdidos }}</td>
                                 <td>{{ item.ratio }}</td>
                                 {% if imagenUser %}
-                                    <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaUsuario">Retar</button></td>
+                                    <td><a href="/reta_usuario/{{ item.id }}" class="btn btn-primary">Retar</a></td>
                                 {% endif %}
                             </tr>
                     {% endfor %}
