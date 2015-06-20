@@ -19,6 +19,7 @@ $app->get('/clas_us', function() use ($app) {
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
             'nuevaSolicitud' => $_SESSION['solicitudes'],
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'clasificacion' => $clasRetos));
     }
 });

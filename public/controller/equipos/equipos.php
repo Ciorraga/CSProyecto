@@ -46,6 +46,7 @@ $app->get('/equipos', function() use ($app) {
             'usuarios' => $usuarios,
             'miEquipo' => $miEquipo,
             'nuevaSolicitud' => $_SESSION['solicitudes'],
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'misRetos' => $ultJugados));
         die();
     }
@@ -102,5 +103,6 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
         'botonSolicitud' => $botonSolicitud,
         'nuevaSolicitud' => $_SESSION['solicitudes'],
         'misRetos' => $ultJugados,
+        'retos1vs1' => $_SESSION['retos1vs1'],
         'equipoUsuario' => $equipoUsuarioActual));
 });

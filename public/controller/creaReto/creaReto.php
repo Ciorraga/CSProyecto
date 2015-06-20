@@ -13,5 +13,6 @@ $app->get('/reta_usuario/:id', function ($id) use ($app) {
         'usuarioLogin'=>$_SESSION['usuarioLogin'],
         'numMensajes' => $_SESSION['numMensajes'],
         'nuevaSolicitud' => $_SESSION['solicitudes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
         'usuario' => $usuario));
 });

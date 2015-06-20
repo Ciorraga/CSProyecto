@@ -25,6 +25,7 @@ $app->get('/clas_eq', function() use ($app) {
             'numMensajes' => $_SESSION['numMensajes'],
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'clasificacion' => $clasRetos,
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'esCapitan' => $esCapitan));
     }
 });

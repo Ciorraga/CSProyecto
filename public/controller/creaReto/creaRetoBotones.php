@@ -26,6 +26,7 @@ if(isset($_POST['botonEnviaReto'])){
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios,
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeError' => 'El usuario seleccionado y tú aún tenéis un reto activo. Termina el reto, o ponte en contacto con un administrador'));
         die();
     }else{
@@ -54,7 +55,9 @@ if(isset($_POST['botonEnviaReto'])){
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios,
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeOk' => 'Reto enviado!'));
+
         die();
     }
 

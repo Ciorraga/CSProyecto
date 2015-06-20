@@ -83,6 +83,15 @@ class comun {
         return $ar;
     }
 
+    public function compruebaRetosUsuario(){
+        $res = ORM::for_table('reto1vs1')
+            ->where('retado_id',$_SESSION['usuarioLogin']['id'])
+            ->where('aceptado',"0")
+            ->find_many();
+
+        return $res;
+    }
+
 
 
 }

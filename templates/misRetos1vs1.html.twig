@@ -1,0 +1,59 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Retos 1vs1
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Mis retos</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Próximos retos</div>
+                    <div class="panel-body">
+                        <form action="/" method="POST">
+                            {% if pendientes=="vacio" %}
+                                <div class="jumbotron" id="jumbotronUsuarios">
+                                    <h2>No tiene retos pendientes</h2>
+                                </div>
+                            {% else %}
+                            <table id="myTable" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Retador</th>
+                                    <th>Fecha</th>
+                                    <th>Mapa</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for elem in pendientes %}
+                                        <tr>
+                                            <td><img id="imagenReto" src="{{ elem.imagen }}"/></td>
+                                            <td>{{ elem.user }}</td>
+                                            <td>{{ elem.fecha }}</td>
+                                            <td>{{ elem.mapa }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="submit" name="botonAceptarReto1vs1" class="btn btn-success" value="{{ elem.id }}">Aceptar</button>
+                                                    <button type="submit" name="botonRechazarReto1vs1" class="btn btn-danger" value="{{ elem.id }}">Rechazar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

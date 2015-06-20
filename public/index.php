@@ -158,6 +158,7 @@ $app->post('/', function() use ($app) {
     include "controller/retos/botonesReto.php";
     include "controller/usuarios/usuariosBotones.php";
     include "controller/creaReto/creaRetoBotones.php";
+    include "controller/retos1vs1/botonesRetos1vs1.php";
 
     if(isset($_POST['loginUsuario'])){
         $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();
@@ -167,6 +168,7 @@ $app->post('/', function() use ($app) {
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+            $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
             $app->redirect($app->router()->urlFor('inicio'));
             die();
         }

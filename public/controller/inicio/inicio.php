@@ -20,6 +20,7 @@ $app->get('/', function() use ($app) {
             'noticias' => $notic,
             'numMensajes' => $_SESSION['numMensajes'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'registrado' => 'env'));
     }
 })->name('inicio');
