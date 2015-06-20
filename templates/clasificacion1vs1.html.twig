@@ -6,13 +6,13 @@
 
 {% block contenido %}
     <div class="col-md-4 col-md-offset-4" id="titulo">
-        <h1>Retos</h1>
+        <h1>Clasificación retos 1vs1</h1>
     </div>
     <div class="col-md-10 col-md-offset-1" id="primerDiv">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" id="entradilla">
-                Aquí podrás ver la clasificación de los equipos según los retos ganados y perdidos que hayan tenido
-                Además también podrás retar a los equipos que puedes ver. ¿Te atreves?
+                Aquí podrás ver la clasificación de los usuarios según los retos ganados y perdidos que haya tenido
+                Además también podrás retar a los usuario que puedes ver. ¿Te atreves?
             </div>
         </div>
         <div class="panel panel-default">
@@ -30,25 +30,19 @@
                         <th>Ganados</th>
                         <th>Perdidos</th>
                         <th>W/D Ratio</th>
-                        {% if esCapitan %}
-                            <td></td>
-                        {% endif %}
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in clasificacion %}
-                        {% if item.nombre!='Usuario borrado' %}
                             <tr>
-                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.user }}</td>
                                 <td>{{ item.total }}</td>
                                 <td>{{ item.ganados }}</td>
                                 <td>{{ item.perdidos }}</td>
                                 <td>{{ item.ratio }}</td>
-                                {% if esCapitan %}
-                                    <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaEquipo">Retar</button></td>
-                                {% endif %}
+                                <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaUsuario">Retar</button></td>
                             </tr>
-                        {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>
