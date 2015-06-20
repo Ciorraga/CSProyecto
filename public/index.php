@@ -45,6 +45,7 @@ include "controller/retos/retos.php";
 include "controller/retos1vs1/retos1vs1.php";
 include "controller/clasificacion/clasificacionEquipos.php";
 include "controller/clasificacion/clasificacion1vs1.php";
+include "controller/usuarios/usuarios.php";
 
 
 //Cuando pulsamos en Salir para cerrar nuestra sesión
@@ -164,6 +165,7 @@ $app->post('/', function() use ($app) {
     include "controller/mensajes/botonesMensaje.php";
     include "controller/solicitudes/botonesSolicitudes.php";
     include "controller/retos/botonesReto.php";
+    include "controller/usuarios/usuariosBotones.php";
 
     if(isset($_POST['loginUsuario'])){
         $usuario = ORM::for_table('usuario')->where('user', $_POST['username'])->where('password', $_POST['password'])->find_one();

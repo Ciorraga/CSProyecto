@@ -5,7 +5,7 @@ $app->get('/clas_us', function() use ($app) {
         $clasRetos = ORM::for_table('reto')
             ->raw_query('SELECT reto1vs1.retador_id, usuario.user,usuario.id ,count(*) as total, sum(reto1vs1.retador_id=reto1vs1.ganador) as ganados, sum(reto1vs1.retador_id<>reto1vs1.ganador) as perdidos, (sum(reto1vs1.retador_id=reto1vs1.ganador)-sum(reto1vs1.retador_id<>reto1vs1.ganador))/count(*) as ratio FROM reto1vs1 join usuario on usuario.id=reto1vs1.retador_id where reto1vs1.ganador IS NOT null GROUP BY reto1vs1.retador_id ORDER BY ratio')
             ->find_many();
-        $app->render('clasificacionEquipos.html.twig',array('clasificacion' => $clasRetos));
+        $app->render('clasificacion1vs1.html.twig',array('clasificacion' => $clasRetos));
     }else{
         $clasRetos = ORM::for_table('reto')
             ->raw_query('SELECT reto1vs1.retador_id, usuario.user,usuario.id ,count(*) as total, sum(reto1vs1.retador_id=reto1vs1.ganador) as ganados, sum(reto1vs1.retador_id<>reto1vs1.ganador) as perdidos, (sum(reto1vs1.retador_id=reto1vs1.ganador)-sum(reto1vs1.retador_id<>reto1vs1.ganador))/count(*) as ratio FROM reto1vs1 join usuario on usuario.id=reto1vs1.retador_id where reto1vs1.ganador IS NOT null GROUP BY reto1vs1.retador_id ORDER BY ratio')

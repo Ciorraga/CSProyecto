@@ -1,0 +1,120 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Usuarios
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Usuarios</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="entradilla">
+                ¿Quieres retar a alguien? Aquí podras hacerlo.<br/>
+                ¡Solo busca el usuario al que quieras retar y mandale tu reto!
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:25px;">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="input-group" style="width:90%;margin-left:0px">
+                    <form action="/" method="POST">
+                        <input type="text" class="form-control" name="nombreUser" placeholder="Introduce un nombre...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" name="buscarUsuario">Buscar</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if usuarios %}
+            {% if usuarios=='Vacio' %}
+            <div class="row" style="margin-bottom:25px;">
+                <div class="jumbotron" id="jumbotronUsuarios">
+                    <p>No se han encontrado resultados</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="row" style="margin-bottom:25px;">
+                <div class="col-md-8 col-md-offset-2" id="entradilla">
+                    <h2>Resultados de la búsqueda</h2>
+                </div>
+                <div class="col-md-10 col-md-offset-1" style="border:1px solid gray">
+                    <form action="/" method="POST">
+                        <table id="myTable" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Usuario</th>
+                                <th>Edad</th>
+                                <th>Steam</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for elem in usuarios %}
+                                <tr>
+                                    <td><img id="imagenReto" src="{{ elem.imagen }}"/></td>
+                                    <td>{{ elem.user }}</td>
+                                    <td>{{ elem.edad }}</td>
+                                    <td>{{ elem.steam }}</td>
+                                    <td id="divBotonesMensajesEntrada">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-primary" value="{{ elem.id }}" name="retaUser">Retar</button>
+                                            <a class="btn btn-success" id="aMensaje" href="/mensajeNuevo/{{ elem.id }}">Mensaje</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" id="entradilla">
+                <h2>Últimos usuarios registrados en la web</h2>
+            </div>
+            <div class="col-md-10 col-md-offset-1" style="border:1px solid gray">
+                <form action="/" method="POST">
+                    <table id="myTable" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Usuario</th>
+                            <th>Edad</th>
+                            <th>Steam</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for elem in ultimosUsuarios %}
+                            <tr>
+                                <td><img id="imagenReto" src="{{ elem.imagen }}"/></td>
+                                <td>{{ elem.user }}</td>
+                                <td>{{ elem.edad }}</td>
+                                <td>{{ elem.steam }}</td>
+                                <td id="divBotonesMensajesEntrada">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-primary" value="{{ elem.id }}" name="retaUser">Retar</button>
+                                        <a class="btn btn-success" id="aMensaje" href="/mensajeNuevo/{{ elem.id }}">Mensaje</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

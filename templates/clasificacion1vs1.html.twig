@@ -30,7 +30,9 @@
                         <th>Ganados</th>
                         <th>Perdidos</th>
                         <th>W/D Ratio</th>
-                        <th></th>
+                        {% if imagenUser %}
+                            <th></th>
+                        {% endif %}
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +43,9 @@
                                 <td>{{ item.ganados }}</td>
                                 <td>{{ item.perdidos }}</td>
                                 <td>{{ item.ratio }}</td>
-                                <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaUsuario">Retar</button></td>
+                                {% if imagenUser %}
+                                    <td><button type="submit" class="btn btn-success" value="{{ item.id }}" name="retaUsuario">Retar</button></td>
+                                {% endif %}
                             </tr>
                     {% endfor %}
                     </tbody>

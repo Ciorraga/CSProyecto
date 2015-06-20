@@ -11,7 +11,10 @@ $app->get('/equipos', function() use ($app) {
         $equipo = null;
         $req = new comun();
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'usuarioLogin'=>$_SESSION['usuarioLogin'],
+            'numMensajes' => $_SESSION['numMensajes'],
+            'nuevaSolicitud' => $_SESSION['solicitudes']));
     }else{
         //Consulta para extraer los datos del equipo
         $equipo = ORM::for_table('equipo')
@@ -36,11 +39,16 @@ $app->get('/equipos', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
 
-        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'miEquipo' => $miEquipo,'nuevaSolicitud' => $_SESSION['solicitudes'],'misRetos' => $ultJugados));
+        $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'usuarioLogin'=>$_SESSION['usuarioLogin'],
+            'numMensajes' => $_SESSION['numMensajes'],
+            'equipo' => $equipo,
+            'usuarios' => $usuarios,
+            'miEquipo' => $miEquipo,
+            'nuevaSolicitud' => $_SESSION['solicitudes'],
+            'misRetos' => $ultJugados));
         die();
     }
-
-
 })->name('equipos');
 
 $app->get('/buscarEquipo/:id', function ($id) {
@@ -84,7 +92,15 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $imagenUser = ".".$_SESSION['usuarioLogin']['imagen'];
+    $imagenUser = $_SESSION['usuarioLogin']['imagen'];
 
-    $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'equipo' => $equipo,'usuarios' => $usuarios,'botonSolicitud' => $botonSolicitud,'nuevaSolicitud' => $_SESSION['solicitudes'],'misRetos' => $ultJugados, 'equipoUsuario' => $equipoUsuarioActual));
+    $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'equipo' => $equipo,
+        'usuarios' => $usuarios,
+        'botonSolicitud' => $botonSolicitud,
+        'nuevaSolicitud' => $_SESSION['solicitudes'],
+        'misRetos' => $ultJugados,
+        'equipoUsuario' => $equipoUsuarioActual));
 });
