@@ -8,6 +8,7 @@ $app->get('/reta_usuario/:id', function ($id) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
     $app->render('retaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
         'usuarioLogin'=>$_SESSION['usuarioLogin'],

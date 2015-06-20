@@ -25,4 +25,4 @@ $app->get('/usuarios', function() use ($app) {
             'ultimosUsuarios' => $ultUsuarios));
         die();
     }
-});
+})->name('usuarios');

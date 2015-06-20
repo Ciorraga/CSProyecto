@@ -1,7 +1,28 @@
 <?php
 
 if(isset($_POST['botonEnviaReto'])){
+    if($_POST['fecha']==""){
+        $ultUsuarios = ORM::for_table('usuario')
+            ->select('usuario.id')
+            ->select('usuario.imagen')
+            ->select('usuario.user')
+            ->select('usuario.edad')
+            ->select('usuario.steam')
+            ->limit(10)
+            ->order_by_desc('id')
+            ->find_many();
 
+        $req = new comun();
+        $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+        $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+
+        $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'usuarioLogin' => $_SESSION['usuarioLogin'],
+            'ultimosUsuarios' => $ultUsuarios,
+            'mensajeError' => "Tiene que adjuntar una fecha cuando haga un reto"));
+        die();
+    }
     $compReto = ORM::for_table('reto1vs1')
         ->where('retador_id',$_SESSION['usuarioLogin']['id'])
         ->where('retado_id',$_POST['botonEnviaReto'])
@@ -51,6 +72,7 @@ if(isset($_POST['botonEnviaReto'])){
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
