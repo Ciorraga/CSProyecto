@@ -13,6 +13,10 @@ $app->get('/retos1vs1', function() use ($app) {
                 limit 10')
             ->find_many();
 
+        if($pendientes == null){
+            $pendientes="vacio";
+        }
+
 
         $app->render('retos1vs1.html.twig',array(
             'ultimosJugados' => $ultJugados,

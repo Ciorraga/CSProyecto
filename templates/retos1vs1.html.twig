@@ -18,6 +18,11 @@
             <!-- Default panel contents -->
             <div class="panel-heading">Próximos retos 1vs1</div>
             <div class="panel-body">
+                {% if pendientes==vacio %}
+                    <div class="jumbotron" id="jumbotronUsuarios">
+                        <h2>No hay retos pendientes en estos momentos</h2>
+                    </div>
+                {% else %}
                 <table id="myTable" class="table table-hover">
                     <thead>
                     <tr>
@@ -44,6 +49,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </div>
         </div>
 
