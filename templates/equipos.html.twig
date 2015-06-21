@@ -147,9 +147,7 @@
                 {% if not miEquipo %}
                     {% if usuarioLogin['equipo_id']!="" %}
                         {% if equipoUsuario['capitan_id']==usuarioLogin['id'] %}
-                            <form action="/" method="POST">
-                                <button id="botonReto" class="button button--wapasha button--round-s" name="botonRetarEquipo" value="{{ equipo[0]['id'] }}">Retar</button>
-                            </form>
+                                <a href="../reta_equipo/{{ equipo[0]['id'] }}"><button id="botonReto" class="button button--wapasha button--round-s">Retar</button></a>
                         {% endif %}
                     {% endif %}
                 {% endif %}

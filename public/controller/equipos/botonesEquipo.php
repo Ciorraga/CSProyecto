@@ -119,10 +119,6 @@ if(isset($_POST['botonDestruirEquipo'])){
         'mensajeOk' => 'Equipo eliminado con éxito'));
 }
 
-if(isset($_POST['botonRetarEquipo'])){
-    echo "va";die();
-}
-
 if(isset($_POST['botonFormNuevoEquipo'])){
     $mensajeOk = "";
     $nombre = htmlentities($_POST['nombreEquipo']);

@@ -358,10 +358,9 @@ h1{
 }
 
 #botonReto{
-    width:100%;
+    width:100% !important;
     height:7%;
-    font-family: csFont;
-    font-size: 1.7em;
+    font-size: 1.5em;
     -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);

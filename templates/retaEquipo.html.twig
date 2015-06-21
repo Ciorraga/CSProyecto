@@ -1,0 +1,82 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Retos
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Retos</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+        <form action="/" method="POST">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" id="entradilla">
+                    Estás a punto de retar a <b>{{ usuario.user }}</b>
+                    <p>
+                        Estás a punto de, como capitán de tu equipo, retar a otro equipo.
+                        Un reto tiene que ser serio. Retando a otro equipo te estás comprometiendo a jugar.
+                        Si se falla en varios retos, la administración se guarda el derecho de tomar medidas.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="paraRetos">
+                    <div class="col-md-3 col-md-offset-3">
+                        <img src="{{ equipo.logo }}" id="imagenUsuarioReto" alt=""/>
+                    </div>
+                    <div class="col-md-3">
+                        <p>
+                        <h3><span class="label label-default">Usuario</span> {{ equipo.nombre }}</h3>
+                        </p>
+                        <p>
+                            Mapa: <select class="form-control input-sm" name="mapa">
+                                <option value="dust 2">Dust 2</option>
+                                <option value="mirage">Mirage</option>
+                                <option value="cache">Cache</option>
+                                <option value="overpass">Overpass</option>
+                                <option value="inferno">Inferno</option>
+                                <option value="nuke">Nuke</option>
+                                <option value="train">Train</option>
+                                <option value="vertigo">Vertigo</option>
+                            </select>
+                        </p>
+                        <p>
+                            <input class="form-control" id="datetimepicker1" placeholder="Picha aquí para elegir fecha" type="text" name="fecha">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="botonEnviaReto">
+                    <button class="ui blue submit icon button" name="botonEnviaRetoEquipo" value="{{ equipo.id }}" type="submit">Mandar reto</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script src="/js/jquery.datetimepicker.js"></script>
+    <script>
+        jQuery('#datetimepicker1').datetimepicker({
+            lang:'de',
+            i18n:{
+                de:{
+                    months:[
+                        'Enero','Febrero','Marzo','Abril',
+                        'Mayo','Junio','Julio','Agosto',
+                        'Septiembre','Octubre','Noviembre','Diciembre',
+                    ],
+                    dayOfWeek:[
+                        "Dom", "Lun", "Mar", "Mie",
+                        "Jue", "Vie", "Sab",
+                    ]
+                }
+            },
+            timepicker:true,
+            format:'Y-m-d H:i:s'
+        });
+
+    </script>
+{% endblock %}
