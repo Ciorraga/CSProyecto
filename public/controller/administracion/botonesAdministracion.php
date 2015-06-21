@@ -30,7 +30,10 @@ if(isset($_POST['botonEnviaNoticia'])){
         $notic = $req->mostrarNoticias();
         $ret = $req->compruebaRetos();
 
-        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,'mensajeOk' => 'Noticia agregada con éxito','retNum' => $ret));
+        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,
+            'usuarioLogin' => $_SESSION['usuarioLogin'],
+            'mensajeOk' => 'Noticia agregada con éxito',
+            'retNum' => $ret));
     }
 }
 
@@ -78,8 +81,13 @@ if(isset($_POST['botonAdminBorrarUsuario'])){
 
     $req = new comun();
     $ret = $req->compruebaRetos();
+    $rep = $req->compruebaReportes();
 
-    $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito','usuarios' => $usuarios,'retNum' => $ret));
+    $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito',
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'usuarios' => $usuarios,
+        'repNum' => $ret,
+        'retNum' => $ret));
 }
 
 if(isset($_POST['botonAdminBorrarEquipo'])){
@@ -111,7 +119,11 @@ if(isset($_POST['botonAdminBorrarEquipo'])){
     $rep = $req->compruebaReportes();
     $ret = $req->compruebaRetos();
 
-    $app->render('admin/listaEquipos.html.twig',array('mensajeOK' => 'Equipo eliminado con éxito','equipos' => $equipos,'repNum' => $rep, 'retNum' => $ret));
+    $app->render('admin/listaEquipos.html.twig',array('mensajeOK' => 'Equipo eliminado con éxito',
+        'equipos' => $equipos,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'repNum' => $rep,
+        'retNum' => $ret));
     die();
 }
 
@@ -140,8 +152,14 @@ if(isset($_POST['fijaResultadoReto'])){
 
     $req = new comun();
     $ret = $req->compruebaRetos();
+    $rep = $req->compruebaReportes();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto actualizado','retosCerrados' => $retosCerrados,'retNum' => $ret));
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq,
+        'mensajeOk' => 'Reto actualizado',
+        'repNum' => $rep,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'retosCerrados' => $retosCerrados,
+        'retNum' => $ret));
     die();
 }
 
@@ -171,10 +189,13 @@ if(isset($_POST['fijaResultadoReto1vs1'])){
 
     $req = new comun();
     $ret = $req->compruebaRetos();
+    $rep = $req->compruebaReportes();
 
     $app->render('admin/listaRetos1vs1.html.twig',array('retosEq' => $retosAbiertos,
         'retNum' => $ret,
         'mensajeOk' => 'Reto actualizado',
+        'repNum' => $rep,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
         'retosCerrados' => $retosCerrados));
     die();
 }
@@ -194,8 +215,14 @@ if(isset($_POST['botonBorrarReto'])){
 
     $req = new comun();
     $ret = $req->compruebaRetos();
+    $rep = $req->compruebaReportes();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto borrado','retosCerrados' => $retosCerrados,'retNum' => $ret));
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq,
+        'mensajeOk' => 'Reto borrado',
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'repNum' => $rep,
+        'retosCerrados' => $retosCerrados,
+        'retNum' => $ret));
     die();
 }
 
@@ -217,10 +244,13 @@ if(isset($_POST['botonBorrarReto1vs1'])){
 
     $req = new comun();
     $ret = $req->compruebaRetos();
+    $rep = $req->compruebaReportes();
 
     $app->render('admin/listaRetos1vs1.html.twig',array('retosEq' => $retosAbiertos,
         'retNum' => $ret,
         'mensajeOk' => 'Reto borrado',
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'repNum' => $rep,
         'retosCerrados' => $retosCerrados));
     die();
 }
@@ -246,7 +276,12 @@ if(isset($_POST['botonBorrarReporte'])){
     $notic = $req->mostrarNoticias();
     $rep = $req->compruebaReportes();
     $ret = $req->compruebaRetos();
-    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes,'mensajeOk' => 'Reporte eliminado con éxito'));
+
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep,
+        'retNum' => $ret,
+        'reportes' => $reportes,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajeOk' => 'Reporte eliminado con éxito'));
     die();
 }
 
@@ -268,7 +303,12 @@ if(isset($_POST['eliminaComentarioReportado'])){
     $notic = $req->mostrarNoticias();
     $rep = $req->compruebaReportes();
     $ret = $req->compruebaRetos();
-    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes, 'mensajeOk' => 'Comentario eliminado con éxito'));
+
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep,
+        'retNum' => $ret,
+        'reportes' => $reportes,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajeOk' => 'Comentario eliminado con éxito'));
     die();
 }
 
@@ -293,7 +333,136 @@ if(isset($_POST['descartaComentarioReportado'])){
     $notic = $req->mostrarNoticias();
     $rep = $req->compruebaReportes();
     $ret = $req->compruebaRetos();
-    $app->render('admin/reportes.html.twig',array('repNum' => $rep, 'retNum' => $ret,'reportes' => $reportes, 'mensajeOk' => 'Reporte de comentario descartado con éxito'));
+
+    $app->render('admin/reportes.html.twig',array('repNum' => $rep,
+        'retNum' => $ret,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'reportes' => $reportes,
+        'mensajeOk' => 'Reporte de comentario descartado con éxito'));
+    die();
+}
+
+if(isset($_POST['botonCreaMod'])){
+    $cons = ORM::for_table('usuario')
+        ->where('id',$_POST['botonCreaMod'])
+        ->find_one();
+    $cons->es_moderador = 1;
+    $cons->save();
+
+    $usuarios = ORM::for_table('usuario')
+        ->select('usuario.es_redactor')
+        ->select('usuario.es_moderador')
+        ->select('usuario.id')
+        ->select('usuario.imagen')
+        ->select('usuario.user')
+        ->select('usuario.nombre')
+        ->select('usuario.email')
+        ->select('usuario.edad')
+        ->find_many();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaUsuarios.html.twig', array('usuarios' => $usuarios,
+        'repNum' => $rep,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajeOk' => 'Rol moderador asignado correctamente',
+        'retNum' => $ret));
+    die();
+}
+
+if(isset($_POST['botonDesMod'])){
+    $cons = ORM::for_table('usuario')
+        ->where('id',$_POST['botonDesMod'])
+        ->find_one();
+    $cons->es_moderador = 0;
+    $cons->save();
+
+    $usuarios = ORM::for_table('usuario')
+        ->select('usuario.es_redactor')
+        ->select('usuario.es_moderador')
+        ->select('usuario.id')
+        ->select('usuario.imagen')
+        ->select('usuario.user')
+        ->select('usuario.nombre')
+        ->select('usuario.email')
+        ->select('usuario.edad')
+        ->find_many();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaUsuarios.html.twig', array('usuarios' => $usuarios,
+        'repNum' => $rep,
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajeOk' => 'Rol moderador revocado con éxito',
+        'retNum' => $ret));
+    die();
+}
+
+if(isset($_POST['botonCreaRed'])){
+    $cons = ORM::for_table('usuario')
+        ->where('id',$_POST['botonCreaRed'])
+        ->find_one();
+    $cons->es_redactor = 1;
+    $cons->save();
+
+    $usuarios = ORM::for_table('usuario')
+        ->select('usuario.es_redactor')
+        ->select('usuario.es_moderador')
+        ->select('usuario.id')
+        ->select('usuario.imagen')
+        ->select('usuario.user')
+        ->select('usuario.nombre')
+        ->select('usuario.email')
+        ->select('usuario.edad')
+        ->find_many();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaUsuarios.html.twig', array('usuarios' => $usuarios,
+        'repNum' => $rep,
+        'mensajeOk' => 'Rol redactor asignado correctamente',
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'retNum' => $ret));
+    die();
+}
+
+if(isset($_POST['botonDesRed'])){
+    $cons = ORM::for_table('usuario')
+        ->where('id',$_POST['botonDesRed'])
+        ->find_one();
+    $cons->es_redactor = 0;
+    $cons->save();
+
+    $usuarios = ORM::for_table('usuario')
+        ->select('usuario.es_redactor')
+        ->select('usuario.es_moderador')
+        ->select('usuario.id')
+        ->select('usuario.imagen')
+        ->select('usuario.user')
+        ->select('usuario.nombre')
+        ->select('usuario.email')
+        ->select('usuario.edad')
+        ->find_many();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaUsuarios.html.twig', array('usuarios' => $usuarios,
+        'repNum' => $rep,
+        'mensajeOk' => 'Rol redactor revocado con éxito',
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'retNum' => $ret));
     die();
 }
 

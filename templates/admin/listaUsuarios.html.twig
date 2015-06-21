@@ -15,7 +15,9 @@
                         <th>Nombre</th>
                         <th>E-mail</th>
                         <th>Edad</th>
+                        <th>Rol</th>
                         <th></th>
+                        <th>Escoger rol</th>
 
                     </tr>
                 </thead>
@@ -28,7 +30,26 @@
                         <td>{{ usuario.nombre }}</td>
                         <td>{{ usuario.email }}</td>
                         <td>{{ usuario.edad }}</td>
+                        <td>
+                            {% if usuario.es_moderador==1 %}
+                                Moderador
+                            {% endif %}
+                            {% if usuario.es_moderador==1 and usuario.es_redactor==1 %}
+                                Moderador / Redactor
+                            {% endif %}
+                            {% if usuario.es_redactor==1 %}
+                                Redactor
+                            {% endif %}
+                            {% if usuario.es_moderador==0 and usuario.es_redactor==0 %}
+                                Usuario sin rol
+                            {% endif %}
+                        </td>
                         <td><button onclick="ConfirmDelete('{{ usuario.user }}'); return false;"  class="btn btn-danger" value="{{ usuario.id }}" name="botonAdminBorrarUsuario">Eliminar</button></td>
+                        <td><div class="btn-group">
+                                <button type="submit" {% if usuario.es_moderador==1 %}name="botonDesMod" class="btn btn-danger" value="{{ usuario.id }}"{% else %}name="botonCreaMod" class="btn btn-primary" value="{{ usuario.id }}"{% endif %}>Moderador</button>
+                                <button type="submit" {% if usuario.es_redactor %}name="botonDesRed" class="btn btn-danger" value="{{ usuario.id }}"{% else %}name="botonCreaRed" class="btn btn-primary" value="{{ usuario.id }}"{% endif %}>Redactor</button>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -54,10 +75,10 @@
                 "order": [[ 1, 'asc' ]],
                 "aoColumnDefs": [
                     { "bSearchable": false, "aTargets": [ 0 ] },
-                    { "bSearchable": false, "aTargets": [ 1] },
-                    { "bSearchable": true, "aTargets": [ 2] },
-                    { "bSearchable": false, "aTargets": [ 3] },
-                    { "bSearchable": false, "aTargets": [ 4] }]
+                    { "bSearchable": false, "aTargets": [ 1 ] },
+                    { "bSearchable": true, "aTargets": [ 2 ] },
+                    { "bSearchable": false, "aTargets": [ 3 ] },
+                    { "bSearchable": false, "aTargets": [ 4 ] }]
             });
 
         });
