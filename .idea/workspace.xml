@@ -25,136 +25,116 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="administracion.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/controller/administracion/administracion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.846153" vertical-offset="1108" max-vertical-offset="3910">
-              <caret line="94" column="14" selection-start-line="80" selection-start-column="8" selection-end-line="94" selection-end-column="14" />
-              <folding>
-                <marker date="1434884419987" expanded="true" signature="3498:3874" placeholder="select eq1.n..reto..." />
-                <marker date="1434884419987" expanded="true" signature="3978:4319" placeholder="select eq1.n..reto..." />
-                <marker date="1434884419987" expanded="true" signature="4995:5307" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884419987" expanded="true" signature="5411:5787" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884419987" expanded="true" signature="6425:6442" placeholder="..." />
-                <marker date="1434884419987" expanded="true" signature="6525:6541" placeholder="..." />
-                <marker date="1434884419987" expanded="true" signature="7025:7042" placeholder="..." />
-                <marker date="1434884419987" expanded="true" signature="7133:7149" placeholder="..." />
-                <marker date="1434884419987" expanded="true" signature="8733:9216" placeholder="..." />
-                <marker date="1434884419987" expanded="true" signature="8867:9198" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listaUsuarios.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/listaUsuarios.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.461538" vertical-offset="15" max-vertical-offset="1190">
-              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listaEquipos.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/listaEquipos.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.1454544" vertical-offset="104" max-vertical-offset="1122">
-              <caret line="26" column="83" selection-start-line="26" selection-start-column="83" selection-end-line="26" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="baseAdmin.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/admin/baseAdmin.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41834453" vertical-offset="102" max-vertical-offset="1666">
-              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="botonesAdministracion.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/controller/administracion/botonesAdministracion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.236363" vertical-offset="1358" max-vertical-offset="5219">
-              <caret line="113" column="97" selection-start-line="113" selection-start-column="97" selection-end-line="113" selection-end-column="97" />
-              <folding>
-                <marker date="1434885052317" expanded="true" signature="4367:4743" placeholder="select eq1.n..reto..." />
-                <marker date="1434885052317" expanded="true" signature="4835:5176" placeholder="select eq1.n..reto..." />
-                <marker date="1434885052317" expanded="true" signature="5940:6252" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434885052317" expanded="true" signature="6344:6720" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434885052317" expanded="true" signature="7244:7620" placeholder="select eq1.n..reto..." />
-                <marker date="1434885052317" expanded="true" signature="7711:8052" placeholder="select eq1.n..reto..." />
-                <marker date="1434885052317" expanded="true" signature="8559:8871" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434885052317" expanded="true" signature="8963:9339" placeholder="select us1.u..reto1vs1..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="retos.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/retos.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.5" vertical-offset="612" max-vertical-offset="1666">
-              <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listaRetos.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin/listaRetos.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.153846" vertical-offset="712" max-vertical-offset="1938">
-              <caret line="62" column="28" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="retos1vs1.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/retos1vs1.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.4" vertical-offset="2004" max-vertical-offset="2873">
-              <caret line="158" column="30" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
+            <state vertical-scroll-proportion="-7.730769" vertical-offset="1516" max-vertical-offset="2788">
+              <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
               <folding>
-                <marker date="1434884138301" expanded="true" signature="174:548" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="653:1084" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="1415:1789" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="1894:2325" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="3595:4100" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="4193:4669" placeholder="select us1.u..reto1vs1..." />
-                <marker date="1434884138301" expanded="true" signature="6098:6449" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6098:6561" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6098:6585" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6704:6808" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6704:7140" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6704:7283" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="6704:7307" placeholder="select eq1.n..reto..." />
-                <marker date="1434884138301" expanded="true" signature="7369:7918" placeholder="select eq1.n..reto..." />
+                <marker date="1434887637770" expanded="true" signature="174:548" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="653:1084" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="1415:1789" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="1894:2325" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="3715:4220" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="4313:4789" placeholder="select us1.u..reto1vs1..." />
+                <marker date="1434887637770" expanded="true" signature="6330:6909" placeholder="select eq1.n..reto..." />
+                <marker date="1434887637770" expanded="true" signature="6995:7544" placeholder="select eq1.n..reto..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="misRetosEquipo.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/misRetosEquipo.html.twig">
+      <file leaf-file-name="equipos.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controller/equipos/equipos.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.153847" vertical-offset="255" max-vertical-offset="2329">
-              <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="2108">
+              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="14" />
+              <folding>
+                <marker date="1434887311615" expanded="true" signature="1386:1859" placeholder="select reto...reto..." />
+                <marker date="1434887311615" expanded="true" signature="3949:4378" placeholder="select reto...reto..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="comun.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/php/comun.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-29.307692" vertical-offset="1261" max-vertical-offset="2278">
+              <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+              <folding>
+                <marker date="1434887557624" expanded="true" signature="2675:3043" placeholder="select eq1.n..reto..." />
+                <marker date="1434887557624" expanded="true" signature="3152:3464" placeholder="select us1.u..reto1vs1..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="botonesSolicitudes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/botonesSolicitudes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-35.96154" vertical-offset="0" max-vertical-offset="2329">
+              <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="botonesRetos1vs1.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="baseAdmin.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/baseAdmin.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="1666">
+              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-25.307692" vertical-offset="583" max-vertical-offset="3179">
+              <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="solicitudes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/solicitudes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.538462" vertical-offset="0" max-vertical-offset="799">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usuarios.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuarios.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.0" vertical-offset="0" max-vertical-offset="629">
+              <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usuariosBotones.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuariosBotones.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-22.23077" vertical-offset="0" max-vertical-offset="765">
+              <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="botonesRetos1vs1.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/botonesRetos1vs1.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.309091" vertical-offset="767" max-vertical-offset="1632">
-              <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.54362416" vertical-offset="874" max-vertical-offset="1785">
+              <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -185,37 +165,37 @@
         <option value="$PROJECT_DIR$/templates/clasificacion1vs1.html.twig" />
         <option value="$PROJECT_DIR$/public/php/mail.php" />
         <option value="$PROJECT_DIR$/templates/inicio.html.twig" />
-        <option value="$PROJECT_DIR$/public/controller/inicio/inicio.php" />
-        <option value="$PROJECT_DIR$/public/controller/clasificacion/clasificacionEquipos.php" />
-        <option value="$PROJECT_DIR$/public/controller/clasificacion/clasificacion1vs1.php" />
-        <option value="$PROJECT_DIR$/public/controller/inicio/botonesInicio.php" />
-        <option value="$PROJECT_DIR$/public/controller/mensajes/botonesMensaje.php" />
-        <option value="$PROJECT_DIR$/public/controller/mensajes/mensajes.php" />
-        <option value="$PROJECT_DIR$/public/controller/miCuenta/miCuenta.php" />
-        <option value="$PROJECT_DIR$/public/controller/solicitudes/botonesSolicitudes.php" />
-        <option value="$PROJECT_DIR$/public/controller/solicitudes/solicitudes.php" />
-        <option value="$PROJECT_DIR$/public/controller/usuarios/usuarios.php" />
-        <option value="$PROJECT_DIR$/public/controller/usuarios/usuariosBotones.php" />
         <option value="$PROJECT_DIR$/templates/misRetos1vs1.html.twig" />
-        <option value="$PROJECT_DIR$/public/controller/equipos/equipos.php" />
-        <option value="$PROJECT_DIR$/public/php/comun.php" />
         <option value="$PROJECT_DIR$/templates/admin/listaRetos1vs1.html.twig" />
-        <option value="$PROJECT_DIR$/public/controller/equipos/botonesEquipo.php" />
         <option value="$PROJECT_DIR$/public/css/estilos.css" />
         <option value="$PROJECT_DIR$/public/controller/retos/botonesReto.php" />
         <option value="$PROJECT_DIR$/templates/equipos.html.twig" />
         <option value="$PROJECT_DIR$/templates/retaEquipo.html.twig" />
-        <option value="$PROJECT_DIR$/public/controller/creaReto/creaReto.php" />
-        <option value="$PROJECT_DIR$/public/controller/retos/retos.php" />
-        <option value="$PROJECT_DIR$/public/controller/creaReto/creaRetoBotones.php" />
-        <option value="$PROJECT_DIR$/templates/base.twig" />
-        <option value="$PROJECT_DIR$/public/controller/retos1vs1/botonesRetos1vs1.php" />
-        <option value="$PROJECT_DIR$/public/controller/retos1vs1/retos1vs1.php" />
         <option value="$PROJECT_DIR$/templates/misRetosEquipo.html.twig" />
         <option value="$PROJECT_DIR$/public/controller/administracion/administracion.php" />
         <option value="$PROJECT_DIR$/templates/admin/listaEquipos.html.twig" />
         <option value="$PROJECT_DIR$/public/controller/administracion/botonesAdministracion.php" />
         <option value="$PROJECT_DIR$/templates/admin/baseAdmin.html.twig" />
+        <option value="$PROJECT_DIR$/public/controller/clasificacion/clasificacion1vs1.php" />
+        <option value="$PROJECT_DIR$/public/controller/clasificacion/clasificacionEquipos.php" />
+        <option value="$PROJECT_DIR$/public/controller/creaReto/creaReto.php" />
+        <option value="$PROJECT_DIR$/public/controller/creaReto/creaRetoBotones.php" />
+        <option value="$PROJECT_DIR$/public/controller/equipos/botonesEquipo.php" />
+        <option value="$PROJECT_DIR$/public/controller/equipos/equipos.php" />
+        <option value="$PROJECT_DIR$/public/controller/inicio/botonesInicio.php" />
+        <option value="$PROJECT_DIR$/public/controller/inicio/inicio.php" />
+        <option value="$PROJECT_DIR$/public/controller/mensajes/botonesMensaje.php" />
+        <option value="$PROJECT_DIR$/public/controller/mensajes/mensajes.php" />
+        <option value="$PROJECT_DIR$/public/controller/miCuenta/miCuenta.php" />
+        <option value="$PROJECT_DIR$/public/controller/retos/retos.php" />
+        <option value="$PROJECT_DIR$/public/controller/solicitudes/botonesSolicitudes.php" />
+        <option value="$PROJECT_DIR$/public/controller/solicitudes/solicitudes.php" />
+        <option value="$PROJECT_DIR$/public/controller/usuarios/usuarios.php" />
+        <option value="$PROJECT_DIR$/public/controller/usuarios/usuariosBotones.php" />
+        <option value="$PROJECT_DIR$/public/php/comun.php" />
+        <option value="$PROJECT_DIR$/public/controller/retos1vs1/retos1vs1.php" />
+        <option value="$PROJECT_DIR$/templates/base.twig" />
+        <option value="$PROJECT_DIR$/public/controller/retos1vs1/botonesRetos1vs1.php" />
       </list>
     </option>
   </component>
@@ -331,6 +311,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="php" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="usuarios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -353,7 +373,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="administracion" />
+              <option name="myItemId" value="retos1vs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSProyecto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="equipos" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -465,13 +507,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/admin/nuevaNoticia.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/estilosAdmin.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="389" max-vertical-offset="1343">
@@ -550,72 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/clasificacion/clasificacion1vs1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="527">
-          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/clasificacion/clasificacionEquipos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="629">
-          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/inicio/inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="850">
-          <caret line="24" column="50" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/inicio/botonesInicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="578">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/mensajes/botonesMensaje.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.923077" vertical-offset="0" max-vertical-offset="2754">
-          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/mensajes/mensajes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="357" max-vertical-offset="2074">
-          <caret line="29" column="46" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/miCuenta/miCuenta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-35.96154" vertical-offset="0" max-vertical-offset="2924">
-          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/botonesSolicitudes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-35.96154" vertical-offset="0" max-vertical-offset="2142">
-          <caret line="55" column="49" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/solicitudes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.884615" vertical-offset="0" max-vertical-offset="765">
-          <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/retos1vs1.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-33.076923" vertical-offset="670" max-vertical-offset="1768">
@@ -655,42 +624,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/equipos/botonesEquipo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="4318">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuariosBotones.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuarios.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="595">
-          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/estilos.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.724138" vertical-offset="5722" max-vertical-offset="6613">
           <caret line="360" column="18" selection-start-line="360" selection-start-column="18" selection-end-line="360" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/retos/botonesReto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="136">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -721,113 +658,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/creaReto/creaReto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.384615" vertical-offset="0" max-vertical-offset="969">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="23" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/equipos/equipos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6363635" vertical-offset="153" max-vertical-offset="1989">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding>
-            <marker date="1434846872910" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
-            <marker date="1434846872910" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/creaReto/creaRetoBotones.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.490909" vertical-offset="0" max-vertical-offset="3808">
-          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
-          <folding>
-            <marker date="1434878601624" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
-            <marker date="1434878601624" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
-            <marker date="1434878601624" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/php/comun.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.709091" vertical-offset="0" max-vertical-offset="1972">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding>
-            <marker date="1434849720647" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
-            <marker date="1434849720647" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.8545456" vertical-offset="583" max-vertical-offset="3094">
-          <caret line="50" column="53" selection-start-line="50" selection-start-column="53" selection-end-line="50" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/retos/retos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="850">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="22" selection-end-column="26" />
-          <folding>
-            <marker date="1434878029990" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
-            <marker date="1434878029990" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
-            <marker date="1434878029990" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
-            <marker date="1434878029990" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/misRetos1vs1.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.923077" vertical-offset="51" max-vertical-offset="2227">
           <caret line="35" column="51" selection-start-line="0" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/retos.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.5" vertical-offset="612" max-vertical-offset="1666">
-          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/botonesRetos1vs1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.309091" vertical-offset="767" max-vertical-offset="1632">
-          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/retos1vs1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.4" vertical-offset="2004" max-vertical-offset="2873">
-          <caret line="158" column="30" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
-          <folding>
-            <marker date="1434884138301" expanded="true" signature="174:548" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="653:1084" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="1415:1789" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="1894:2325" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="3595:4100" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="4193:4669" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884138301" expanded="true" signature="6098:6449" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6098:6561" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6098:6585" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6704:6808" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6704:7140" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6704:7283" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="6704:7307" placeholder="select eq1.n..reto..." />
-            <marker date="1434884138301" expanded="true" signature="7369:7918" placeholder="select eq1.n..reto..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -868,16 +703,16 @@
         <state vertical-scroll-proportion="-18.846153" vertical-offset="1108" max-vertical-offset="3910">
           <caret line="94" column="14" selection-start-line="80" selection-start-column="8" selection-end-line="94" selection-end-column="14" />
           <folding>
-            <marker date="1434884419987" expanded="true" signature="3498:3874" placeholder="select eq1.n..reto..." />
-            <marker date="1434884419987" expanded="true" signature="3978:4319" placeholder="select eq1.n..reto..." />
-            <marker date="1434884419987" expanded="true" signature="4995:5307" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884419987" expanded="true" signature="5411:5787" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434884419987" expanded="true" signature="6425:6442" placeholder="..." />
-            <marker date="1434884419987" expanded="true" signature="6525:6541" placeholder="..." />
-            <marker date="1434884419987" expanded="true" signature="7025:7042" placeholder="..." />
-            <marker date="1434884419987" expanded="true" signature="7133:7149" placeholder="..." />
-            <marker date="1434884419987" expanded="true" signature="8733:9216" placeholder="..." />
-            <marker date="1434884419987" expanded="true" signature="8867:9198" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434884419987" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -887,22 +722,235 @@
         <state vertical-scroll-proportion="-10.236363" vertical-offset="1358" max-vertical-offset="5219">
           <caret line="113" column="97" selection-start-line="113" selection-start-column="97" selection-end-line="113" selection-end-column="97" />
           <folding>
-            <marker date="1434885052317" expanded="true" signature="4367:4743" placeholder="select eq1.n..reto..." />
-            <marker date="1434885052317" expanded="true" signature="4835:5176" placeholder="select eq1.n..reto..." />
-            <marker date="1434885052317" expanded="true" signature="5940:6252" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434885052317" expanded="true" signature="6344:6720" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434885052317" expanded="true" signature="7244:7620" placeholder="select eq1.n..reto..." />
-            <marker date="1434885052317" expanded="true" signature="7711:8052" placeholder="select eq1.n..reto..." />
-            <marker date="1434885052317" expanded="true" signature="8559:8871" placeholder="select us1.u..reto1vs1..." />
-            <marker date="1434885052317" expanded="true" signature="8963:9339" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434885052317" expanded="true" signature="-1:-1" placeholder="select us1.u..reto1vs1..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/retos.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-49.03846" vertical-offset="0" max-vertical-offset="1666">
+          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/php/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="920">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1433752842000" expanded="true" signature="-1:-1" placeholder="select id,us..usuario..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/clasificacion/clasificacion1vs1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="561">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/clasificacion/clasificacionEquipos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="663">
+          <caret line="30" column="54" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="54" />
+          <folding>
+            <marker date="1434887311514" expanded="true" signature="-1:-1" placeholder="SELECT reto...reto..." />
+            <marker date="1434887311514" expanded="true" signature="-1:-1" placeholder="SELECT reto...reto..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/creaReto/creaReto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.192307" vertical-offset="83" max-vertical-offset="1037">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/creaReto/creaRetoBotones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="4012">
+          <caret line="27" column="54" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
+          <folding>
+            <marker date="1434887311522" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
+            <marker date="1434887311522" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
+            <marker date="1434887311522" expanded="true" signature="-1:-1" placeholder="select reto...reto..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/equipos/botonesEquipo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.423077" vertical-offset="0" max-vertical-offset="4539">
+          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/inicio/botonesInicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="612">
+          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/inicio/inicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="884">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/mensajes/botonesMensaje.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.576923" vertical-offset="0" max-vertical-offset="2907">
+          <caret line="33" column="50" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/mensajes/mensajes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="2244">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/miCuenta/miCuenta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.846153" vertical-offset="0" max-vertical-offset="3111">
+          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/retos/botonesReto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="136">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/retos/retos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.846153" vertical-offset="0" max-vertical-offset="884">
+          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+          <folding>
+            <marker date="1434887508598" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434887508598" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434887508598" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+            <marker date="1434887508598" expanded="true" signature="-1:-1" placeholder="select eq1.n..reto..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/botonesSolicitudes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-35.96154" vertical-offset="0" max-vertical-offset="2329">
+          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/solicitudes/solicitudes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.538462" vertical-offset="0" max-vertical-offset="799">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuarios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.0" vertical-offset="0" max-vertical-offset="629">
+          <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/usuarios/usuariosBotones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.23077" vertical-offset="0" max-vertical-offset="765">
+          <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/php/comun.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.307692" vertical-offset="1261" max-vertical-offset="2278">
+          <caret line="119" column="24" selection-start-line="119" selection-start-column="24" selection-end-line="119" selection-end-column="24" />
+          <folding>
+            <marker date="1434887557624" expanded="true" signature="2675:3043" placeholder="select eq1.n..reto..." />
+            <marker date="1434887557624" expanded="true" signature="3152:3464" placeholder="select us1.u..reto1vs1..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/equipos/equipos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="2108">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <marker date="1434887311615" expanded="true" signature="1386:1859" placeholder="select reto...reto..." />
+            <marker date="1434887311615" expanded="true" signature="3949:4378" placeholder="select reto...reto..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/baseAdmin.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41834453" vertical-offset="102" max-vertical-offset="1666">
-          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="1666">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.307692" vertical-offset="583" max-vertical-offset="3179">
+          <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/retos1vs1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.730769" vertical-offset="1516" max-vertical-offset="2788">
+          <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
+          <folding>
+            <marker date="1434887637770" expanded="true" signature="174:548" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="653:1084" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="1415:1789" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="1894:2325" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="3715:4220" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="4313:4789" placeholder="select us1.u..reto1vs1..." />
+            <marker date="1434887637770" expanded="true" signature="6330:6909" placeholder="select eq1.n..reto..." />
+            <marker date="1434887637770" expanded="true" signature="6995:7544" placeholder="select eq1.n..reto..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controller/retos1vs1/botonesRetos1vs1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54362416" vertical-offset="874" max-vertical-offset="1785">
+          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
           <folding />
         </state>
       </provider>

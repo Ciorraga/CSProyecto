@@ -29,10 +29,12 @@ $app->get('/solicitudes', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'retos1vs1' =>$_SESSION['retos1vs1'],
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'solicitudes' => $solicitudes));

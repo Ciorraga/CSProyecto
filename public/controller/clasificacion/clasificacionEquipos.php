@@ -20,6 +20,7 @@ $app->get('/clas_eq', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('clasificacionEquipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
@@ -27,6 +28,7 @@ $app->get('/clas_eq', function() use ($app) {
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'clasificacion' => $clasRetos,
             'retos1vs1' => $_SESSION['retos1vs1'],
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'esCapitan' => $esCapitan));
     }
 });

@@ -20,10 +20,12 @@ if(isset($_POST['botonEnviaReto'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeError' => "Tiene que adjuntar una fecha cuando haga un reto"));
         die();
@@ -49,10 +51,12 @@ if(isset($_POST['botonEnviaReto'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeError' => 'El usuario seleccionado y tú aún tenéis un reto activo. Termina el reto, o ponte en contacto con un administrador'));
         die();
@@ -79,9 +83,11 @@ if(isset($_POST['botonEnviaReto'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'ultimosUsuarios' => $ultUsuarios,
             'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeOk' => 'Reto enviado!'));
@@ -115,6 +121,7 @@ if(isset($_POST['botonEnviaRetoEquipo'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
@@ -122,6 +129,7 @@ if(isset($_POST['botonEnviaRetoEquipo'])){
             'equipo' => $equipo,
             'usuarios' => $usuarios,
             'miEquipo' => $miEquipo,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'mensajeError' => "Tiene que adjuntar una fecha cuando haga un reto",
             'retos1vs1' => $_SESSION['retos1vs1'],
@@ -159,6 +167,7 @@ if(isset($_POST['botonEnviaRetoEquipo'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
@@ -166,6 +175,7 @@ if(isset($_POST['botonEnviaRetoEquipo'])){
             'equipo' => $equipo,
             'usuarios' => $usuarios,
             'miEquipo' => $miEquipo,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'mensajeError' => 'El equipo seleccionado y tú aún tenéis un reto activo. Termina el reto, o ponte en contacto con un administrador',
             'retos1vs1' => $_SESSION['retos1vs1'],
@@ -203,12 +213,14 @@ if(isset($_POST['botonEnviaRetoEquipo'])){
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
             'equipo' => $equipo,
             'usuarios' => $usuarios,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'miEquipo' => $miEquipo,
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'mensajeOk' => 'Reto enviado!',

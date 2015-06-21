@@ -17,10 +17,12 @@ if(isset($_POST['botonResponderNoticia'])){
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
     $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+    $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
     $app->render('inicio.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
         'nuevaSolicitud' => $_SESSION['solicitudes'],
         'noticias' => $notic,
+        'retosEquipo' => $_SESSION['retosEquipo'],
         'numMensajes' => $_SESSION['numMensajes'],
         'retos1vs1' => $_SESSION['retos1vs1'],
         'usuarioLogin' => $_SESSION['usuarioLogin'],

@@ -12,9 +12,12 @@ $app->get('/equipos', function() use ($app) {
         $req = new comun();
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
+
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'retos1vs1' => $_SESSION['retos1vs1'],
             'nuevaSolicitud' => $_SESSION['solicitudes']));
     }else{
@@ -41,12 +44,14 @@ $app->get('/equipos', function() use ($app) {
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
         $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
             'equipo' => $equipo,
             'usuarios' => $usuarios,
+            'retosEquipo' => $_SESSION['retosEquipo'],
             'miEquipo' => $miEquipo,
             'nuevaSolicitud' => $_SESSION['solicitudes'],
             'retos1vs1' => $_SESSION['retos1vs1'],
@@ -98,12 +103,14 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
     $imagenUser = $_SESSION['usuarioLogin']['imagen'];
     $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+    $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
     $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,
         'usuarioLogin'=>$_SESSION['usuarioLogin'],
         'numMensajes' => $_SESSION['numMensajes'],
         'equipo' => $equipo,
         'usuarios' => $usuarios,
+        'retosEquipo' => $_SESSION['retosEquipo'],
         'botonSolicitud' => $botonSolicitud,
         'nuevaSolicitud' => $_SESSION['solicitudes'],
         'misRetos' => $ultJugados,

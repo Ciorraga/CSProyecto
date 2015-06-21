@@ -106,6 +106,24 @@ class comun {
         return $res;
     }
 
+    public function compruebaRetosEquipo(){
+        $es_capitan = ORM::for_table('equipo')
+            ->where('capitan_id',$_SESSION['usuarioLogin']['id'])
+            ->find_one();
+
+        if($es_capitan){
+            $res = ORM::for_table('reto')
+                ->where('retado_id',$_SESSION['usuarioLogin']['equipo_id'])
+                ->where('aceptado',"0")
+                ->find_many();
+        }else{
+            $res = null;
+        }
+
+        return $res;
+    }
+
+
 
 
 }

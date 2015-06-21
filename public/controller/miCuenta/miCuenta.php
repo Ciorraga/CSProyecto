@@ -29,12 +29,14 @@ $app->post('/actualizaUsuario', function() use ($app) {
     $compUser = $req->compruebaNombres('usuario','user',$user);
     $compEmail = $req->compruebaNombres('usuario','email',$email);
     $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+    $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
         $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),
             'numMensajes' => $_SESSION['numMensajes'],
             'retos1vs1' => $_SESSION['retos1vs1'],
+            'retosEquipo' => $_SESSION['retosEquipo'],
             "usuarioLogin" => $_SESSION['usuarioLogin'],
             'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
@@ -44,6 +46,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
                 'msgCuenta' => array("danger","El nombre de usuario ya existe"),
                 'numMensajes' => $_SESSION['numMensajes'],
                 'retos1vs1' => $_SESSION['retos1vs1'],
+                'retosEquipo' => $_SESSION['retosEquipo'],
                 "usuarioLogin" => $_SESSION['usuarioLogin'],
                 'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
@@ -52,6 +55,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
                 'msgCuenta' => array("danger","El e-mail que has introducido ya existe"),
                 'numMensajes' => $_SESSION['numMensajes'],
+                'retosEquipo' => $_SESSION['retosEquipo'],
                 "usuarioLogin" => $_SESSION['usuarioLogin'],
                 'retos1vs1' => $_SESSION['retos1vs1'],
                 'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -72,6 +76,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
                     $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
                         'mensajeError' => $mensajeError,
                         'numMensajes' => $_SESSION['numMensajes'],
+                        'retosEquipo' => $_SESSION['retosEquipo'],
                         'retos1vs1' => $_SESSION['retos1vs1'],
                         'usuarioLogin' => $_SESSION['usuarioLogin'],
                         'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -84,6 +89,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
                     $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
                         'mensajeError' => $mensajeError,
                         'numMensajes' => $_SESSION['numMensajes'],
+                        'retosEquipo' => $_SESSION['retosEquipo'],
                         'usuarioLogin' => $_SESSION['usuarioLogin'],
                         'retos1vs1' => $_SESSION['retos1vs1'],
                         'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -108,6 +114,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
                         'mensajeError' => $mensajeError,
                         'retos1vs1' => $_SESSION['retos1vs1'],
                         'numMensajes' => $_SESSION['numMensajes'],
+                        'retosEquipo' => $_SESSION['retosEquipo'],
                         'usuarioLogin' => $_SESSION['usuarioLogin'],
                         'nuevaSolicitud' => $_SESSION['solicitudes']));
                     die();
@@ -137,6 +144,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
             $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+            $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
             $usuario = ORM::for_table('usuario')->where('user', $user)
                 ->find_one();
@@ -145,6 +153,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
                 'msgCuenta' => array("success","Cambios realizados con éxito"),
                 'numMensajes' => $_SESSION['numMensajes'],
+                'retosEquipo' => $_SESSION['retosEquipo'],
                 'retos1vs1' => $_SESSION['retos1vs1'],
                 "usuarioLogin" => $_SESSION['usuarioLogin'],
                 'nuevaSolicitud' => $_SESSION['solicitudes']));
@@ -154,12 +163,14 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
             $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+            $_SESSION['retosEquipo'] = $req->compruebaRetosEquipo();
 
             $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
                 'msgCuenta' => array("danger","Las contraseñas no son iguales"),
                 'numMensajes' => $_SESSION['numMensajes'],
                 "usuarioLogin" => $_SESSION['usuarioLogin'],
                 'retos1vs1' => $_SESSION['retos1vs1'],
+                'retosEquipo' => $_SESSION['retosEquipo'],
                 'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }
