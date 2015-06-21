@@ -82,6 +82,39 @@ if(isset($_POST['botonAdminBorrarUsuario'])){
     $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito','usuarios' => $usuarios,'retNum' => $ret));
 }
 
+if(isset($_POST['botonAdminBorrarEquipo'])){
+    $miembros = ORM::for_table('usuario')
+        ->where('equipo_id',$_POST['botonAdminBorrarEquipo'])
+        ->find_many();
+    foreach ($miembros as $miembro){
+        $miembro->equipo_id = null;
+        $miembro->save();
+    }
+
+    $equipo = ORM::for_table('equipo')
+        ->where('id',$_POST['botonAdminBorrarEquipo'])
+        ->find_one();
+    $equipo->capitan_id = null;
+    $equipo->save();
+    $equipo->delete();
+
+    $equipos = ORM::for_table('equipo')
+        ->join('usuario',array('equipo.capitan_id','=','usuario.id'))
+        ->select('equipo.id')
+        ->select('equipo.logo')
+        ->select('equipo.nombre')
+        ->select('usuario.user')
+        ->find_many();
+
+    $req = new comun();
+    $notic = $req->mostrarNoticias();
+    $rep = $req->compruebaReportes();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaEquipos.html.twig',array('mensajeOK' => 'Equipo eliminado con éxito','equipos' => $equipos,'repNum' => $rep, 'retNum' => $ret));
+    die();
+}
+
 if(isset($_POST['fijaResultadoReto'])){
     $reto = ORM::for_table('reto')
         ->where('id',$_POST['fijaResultadoReto'])

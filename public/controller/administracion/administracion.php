@@ -72,6 +72,30 @@ $app->get('/administracion/usuarios', function() use ($app) {
     }
 })->name("listaUsuarios");
 
+$app->get('/administracion/equipos', function() use ($app) {
+    if (!isset($_SESSION['usuarioLogin'])) {
+        session_destroy();
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }else{
+        $equipos = ORM::for_table('equipo')
+            ->join('usuario',array('equipo.capitan_id','=','usuario.id'))
+            ->select('equipo.id')
+            ->select('equipo.logo')
+            ->select('equipo.nombre')
+            ->select('usuario.user')
+            ->find_many();
+
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
+
+        $app->render('admin/listaEquipos.html.twig',array('equipos' => $equipos,'repNum' => $rep, 'retNum' => $ret));
+        die();
+    }
+})->name("listaEquipos");
+
 $app->get('/administracion/retos', function() use ($app) {
     if (!isset($_SESSION['usuarioLogin'])) {
         session_destroy();

@@ -88,3 +88,76 @@ where reto1vs1.ganador IS NOT null AND reto1vs1.retado_id=". $_SESSION['usuarioL
 
 });
 
+$app->get('/misRetosEquipo', function() use ($app) {
+    $es_capitan = ORM::for_table('equipo')->where('capitan_id', $_SESSION['usuarioLogin']['id'])->find_one();
+    if($es_capitan){
+        $capitan=1;
+    }else{
+        $pendientes="vacio";
+        $capitan = 0;
+    }
+
+    $nuevos = ORM::for_table('reto')
+        ->join('equipo',array('reto.retador_id','=','equipo.id'))
+        ->select('reto.id')
+        ->select('reto.fecha')
+        ->select('reto.mapa')
+        ->select('equipo.nombre')
+        ->select('equipo.logo')
+        ->where('retado_id',$_SESSION['usuarioLogin']['equipo_id'])
+        ->where('aceptado',"0")
+        ->find_many();
+    if($nuevos==null){
+        $nuevos="vacio";
+    }
+
+    /*$nuevos = ORM::for_table('reto')
+        ->raw_query("select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.fecha,reto.aceptado,reto.ganador,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2
+            from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id
+            where reto.aceptado=0
+            AND reto.retado_id=". $_SESSION['usuarioLogin']['equipo_id'] ."
+            ORDER BY reto.fecha DESC")
+        ->find_many();
+    if($nuevos==null){
+        $nuevos="vacio";
+    }*/
+
+    $proximos = ORM::for_table('reto')
+        ->raw_query("select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.aceptado,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2
+            from reto
+            join equipo as eq1 on reto.retador_id=eq1.id
+            join equipo as eq2 on reto.retado_id=eq2.id
+            where reto.ganador IS null
+            AND reto.aceptado = 1
+            AND ( reto.retador_id = ". $_SESSION['usuarioLogin']['equipo_id'] ." OR reto.retado_id = ". $_SESSION['usuarioLogin']['equipo_id'] .")
+            ORDER BY reto.fecha")
+        ->find_many();
+
+    $jugados = ORM::for_table('reto')
+        ->raw_query("select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.aceptado,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2
+            from reto
+            join equipo as eq1 on reto.retador_id=eq1.id
+            join equipo as eq2 on reto.retado_id=eq2.id
+            where reto.ganador IS NOT null
+            AND ( reto.retador_id = ". $_SESSION['usuarioLogin']['equipo_id'] ." OR reto.retado_id = ". $_SESSION['usuarioLogin']['equipo_id'] .")
+            ORDER BY reto.fecha")
+        ->find_many();
+
+
+    $req = new comun();
+    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
+    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+
+    $app->render('misRetosEquipo.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' =>$_SESSION['retos1vs1'],
+        'nuevaSolicitud' => $_SESSION['solicitudes'],
+        'pendientes' => $nuevos,
+        'proximos' => $proximos,
+        'capitan' => $capitan,
+        'ultimosJugados' => $jugados
+    ));
+
+});

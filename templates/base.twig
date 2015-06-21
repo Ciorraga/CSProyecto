@@ -48,6 +48,9 @@
                         {% if usuarioLogin %}
                             <li><a href="/misRetos1vs1">Mis retos</a></li>
                         {% endif %}
+                        {% if usuarioLogin['equipo_id'] %}
+                            <li><a href="/misRetosEquipo">Mis retos equipo</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -63,7 +66,7 @@
 </nav>
 {% if retos1vs1!=null %}
     <div class="alert alert-info" role="alert" style="text-align:center;">
-        <a href="/misRetos1vs1">Tienes nuevos retos</a>
+        <a href="/misRetos1vs1">Tienes un nuevo reto 1vs1</a>
     </div>
 {% endif %}
 

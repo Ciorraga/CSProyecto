@@ -1,0 +1,131 @@
+{%extends "base.twig" %}
+
+{% block titulo %}
+    CSGOPlay | Retos 1vs1
+{% endblock %}
+
+{% block contenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Mis retos</h1>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="primerDiv">
+        {% if capitan==1 %}
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Nuevos retos</div>
+                    <div class="panel-body">
+                        <form action="/" method="POST">
+                            {% if pendientes=="vacio" %}
+                            <div class="jumbotron" id="jumbotronUsuarios">
+                                <h2>No tiene nuevos retos</h2>
+                            </div>
+                            {% else %}
+                            <table id="myTable" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Retador</th>
+                                    <th>Fecha</th>
+                                    <th>Mapa</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for elem in pendientes %}
+                                    <tr>
+                                        <td><img id="imagenReto" src="{{ elem.logo }}"/></td>
+                                        <td>{{ elem.nombre }}</td>
+                                        <td>{{ elem.fecha }}</td>
+                                        <td>{{ elem.mapa }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="submit" name="botonAceptarReto" class="btn btn-success" value="{{ elem.id }}">Aceptar</button>
+                                                <button type="submit" name="botonRechazarReto" class="btn btn-danger" value="{{ elem.id }}">Rechazar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Próximos retos</div>
+            <div class="panel-body">
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for elem in proximos %}
+                        <tr>
+                            <td>{{ elem.nombreEq1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                            <td>{{ elem.nombreEq2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Jugados</div>
+            <div class="panel-body">
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for elem in ultimosJugados %}
+                        <tr>
+                            <td>{{ elem.nombreEq1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.eq1Imagen }}"/></td>
+                            <td id="resEq"><b>{{ elem.resEq1 }}</b></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td id="resEq"><b>{{ elem.resEq2 }}</b></td>
+                            <td><img id="imagenReto" src="{{ elem.eq2Imagen }}"/></td>
+                            <td>{{ elem.nombreEq2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

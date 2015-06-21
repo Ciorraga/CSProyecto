@@ -1,0 +1,61 @@
+{%extends "admin/baseAdmin.html.twig" %}
+
+{% block admincontenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Listado de usuarios</h1>
+    </div>
+    <div id="primerDiv" class="col-md-8 col-md-offset-2">
+        <form action="/" method="POST">
+            <table id="myTable2" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Capitán</th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for equipo in equipos %}
+                    <tr>
+                        <td>{{ equipo.id }}</td>
+                        <td><img id="imagenUsuario" src="{{ equipo.logo }}" alt=""/></td>
+                        <td>{{ equipo.nombre }}</td>
+                        <td>{{ equipo.user }}</td>
+                        <td><button onclick="ConfirmDelete('{{ equipo.nombre }}'); return false;"  class="btn btn-danger" value="{{ equipo.id }}" name="botonAdminBorrarEquipo">Eliminar</button></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="/js/jquery.dataTables2.js"></script>
+    <script>
+        function ConfirmDelete(elem)
+        {
+            var x = confirm("¿Seguro que quieres eliminar el equipo "+elem+" ?");
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#myTable2').dataTable({
+                "order": [[ 1, 'asc' ]],
+                "aoColumnDefs": [
+                    { "bSearchable": false, "aTargets": [ 0 ] },
+                    { "bSearchable": false, "aTargets": [ 1] },
+                    { "bSearchable": true, "aTargets": [ 2] },
+                    { "bSearchable": false, "aTargets": [ 3] },
+                    { "bSearchable": false, "aTargets": [ 4] }]
+            });
+
+        });
+    </script>
+{% endblock %}
