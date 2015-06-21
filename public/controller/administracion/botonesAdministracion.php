@@ -13,7 +13,9 @@ if(isset($_POST['botonBorrarNoticia'])){
 
 if(isset($_POST['botonEnviaNoticia'])){
     if($_POST['tituloNoticia']=="" || $_POST['textoNoticia']==""){
-        $app->render('admin/nuevaNoticia.html.twig',array('mensajeError' => 'Tienes que rellenar todos los campos'));
+        $req = new comun();
+        $ret = $req->compruebaRetos();
+        $app->render('admin/nuevaNoticia.html.twig',array('mensajeError' => 'Tienes que rellenar todos los campos','retNum' => $ret));
     }else{
         $fecha=date("Y/m/d");
         $nuevaNoticia = ORM::for_table('noticia')
@@ -26,8 +28,9 @@ if(isset($_POST['botonEnviaNoticia'])){
 
         $req = new comun();
         $notic = $req->mostrarNoticias();
+        $ret = $req->compruebaRetos();
 
-        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,'mensajeOk' => 'Noticia agregada con éxito'));
+        $app->render('admin/listadoNoticias.html.twig',array('noticias' => $notic,'mensajeOk' => 'Noticia agregada con éxito','retNum' => $ret));
     }
 }
 
@@ -73,7 +76,10 @@ if(isset($_POST['botonAdminBorrarUsuario'])){
         ->select('usuario.edad')
         ->find_many();
 
-    $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito','usuarios' => $usuarios));
+    $req = new comun();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaUsuarios.html.twig', array('mensajeOk' => 'Usuario eliminado con éxito','usuarios' => $usuarios,'retNum' => $ret));
 }
 
 if(isset($_POST['fijaResultadoReto'])){
@@ -99,7 +105,44 @@ if(isset($_POST['fijaResultadoReto'])){
         ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC ')
         ->find_many();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto actualizado','retosCerrados' => $retosCerrados));
+    $req = new comun();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto actualizado','retosCerrados' => $retosCerrados,'retNum' => $ret));
+    die();
+}
+
+if(isset($_POST['fijaResultadoReto1vs1'])){
+    $reto = ORM::for_table('reto1vs1')
+        ->where('id',$_POST['fijaResultadoReto1vs1'])
+        ->find_one();
+
+    $reto->res_retador = $_POST['resRetador'];
+    $reto->res_retado = $_POST['resRetado'];
+    if($_POST['resRetador']>$_POST['resRetado']){
+        $reto->ganador = $reto['retador_id'];
+    }else{
+        $reto->ganador = $reto['retado_id'];
+    }
+    $reto->save();
+
+    $retosAbiertos = ORM::for_table('reto1vs1')
+        ->raw_query("select us1.user as user1,us2.user as user2,us1.imagen as us1Imagen,us2.imagen as us2Imagen,reto1vs1.fecha,reto1vs1.mapa,reto1vs1.id
+        from reto1vs1 join usuario as us1 on reto1vs1.retador_id=us1.id join usuario as us2 on reto1vs1.retado_id=us2.id where reto1vs1.ganador IS null  ORDER BY reto1vs1.fecha ASC")
+        ->find_many();
+
+    $retosCerrados = ORM::for_table('reto')
+        ->raw_query("select us1.user as user1,us2.user as user2,us1.imagen as us1Imagen,us2.imagen as us2Imagen,reto1vs1.fecha,reto1vs1.mapa,reto1vs1.res_retador as resUs1,reto1vs1.res_retado as resUs2,reto1vs1.id
+        from reto1vs1 join usuario as us1 on reto1vs1.retador_id=us1.id join usuario as us2 on reto1vs1.retado_id=us2.id where reto1vs1.ganador IS NOT null ORDER BY reto1vs1.fecha ASC")
+        ->find_many();
+
+    $req = new comun();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaRetos1vs1.html.twig',array('retosEq' => $retosAbiertos,
+        'retNum' => $ret,
+        'mensajeOk' => 'Reto actualizado',
+        'retosCerrados' => $retosCerrados));
     die();
 }
 
@@ -116,7 +159,10 @@ if(isset($_POST['botonBorrarReto'])){
         ->raw_query('select eq1.nombre as nombreEq1,eq2.nombre as nombreEq2,eq1.logo as eq1Imagen,eq2.logo as eq2Imagen,reto.id,reto.fecha,reto.mapa,reto.res_eq_retador as resEq1,reto.res_eq_retado as resEq2 from reto join equipo as eq1 on reto.retador_id=eq1.id join equipo as eq2 on reto.retado_id=eq2.id where reto.ganador IS NOT null ORDER BY reto.fecha DESC ')
         ->find_many();
 
-    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto borrado','retosCerrados' => $retosCerrados));
+    $req = new comun();
+    $ret = $req->compruebaRetos();
+
+    $app->render('admin/listaRetos.html.twig',array('retosEq' => $retosEq, 'mensajeOk' => 'Reto borrado','retosCerrados' => $retosCerrados,'retNum' => $ret));
     die();
 }
 

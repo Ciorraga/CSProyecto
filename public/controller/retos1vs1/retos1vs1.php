@@ -88,28 +88,3 @@ where reto1vs1.ganador IS NOT null AND reto1vs1.retado_id=". $_SESSION['usuarioL
 
 });
 
-$app->get('/misRetos1vs1/:id', function($id) use ($app) {
-    $cons = ORM::for_table('reto1vs1')
-        ->join('usuario',array('reto1vs1.retador_id','=','usuario.id'))
-        ->select('reto1vs1.id')
-        ->select('reto1vs1.fecha')
-        ->select('reto1vs1.mapa')
-        ->select('usuario.user')
-        ->select('usuario.imagen')
-        ->where('retado_id',$id)
-        ->where('aceptado',"0")
-        ->find_many();
-    $req = new comun();
-    $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
-    $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
-
-    $app->render('misRetos1vs1.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
-        'usuarioLogin'=>$_SESSION['usuarioLogin'],
-        'numMensajes' => $_SESSION['numMensajes'],
-        'retos1vs1' =>$_SESSION['retos1vs1'],
-        'nuevaSolicitud' => $_SESSION['solicitudes'],
-        'pendientes' => $cons
-    ));
-
-});

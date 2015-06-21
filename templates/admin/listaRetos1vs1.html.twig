@@ -1,0 +1,109 @@
+{%extends "admin/baseAdmin.html.twig" %}
+
+{% block admincontenido %}
+    <div class="col-md-4 col-md-offset-4" id="titulo">
+        <h1>Retos 1vs1</h1>
+    </div>
+    <div id="primerDiv" class="col-md-8 col-md-offset-2">
+        <div class="row" id="h2Centrado">
+            <p id="textoEntradaMiCuenta">
+                Retos por actualizar
+            </p>
+        </div>
+        <form action="/" method="POST">
+            <table id="myTable" class="table table-bordered">
+
+                <tbody>
+                {% for elem in retosEq %}
+                    <tr>
+                        <td>{{ elem.user1 }}</td>
+                        <td><img id="imagenReto" src="{{ elem.us1Imagen }}"/></td>
+                        <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                        <td><img id="imagenReto" src="{{ elem.us2Imagen }}"/></td>
+                        <td>{{ elem.user2 }}</td>
+                        <td>{{ elem.fecha }}</td>
+                        <td>{{ elem.mapa }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <span onclick="showResult({{ elem.id }})"  class="btn btn-primary" value="{{ elem.id }}">Actualizar</span>
+                                <button type="submit" onclick="ConfirmDelete(); return false;" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div id="segundoDiv" style="display: none" class="col-md-8 col-md-offset-2"></div>
+
+    <div id="primerDiv" class="col-md-8 col-md-offset-2">
+        <div class="row" id="h2Centrado">
+            <p id="textoEntradaMiCuenta">
+                Retos cerrados
+            </p>
+        </div>
+        <form action="/" method="POST">
+            <table id="myTable" class="table table-bordered">
+
+                <tbody>
+                {% for elem in retosCerrados %}
+                    <tr>
+                        <td>{{ elem.user1 }}</td>
+                        <td><b>{{ elem.resUs1 }}</b></td>
+                        <td><img id="imagenReto" src="{{ elem.us1Imagen }}"/></td>
+                        <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                        <td><img id="imagenReto" src="{{ elem.us2Imagen }}"/></td>
+                        <td><b>{{ elem.resUs2 }}</b></td>
+                        <td>{{ elem.user2 }}</td>
+                        <td>{{ elem.fecha }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <span onclick="showResult({{ elem.id }})"  class="btn btn-primary" value="{{ elem.id }}">Actualizar</span>
+                                <button onclick="ConfirmDelete(); return false;" type="submit" name="botonBorrarReto" class="btn btn-danger" value="{{ elem.id }}">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        function ConfirmDelete(elem)
+        {
+            var x = confirm("¿Seguro que quieres eliminar el este reto ?");
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+    </script>
+    <script>
+        function showResult(str) {
+            if (str.length==0) {
+                document.getElementById("segundoDiv").innerHTML="";
+                document.getElementById("segundoDiv").style.border="0px";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                    console.log(xmlhttp.responseText);
+                    document.getElementById("segundoDiv").style.display = 'block';
+                    document.getElementById("segundoDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","/retoActualiza1vs1/"+str,true);
+            xmlhttp.send();
+        }
+    </script>
+{% endblock %}

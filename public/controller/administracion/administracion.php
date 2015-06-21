@@ -96,6 +96,48 @@ $app->get('/administracion/retos', function() use ($app) {
     }
 })->name("listaRetos");
 
+$app->get('/administracion/retos1vs1', function() use ($app) {
+    if (!isset($_SESSION['usuarioLogin'])) {
+        session_destroy();
+        $app->redirect($app->router()->urlFor('inicio'));
+        die();
+    }else{
+        $retosAbiertos = ORM::for_table('reto1vs1')
+            ->raw_query("select us1.user as user1,us2.user as user2,us1.imagen as us1Imagen,us2.imagen as us2Imagen,reto1vs1.fecha,reto1vs1.mapa,reto1vs1.id
+        from reto1vs1 join usuario as us1 on reto1vs1.retador_id=us1.id join usuario as us2 on reto1vs1.retado_id=us2.id where reto1vs1.ganador IS null  ORDER BY reto1vs1.fecha ASC")
+            ->find_many();
+
+        $retosCerrados = ORM::for_table('reto')
+            ->raw_query("select us1.user as user1,us2.user as user2,us1.imagen as us1Imagen,us2.imagen as us2Imagen,reto1vs1.fecha,reto1vs1.mapa,reto1vs1.res_retador as resUs1,reto1vs1.res_retado as resUs2,reto1vs1.id
+        from reto1vs1 join usuario as us1 on reto1vs1.retador_id=us1.id join usuario as us2 on reto1vs1.retado_id=us2.id where reto1vs1.ganador IS NOT null ORDER BY reto1vs1.fecha ASC")
+            ->find_many();
+
+        $req = new comun();
+        $notic = $req->mostrarNoticias();
+        $rep = $req->compruebaReportes();
+        $ret = $req->compruebaRetos();
+
+        $app->render('admin/listaRetos1vs1.html.twig',array('retosEq' => $retosAbiertos,
+            'retosCerrados' => $retosCerrados,
+            'repNum' => $rep,
+            'retNum' => $ret));
+        die();
+    }
+})->name("listaRetos1vs1");
+
+$app->get('/retoActualiza1vs1/:id', function ($id) {
+    $equipos = ORM::for_table('reto')
+        ->where('id',$id)
+        ->find_one();
+
+    echo "<form action='/' method='POST'>";
+    echo "<span style='margin-left:25px;'>Retador: <input type='text' name='resRetador'/></span>" ;
+    echo "<span style='margin-left:5px;'>Retado: <input type='text' name='resRetado'/></span>" ;
+    echo "<button style='float:right;' type='submit' class='btn btn-success' name='fijaResultadoReto1vs1' value='".$id."'>Actualizar</button>";
+    echo "</form>";
+
+})->name('actualizarRetos1vs1');
+
 $app->get('/retoActualiza/:id', function ($id) {
         $equipos = ORM::for_table('reto')
             ->where('id',$id)
@@ -106,7 +148,6 @@ $app->get('/retoActualiza/:id', function ($id) {
             echo "<span style='margin-left:5px;'>Retado: <input type='text' name='resRetado'/></span>" ;
             echo "<button style='float:right;' type='submit' class='btn btn-success' name='fijaResultadoReto' value='".$id."'>Actualizar</button>";
         echo "</form>";
-
 
 })->name('actualizarRetos');
 
