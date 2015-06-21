@@ -28,16 +28,33 @@ $app->post('/actualizaUsuario', function() use ($app) {
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
     $compUser = $req->compruebaNombres('usuario','user',$user);
     $compEmail = $req->compruebaNombres('usuario','email',$email);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+
     if(!$_POST['user'] || !$_POST['pass1'] || !$_POST['pass2'] || !$_POST['email'] || !$_POST['steam'] || !$_POST['nombre'] || !$_POST['edad']){
-        $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+        $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'msgCuenta' => array("danger","Debes rellenar todos los campos obligatorios"),
+            'numMensajes' => $_SESSION['numMensajes'],
+            'retos1vs1' => $_SESSION['retos1vs1'],
+            "usuarioLogin" => $_SESSION['usuarioLogin'],
+            'nuevaSolicitud' => $_SESSION['solicitudes']));
         die();
     }else{
         if($compUser && $user != $_SESSION['usuarioLogin']['user']){
-            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","El nombre de usuario ya existe"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                'msgCuenta' => array("danger","El nombre de usuario ya existe"),
+                'numMensajes' => $_SESSION['numMensajes'],
+                'retos1vs1' => $_SESSION['retos1vs1'],
+                "usuarioLogin" => $_SESSION['usuarioLogin'],
+                'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }
         if($compEmail){
-            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","El e-mail que has introducido ya existe"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                'msgCuenta' => array("danger","El e-mail que has introducido ya existe"),
+                'numMensajes' => $_SESSION['numMensajes'],
+                "usuarioLogin" => $_SESSION['usuarioLogin'],
+                'retos1vs1' => $_SESSION['retos1vs1'],
+                'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }
         if ($_POST['pass1'] == $_POST['pass2']) {
@@ -52,14 +69,24 @@ $app->post('/actualizaUsuario', function() use ($app) {
                 if($check == false) {
                     //Lanzar alerta de que no es una imagen
                     $mensajeError = "El archivo que ha seleccionado NO es una imagen";
-                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                        'mensajeError' => $mensajeError,
+                        'numMensajes' => $_SESSION['numMensajes'],
+                        'retos1vs1' => $_SESSION['retos1vs1'],
+                        'usuarioLogin' => $_SESSION['usuarioLogin'],
+                        'nuevaSolicitud' => $_SESSION['solicitudes']));
                     die();
                 }
 
                 // Comprobamos el tamaño de la imagen
                 if ($_FILES["imagen"]["size"] > 300000) {
                     $mensajeError = "El archivo es demasiado grande";
-                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                        'mensajeError' => $mensajeError,
+                        'numMensajes' => $_SESSION['numMensajes'],
+                        'usuarioLogin' => $_SESSION['usuarioLogin'],
+                        'retos1vs1' => $_SESSION['retos1vs1'],
+                        'nuevaSolicitud' => $_SESSION['solicitudes']));
                     die();
                 }
 
@@ -77,7 +104,12 @@ $app->post('/actualizaUsuario', function() use ($app) {
                     $mensajeOk = "El archivo ". basename( $_FILES["imagen"]["name"]). " ha sido subido con éxito";
                 } else {
                     $mensajeError = "El archivo no pudo ser subido";
-                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeError' => $mensajeError,'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+                    $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                        'mensajeError' => $mensajeError,
+                        'retos1vs1' => $_SESSION['retos1vs1'],
+                        'numMensajes' => $_SESSION['numMensajes'],
+                        'usuarioLogin' => $_SESSION['usuarioLogin'],
+                        'nuevaSolicitud' => $_SESSION['solicitudes']));
                     die();
                 }
             }
@@ -104,19 +136,31 @@ $app->post('/actualizaUsuario', function() use ($app) {
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+            $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
             $usuario = ORM::for_table('usuario')->where('user', $user)
                 ->find_one();
             $_SESSION['usuarioLogin'] = $usuario;
 
-            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("success","Cambios realizados con éxito"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                'msgCuenta' => array("success","Cambios realizados con éxito"),
+                'numMensajes' => $_SESSION['numMensajes'],
+                'retos1vs1' => $_SESSION['retos1vs1'],
+                "usuarioLogin" => $_SESSION['usuarioLogin'],
+                'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }else{
             $req = new comun();
             $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
             $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+            $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'msgCuenta' => array("danger","Las contraseñas no son iguales"),'numMensajes' => $_SESSION['numMensajes'],"usuarioLogin" => $_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+            $app->render('miCuenta.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+                'msgCuenta' => array("danger","Las contraseñas no son iguales"),
+                'numMensajes' => $_SESSION['numMensajes'],
+                "usuarioLogin" => $_SESSION['usuarioLogin'],
+                'retos1vs1' => $_SESSION['retos1vs1'],
+                'nuevaSolicitud' => $_SESSION['solicitudes']));
             die();
         }
     }

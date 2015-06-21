@@ -20,6 +20,7 @@ if(isset($_POST['botonEnviaReto'])){
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios,
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'mensajeError' => "Tiene que adjuntar una fecha cuando haga un reto"));
         die();
     }
@@ -43,6 +44,7 @@ if(isset($_POST['botonEnviaReto'])){
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],

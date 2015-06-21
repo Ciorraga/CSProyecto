@@ -19,8 +19,10 @@ $app->get('/usuarios', function() use ($app) {
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
         $app->render('usuarios.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'retos1vs1' =>$_SESSION['retos1vs1'],
             'usuarioLogin' => $_SESSION['usuarioLogin'],
             'ultimosUsuarios' => $ultUsuarios));
         die();

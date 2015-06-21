@@ -12,12 +12,12 @@
             <div class="panel-body">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
-                    <div class="panel-heading">Próximos retos</div>
+                    <div class="panel-heading">Nuevos retos</div>
                     <div class="panel-body">
                         <form action="/" method="POST">
                             {% if pendientes=="vacio" %}
                                 <div class="jumbotron" id="jumbotronUsuarios">
-                                    <h2>No tiene retos pendientes</h2>
+                                    <h2>No tiene nuevos retos</h2>
                                 </div>
                             {% else %}
                             <table id="myTable" class="table table-hover">
@@ -52,6 +52,72 @@
                     </div>
                 </div>
             </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Próximos retos</div>
+            <div class="panel-body">
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for elem in proximos %}
+                        <tr>
+                            <td>{{ elem.user1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.us1Imagen }}"/></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td><img id="imagenReto" src="{{ elem.us2Imagen }}"/></td>
+                            <td>{{ elem.user2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Jugados</div>
+            <div class="panel-body">
+                <table id="myTable" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Retador</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Retado</th>
+                        <th>Fecha</th>
+                        <th>Mapa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for elem in ultimosJugados %}
+                        <tr>
+                            <td>{{ elem.user1 }}</td>
+                            <td><img id="imagenReto" src="{{ elem.us1Imagen }}"/></td>
+                            <td><img id="imagenVs" src="/imagenes/vs.png"/></td>
+                            <td><img id="imagenReto" src="{{ elem.us2Imagen }}"/></td>
+                            <td>{{ elem.user2 }}</td>
+                            <td>{{ elem.fecha }}</td>
+                            <td>{{ elem.mapa }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block scripts %}

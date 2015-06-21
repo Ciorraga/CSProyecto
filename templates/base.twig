@@ -45,7 +45,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/retos">Retos de equipo</a></li> <!-- Solo se mostrara si es admin o capitan del equipo -->
                         <li><a href="/retos1vs1">Retos 1vs1</a></li>
-                        <li><a href="/misRetos1vs1">Mis retos</a></li>
+                        {% if usuarioLogin %}
+                            <li><a href="/misRetos1vs1">Mis retos</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -59,6 +61,11 @@
         </div>
     </div>
 </nav>
+{% if retos1vs1!=null %}
+    <div class="alert alert-info" role="alert" style="text-align:center;">
+        <a href="/misRetos1vs1">Tienes nuevos retos</a>
+    </div>
+{% endif %}
 
 <div class="row">
     <div class="col-md-12" id="banner">

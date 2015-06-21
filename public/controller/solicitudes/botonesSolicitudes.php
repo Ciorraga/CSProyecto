@@ -36,6 +36,7 @@ if(isset($_POST['botonAceptarSol'])){
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
         $solicitudes = ORM::for_table('equipo_usuario')
             ->select('equipo_usuario.id')
@@ -48,7 +49,13 @@ if(isset($_POST['botonAceptarSol'])){
             ->where('equipo_usuario.equipo_id', $_SESSION['usuarioLogin']['equipo_id'])
             ->find_many();
 
-        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'ok','mensajeOk' => "Solicitud aprobada con éxito"));
+        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'usuarioLogin'=>$_SESSION['usuarioLogin'],
+            'numMensajes' => $_SESSION['numMensajes'],
+            'nuevaSolicitud' => $_SESSION['solicitudes'],
+            'retos1vs1' =>$_SESSION['retos1vs1'],
+            'solicitudes' => $solicitudes,'aprobada' => 'ok',
+            'mensajeOk' => "Solicitud aprobada con éxito"));
     }else{
 
         $modificaEstadoPeticion = ORM::for_table('equipo_usuario')
@@ -71,7 +78,13 @@ if(isset($_POST['botonAceptarSol'])){
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+        $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+            'usuarioLogin'=>$_SESSION['usuarioLogin'],
+            'numMensajes' => $_SESSION['numMensajes'],
+            'retos1vs1' =>$_SESSION['retos1vs1'],
+            'nuevaSolicitud' => $_SESSION['solicitudes'],
+            'solicitudes' => $solicitudes,'tieneEquipo' => 'ok'));
     }
 }
 
@@ -102,6 +115,7 @@ if(isset($_POST['botonDenegarSol'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
     $app->render('solicitudes.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes'],'solicitudes' => $solicitudes,'aprobada' => 'notOk','mensajeError' => 'Solicitud denegada con éxito'));
 }

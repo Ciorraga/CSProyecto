@@ -25,8 +25,15 @@ if(isset($_POST['botonRespondeMensaje'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-    $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => 'Mensaje enviado con éxito','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensajeOk' => 'Mensaje enviado con éxito',
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajes' => $mensajes,
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 }
 
@@ -49,8 +56,14 @@ if(isset($_POST['botonMostrar'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-    $app->render('mensajeEntrada.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajeEntrada.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensaje' => $mensaje[0],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 }
 
@@ -82,8 +95,14 @@ if(isset($_POST['botonMostrar_Msg_Salida'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-    $app->render('mensajeSalida.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensaje' => $mensaje[0],'numMensajes' => $_SESSION['numMensajes'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajeSalida.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensaje' => $mensaje[0],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 }
 
@@ -94,6 +113,7 @@ if(isset($_POST['botonBorrar_Msg_Salida'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
     $app->redirect($app->router()->urlFor('salida'));
     die();
@@ -122,8 +142,15 @@ if(isset($_POST['enviarNuevoMensaje'])){
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-    $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajeOk' => 'Mensaje enviado!','numMensajes' => $_SESSION['numMensajes'],'usuarioLogin' => $_SESSION['usuarioLogin'],'mensajes' => $mensajes,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajesEntradaUsuario.html.twig', array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensajeOk' => 'Mensaje enviado!',
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'usuarioLogin' => $_SESSION['usuarioLogin'],
+        'mensajes' => $mensajes,
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 }
 

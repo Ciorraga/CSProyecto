@@ -21,8 +21,14 @@ $app->get('/entrada', function() use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
     //var_dump($mensajes);die();
-    $app->render('mensajesEntradaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajesEntradaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensajes' => $mensajes,
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 })->name('entrada');
 
@@ -43,7 +49,13 @@ $app->get('/salida', function() use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $app->render('mensajesSalidaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'mensajes' => $mensajes,'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+    $app->render('mensajesSalidaUsuario.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'mensajes' => $mensajes,
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 })->name('salida');
 
@@ -59,7 +71,13 @@ $app->get('/nuevoMensaje', function() use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
-    $app->render('mensajeNuevo.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'usuarios' => $usuarios,'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
+    $app->render('mensajeNuevo.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarios' => $usuarios,
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
 })->name('nuevoMensaje');
 
 
@@ -87,7 +105,13 @@ $app->get('/mensajeNuevo/:id', function ($id) use ($app) {
     $req = new comun();
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
-    $app->render('mensajeNuevo.html.twig',array('usuarioMensaje' => $cons ,'imagenUser'=>$_SESSION['usuarioLogin']['imagen'],'usuarioLogin'=>$_SESSION['usuarioLogin'],'numMensajes' => $_SESSION['numMensajes'],'nuevaSolicitud' => $_SESSION['solicitudes']));
+    $app->render('mensajeNuevo.html.twig',array('usuarioMensaje' => $cons ,
+        'imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
+        'retos1vs1' => $_SESSION['retos1vs1'],
+        'usuarioLogin'=>$_SESSION['usuarioLogin'],
+        'numMensajes' => $_SESSION['numMensajes'],
+        'nuevaSolicitud' => $_SESSION['solicitudes']));
     die();
 });

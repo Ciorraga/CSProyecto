@@ -128,19 +128,19 @@
                 </span>
                 {% if botonSolicitud[0] == true %}
                     <form action="/" method="POST">
-                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonSolicitud" onclick="a()" value="{{ botonSolicitud[1] }}">Mandar solicitud de admisión</button>
+                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonSolicitud"  value="{{ botonSolicitud[1] }}">Mandar solicitud de admisión</button>
                     </form>
                 {% endif %}
                 {% if usuarioLogin['equipo_id']!=null %}
                     {% if miEquipo == true %}
                         <form action="/" method="POST">
-                            <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDejarEquipo" value="{{ usuarioLogin['id'] }}">Dejar equipo</button>
+                            <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDejarEquipo" value="{{ usuarioLogin['id'] }}" onclick="ConfirmDelete('dej'); return false;">Dejar equipo</button>
                         </form>
                     {% endif %}
                 {% endif %}
                 {% if usuarioLogin['id']==equipo[0]['capitan_id'] %}
                     <form action="/" method="POST">
-                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ equipo[0]['id'] }}">Eliminar equipo</button>
+                        <button id="botonSolicitud" class="button button--wapasha button--round-s" name="botonDestruirEquipo" value="{{ equipo[0]['id'] }}" onclick="ConfirmDelete('dest'); return false;">Eliminar equipo</button>
                     </form>
                 {% endif %}
 
@@ -201,8 +201,24 @@
     </script>
 
     <script>
-        function a(){
-            confirm("seguro que blabla?");
+        function ConfirmDelete(elem)
+        {
+            if(elem=='dej'){
+                var x = confirm("¿Seguro que quieres abandonar el equipo ?");
+            }
+
+            if(elem=='dest'){
+                var x = confirm("¿Seguro que quieres borrar el equipo? La operación no podrá deshacerse");
+            }
+
+            if (x)
+                document.getElementById(this).submit();
+            else
+                return false;
+        }
+
+        function seguroEquipo(){
+            confirm("¿Está seguro que quiere eliminar el equipo? Éste cambio no será reversible.");
         }
         function showResult(str) {
             if (str.length==0) {

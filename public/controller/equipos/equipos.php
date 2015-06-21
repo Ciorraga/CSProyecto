@@ -11,9 +11,11 @@ $app->get('/equipos', function() use ($app) {
         $equipo = null;
         $req = new comun();
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
             'numMensajes' => $_SESSION['numMensajes'],
+            'retos1vs1' => $_SESSION['retos1vs1'],
             'nuevaSolicitud' => $_SESSION['solicitudes']));
     }else{
         //Consulta para extraer los datos del equipo
@@ -38,6 +40,7 @@ $app->get('/equipos', function() use ($app) {
         $req = new comun();
         $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
         $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
+        $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
         $app->render('equipos.html.twig',array('imagenUser'=>$_SESSION['usuarioLogin']['imagen'],
             'usuarioLogin'=>$_SESSION['usuarioLogin'],
@@ -94,6 +97,7 @@ $app->get('/equipos/:equipo', function ($equipo) use ($app) {
     $req->mostrarSolicitudes($_SESSION['usuarioLogin']['id']);
     $req->mostrarMensajes($_SESSION['usuarioLogin']['id']);
     $imagenUser = $_SESSION['usuarioLogin']['imagen'];
+    $_SESSION['retos1vs1'] = $req->compruebaRetosUsuario();
 
     $app->render('equipos.html.twig',array('imagenUser'=>$imagenUser,
         'usuarioLogin'=>$_SESSION['usuarioLogin'],
