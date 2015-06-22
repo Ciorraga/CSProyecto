@@ -213,7 +213,7 @@ if(isset($_POST['botonFormNuevoEquipo'])){
         if($_FILES["logoEquipo"]['name'] == null){
             $nuevoEquipo->logo = "/imagenes/interrogacion.jpg";
         }else{
-            $nuevoEquipo->logo = $dirFile;
+            $nuevoEquipo->logo = substr($dirFile, 1);
         }
         $nuevoEquipo->save();
 

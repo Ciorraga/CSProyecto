@@ -131,7 +131,7 @@ $app->post('/actualizaUsuario', function() use ($app) {
             if($_FILES["imagen"]['name'] == null){
                 $userAModificar->imagen = "/imagenes/interrogacion.jpg";
             }else{
-                $userAModificar->imagen = $dirFile;
+                $userAModificar->imagen = substr($dirFile,1);
                 $_SESSION['usuarioLogin']['imagen'] = $dirFile;
             }
             $userAModificar->save();

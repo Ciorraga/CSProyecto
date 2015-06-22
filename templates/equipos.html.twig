@@ -71,7 +71,7 @@
                                             <td>{{ usuario.steam }}</td>
                                         {% endif %}
 
-                                        <td><a class="btn btn-success" id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a></td>
+                                        <td> {% if usuario.id != usuarioLogin['id'] %} <a class="btn btn-success" id="aMensaje" href="/mensajeNuevo/{{ usuario.id }}">Mensaje</a>{% endif %}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

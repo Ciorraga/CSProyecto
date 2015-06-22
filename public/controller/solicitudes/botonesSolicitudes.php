@@ -11,13 +11,14 @@ if(isset($_POST['botonAceptarSol'])){
 
     if($usuario['equipo_id']==""){
         $us = ORM::for_table('equipo_usuario')
-            ->where('id',$_POST['botonAceptarSol'])
+            ->where('id',$_POST['botonAceptarSol']) //us = equipo 36 , usuario 102
             ->find_one();
 
         $userAModificar = ORM::for_table('usuario')
             ->where('id',$us['usuario_id'])
             ->find_one();
-        $userAModificar->equipo_id = $_SESSION['usuarioLogin']['equipo_id'];
+
+        $userAModificar->equipo_id = $us['equipo_id'];
         $userAModificar->save();
 
         $modificaEstadoPeticion = ORM::for_table('equipo_usuario')

@@ -134,7 +134,7 @@ $app->post('/registro', function() use ($app) {
                 if($_FILES["imagenUser"]['name'] == null){
                     $nuevoUser->imagen = "/imagenes/interrogacion.jpg";
                 }else{
-                    $nuevoUser->imagen = $dirFile;
+                    $nuevoUser->imagen = substr($dirFile,1);
                 }
                 $nuevoUser->save();
 
